@@ -3,22 +3,43 @@ import ApartmentCard from "../../components/Card/Card";
 
 const Home = () => {
 
-  const apartments = [
+  const apartmentsData = [
     {
-      imageUrl: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
-      title: "Modern 2-Bedroom Apartment",
-      price: "$1,200/month",
+      id: 1,
+      title: "Cozy Apartment",
+      price: 1200,
+      city: "New York",
+      country: "USA",
       description: "A spacious 2-bedroom apartment in the heart of the city.",
-      location: "Downtown, CityName",
+      image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
     },
     {
-      imageUrl: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
-      title: "Luxury Studio Apartment",
-      price: "$900/month",
+      id: 2,
+      title: "Modern Studio",
+      price: 800,
+      city: "Toronto",
+      country: "Canada",
       description: "A luxury studio with all modern amenities.",
-      location: "Uptown, CityName",
+      image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
     },
-    // Add more apartments here...
+    {
+      id: 3,
+      title: "Beachside Condo",
+      price: 1500,
+      city: "Miami",
+      country: "USA",
+      description: "A spacious 2-bedroom apartment in the heart of the city.",
+      image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+    },
+    {
+      id: 4,
+      title: "Luxury Penthouse",
+      price: 3000,
+      city: "Dubai",
+      country: "UAE",
+      description: "A luxury studio with all modern amenities.",
+      image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+    },
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -63,7 +84,7 @@ const Home = () => {
       <div className="Apartment p-4">
         <h1 className='font-semibold text-2xl underline'>Top Apartment</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {apartments.map((apartment, index) => (
+          {apartmentsData.map((apartment, index) => (
             <ApartmentCard key={index} {...apartment} />
           ))}
         </div>

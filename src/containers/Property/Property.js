@@ -8,6 +8,7 @@ const Property = () => {
       price: 1200,
       city: "New York",
       country: "USA",
+      description: "A spacious 2-bedroom apartment in the heart of the city.",
       image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
     },
     {
@@ -16,6 +17,7 @@ const Property = () => {
       price: 800,
       city: "Toronto",
       country: "Canada",
+      description: "A luxury studio with all modern amenities.",
       image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
     },
     {
@@ -24,6 +26,7 @@ const Property = () => {
       price: 1500,
       city: "Miami",
       country: "USA",
+      description: "A spacious 2-bedroom apartment in the heart of the city.",
       image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
     },
     {
@@ -32,6 +35,7 @@ const Property = () => {
       price: 3000,
       city: "Dubai",
       country: "UAE",
+      description: "A luxury studio with all modern amenities.",
       image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
     },
   ];
