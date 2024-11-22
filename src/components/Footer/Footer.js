@@ -4,7 +4,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-10">
-      <div className="max-w-screen-xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="max-w-screen-xl mx-10 px-6 flex justify-between">
         {/* Column 1: Contact Information */}
         <div>
           <h3 className="text-2xl font-bold mb-4">Contact Us</h3>
@@ -46,8 +46,8 @@ const Footer = () => {
       </div>
 
       {/* Bottom Section: Copyright */}
-      <div className="text-center mt-10">
-        <p className="text-gray-400">&copy; 2024 StudyNest. All rights reserved.</p>
+      <div className="m-10">
+        <p className="text-gray-400 px-6">&copy; 2024 StudyNest. All rights reserved.</p>
       </div>
     </footer>
   );
