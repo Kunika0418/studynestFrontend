@@ -15,3 +15,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 1s ease-out;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px; /* Thinner scrollbar */
+  height: 6px; /* Thinner horizontal scrollbar (if needed) */
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6; /* Light track color */
+  border-radius: 10px; /* Fully rounded track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #FF8F00, #FF6F00); /* Gradient thumb */
+  border-radius: 10px; /* Fully rounded thumb */
+  border: 1px solid #f3f4f6; /* Thin border to match the track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #FF8F00, #FF6F00); /* Darker gradient on hover */
+}
+
+/* Firefox Scrollbar Styles */
+
+

@@ -1,0 +1,327 @@
+var isMobile = window.orientation > -1,
+  isSticky = 1 === document.getElementsByClassName("cnb-sticky").length,
+  urlPath = window.location.pathname,
+  isBike = urlPath.includes("bikes") || urlPath.includes("bike");
+(minimize = !1),
+  (sendMessagetoFrame = !0),
+  (s = document.createElement("script"));
+var script1 = document.createElement("script"),
+  analyticScript = document.createElement("script");
+(analyticScript.innerHTML =
+  "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\n\ngtag('config', 'UA-122267849-1');"),
+  document.getElementsByTagName("head")[0].appendChild(analyticScript),
+  ((script1 = document.createElement("script")).src =
+    "https://securepubads.g.doubleclick.net/tag/js/gpt.js"),
+  (script1.async = "async"),
+  (script1.type = "text/javascript"),
+  document.getElementsByTagName("head")[0].appendChild(script1);
+
+  const leadOrigin = localStorage.getItem("Lead_origin")
+
+  const urls = [
+    "https://www.universityliving.com/assist/journey/start",
+    "https://www.universityliving.com/assist/journey",
+    "https://www.universityliving.com/cost-of-living-calculator",
+    "https://www.universityliving.com/cost-of-living-calculator/journey?tab=<step_name>",
+    "https://www.universityliving.com/student-discounts-offers",
+    "https://www.universityliving.com/scholarship",
+    "https://www.universityliving.com/scholarship/united-kingdom-and-ireland",
+    "https://www.universityliving.com/scholarship/australia",
+    "https://www.universityliving.com/united-states",
+    "https://jai.devbeta.in/assist/journey/start",
+    "https://jai.devbeta.in/assist/journey",
+    "https://jai.devbeta.in/cost-of-living-calculator",
+    "https://jai.devbeta.in/cost-of-living-calculator/journey?tab=<step_name>",
+    "https://jai.devbeta.in/student-discounts-offers",
+    "https://jai.devbeta.in/scholarship",
+    "https://jai.devbeta.in/scholarship/united-kingdom-and-ireland",
+    "https://jai.devbeta.in/scholarship/australia",
+    "https://jai.devbeta.in/scholarship/united-states"
+];
+setInterval(() => {
+
+  const currentUrl = window.location.href;
+  const iframe = document.getElementById("corover-chat-frame");
+
+if (iframe) {
+  iframe.contentWindow.postMessage({ currentUrl , leadOrigin }, '*');
+}
+  const shouldHideElements = urls.some(url => currentUrl.includes(url));
+  
+  if (shouldHideElements) {
+      document.getElementById("corover-cb-widget").style.display = "none";
+      document.getElementById("corover-chatbox").style.display = "none";
+   
+  } 
+  if (!shouldHideElements) {
+   
+    
+      document.getElementById("corover-cb-widget").style.display = "block";
+    
+} 
+ 
+}, 500);
+const chatWidget = document.createElement("div");
+(chatWidget.id = "corover-cb-widget"),
+  (chatWidget.style.cssText =
+    "width: 70px; height: 70px; border: 2px solid #f56a54; position: fixed; bottom: 62px; right: 18px; background-image: url('https://universityliving.corover.ai/assets/student-ai.gif'); background-repeat: no-repeat; background-size: contain; background-position: 0 0; transition: transform 0.2s ease; cursor: pointer; transform-origin: 50% 50%; z-index: 9999; border-radius: 50%; box-shadow: 1px 4px 5px rgba(1,1,1,0.35); background-color:#20628a;");
+let closeBtn = document.createElement("div");
+(closeBtn.id = "corover-close-btn"),
+  (closeBtn.style.cssText =
+    "background: url(https://s3.ap-south-1.amazonaws.com/chatbot-res/irctc/res/NPCI/closebtn.svg); position: absolute; top: -50px; z-index: 99999999; right: 13px; width: 18px; height: 18px; background-size: contain; background-position: 0 0; background-repeat: no-repeat;display:none");
+let minBtn = document.createElement("div");
+(minBtn.id = "corover-min-btn"),
+  (minBtn.style.cssText =
+    "background: url(https://s3.ap-south-1.amazonaws.com/chatbot-res/irctc/res/NPCI/minbtn.svg); position: absolute; top: -10px; left: -5px; width: 18px; height: 18px; background-size: contain; background-position: 0 0; background-repeat: no-repeat;display:none");
+let maxBtn = document.createElement("div");
+(maxBtn.id = "corover-max-btn"),
+  (maxBtn.style.cssText =
+    "background: url(https://s3.ap-south-1.amazonaws.com/chatbot-res/irctc/res/NPCI/plusbtn.svg); position: absolute; top: 0px; left: -30px; width: 30px; height: 30px; background-size: contain; background-position: 0 0; background-repeat: no-repeat; display: none;");
+let tootltip = document.createElement("div");
+(tootltip.className = "corover-dialog"),
+  (tootltip.innerHTML = `<div style="display:flex;flex-direction:row;gap:5px;width:296px;max-height:120px;background-color:#fff;padding:15px 10px;border-radius:10px;box-shadow:1px 4px 15px rgba(1,1,1,.35)"><div><img style="border-radius:50%" src="https://sebi.corover.ai/assets/SEBI_2.gif" width="40px"></div><div><div style="width:122px;font-weight:600;color:#22277e;letter-spacing:1px;font-family:sans-serif"><div>एल आई सी मित्र</div><div style="font-size:12px">LIC MITRA</div></div><div style="color:#22277e;margin-top:10px;font-family:sans-serif;font-size:12px;letter-spacing:1px"><div>आप अपने प्रश्न मुझसे पूछ सकते हैं</div><div style="margin-top:0px">Got questions? Please ask me!!</div></div></div><div style="width:20px;height:20px;background-image:url(https://s3.ap-south-1.amazonaws.com/chatbot-res/irctc/res/NPCI/closebtn.svg);background-repeat:no-repeat;cursor:pointer"></div></div>`),
+  (tootltip.style.cssText =
+    "z-index: 999999;\ndisplay: none;\nposition: absolute;\nright: 1px;\nbottom: 115px;");
+// let chatdown = document.createElement("div");
+// (chatdown.id = "corover-cob-widget"),
+//   (chatdown.innerHTML =
+//     '<div style="width: 221px;height:20px;background-color: #f5f5f1; padding: 6px 6px; border-radius: 10px 0px 10px 10px; box-shadow: 1px 4px 15px rgba(1, 1, 1, 0.35);"><div style="display:flex;color:#131313; font-family: sans-serif; font-size: 10px; letter-spacing: 1px;"><div style="margin-top: 4px;">Hi! I am Your&nbsp</div><div style="margin-top: 4px;color:#054496; font-weight:600">Virtual Assistant Samhita</div></div></div>'),
+//   (chatdown.style.cssText =
+//     "z-index: 999999;\nposition: absolute;\nright:0px;\ntop: 109px;");
+let tootltip1 = document.createElement("div");
+(tootltip1.className = "corover-close-dialog"),
+  (tootltip1.innerHTML =
+    '<span><strong>Bye !!</strong></span><br><span>You can call me any time with</span><br><span style="color: #c13339;"><strong>ctrl + shift + B</strong></span>'),
+  (tootltip1.style.cssText =
+    "z-index: 999999;\ndisplay: none;\nposition: absolute;\nborder: 1px solid rgb(58, 150, 240);\nbackground: rgb(188, 209, 231);\ncolor: rgb(18, 34, 71);\nfont-family: sans-serif;\npadding: 7px 17px;\nwidth: 196px;\nheight: 46px;\ntext-align: left;\nright: 10px;\nbottom: 150px;\nbox-shadow: rgb(0 0 0 / 12%) 0px 1px 6px, rgb(95 71 71 / 24%) 0px 1px 4px;\nborder-radius: 10px;\nfont-size: 12px;\nline-height: 16px !important;");
+const chatbox = document.createElement("div");
+(chatbox.id = "corover-chatbox"),
+  (chatbox.style.cssText =
+    "font-family: Arial, Helvetica, sans-serif; color: white; z-index: 9999999999999999 !important; display:none; width: 405px;height: calc(var(--vh, 1vh) * 84); position: fixed; bottom: 0; right: 15px; background: white; border: 1px solid #272a2b; border-bottom: none; border-radius: 10px 10px 0 0; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);");
+    chatbox.setAttribute("state", "close")
+    let titleBar = document.createElement("div");
+(titleBar.id = "corover-title-bar"),
+  (titleBar.style.cssText =
+    "background-color: #272a2b; border-radius: 10px 10px 0 0; color: white;");
+let frameBody = document.createElement("div");
+(frameBody.id = "corover-frame-body"),
+  (frameBody.style.cssText =
+    "width: 100%; height: 100%; background: #f5f5f5; border-radius: 10px 10px 0 0");
+let chatFrame = document.createElement("iframe");
+(chatFrame.id = "corover-chat-frame"),
+  (chatFrame.src = "https://uatuniversitylivingnew.corover.ai/"),
+  chatFrame.setAttribute("frameborder", "none"),
+  chatFrame.setAttribute("width", "100%"),
+  chatFrame.setAttribute("height", "100%"),
+  chatFrame.setAttribute(
+    "allow",
+    "geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor"
+  ),
+  (chatFrame.style.borderRadius = "10px 10px 0 0"),
+  frameBody.appendChild(chatFrame);
+let closeCbBtn = document.createElement("div");
+(closeCbBtn.id = "corover-close-cb-btn"),
+  (closeCbBtn.style.cssText = `background-size: 12px 25px !important;
+  width: 53px;
+  height: 26px;
+  border-radius: 25px 25px 25px 25px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  background-repeat: no-repeat !important;
+  background-position: center;
+  background-color: rgb(241 108 86);
+  background-image: url(https://cdn.jsdelivr.net/gh/corover/assets@latest/sebi_assets/close.svg);
+  background-size: 15px 15px;
+  position: absolute;
+  top: -32px;
+  right: 2px;
+  cursor: pointer;`),
+  titleBar.appendChild(closeCbBtn);
+let adFrame = document.createElement("div");
+(adFrame.id = "div-gpt-ad-1612774908699-0"),
+  (adFrame.style.cssText = isSticky
+    ? "width:320px;position: fixed; bottom: 63px;  height: 50px; right:5px; z-index: 99999;margin:auto;"
+    : "width:320px;position: fixed; bottom: 5px;  height: 50px; right:5px; z-index: 99999;margin:auto;");
+let widgetFrameClBtn = document.createElement("img");
+widgetFrameClBtn.addEventListener(
+  "click",
+  function () {
+    (widgetFrameClBtn.style.display = "none"), (adFrame.style.display = "none");
+  },
+  !1
+);
+let dealIcon = document.createElement("img");
+function openBot(t) {
+  (this.style.display = "none"), (chatbox.style.display = "block");
+  chatbox.setAttribute("state", "open")
+  let e = {
+    sourceUrl: window.location.origin,
+    sourceType: isBike ? "bike" : "car",
+  };
+  setTimeout(() => {
+    document
+      .querySelector("#corover-chat-frame")
+      .contentWindow.postMessage(e, "*"),
+      (sendMessagetoFrame = !1);
+  }, 1e3),
+    sendmsgforyoutube(!0),
+    t.stopPropagation();
+}
+function openBotFirst(t) {
+  (chatWidget.style.display = "none"), (chatbox.style.display = "block");
+  chatbox.setAttribute("state", "open")
+  let e = {
+    sourceUrl: window.location.origin,
+    sourceType: isBike ? "bike" : "car",
+  };
+  setTimeout(() => {
+    document
+      .querySelector("#corover-chat-frame")
+      .contentWindow.postMessage(e, "*"),
+      (sendMessagetoFrame = !1);
+  }, 1e3),
+    sendmsgforyoutube(!0),
+    t.stopPropagation();
+}
+
+// Call the function immediately after defining it
+// document.addEventListener("DOMContentLoaded", (event) => {
+//   if (!urls.includes(window.location.href)) {
+//   setTimeout(() => {
+//     openBotFirst(event);
+//   }, 30000);
+//   }
+ 
+// });
+function sendmsgforyoutube(t) {
+  chatFrame.contentWindow.postMessage({ showYoutube: t }, "*");
+}
+function logKey(t) {
+  t.shiftKey &&
+    t.ctrlKey &&
+    "KeyB" === t.code &&
+    ((closeBtn.style.background =
+      "url(https://s3.ap-south-1.amazonaws.com/chatbot-res/irctc/res/NPCI/closebtn.svg)"),
+    (tootltip1.style.display = "none"),
+    (adFrame.style.display = "block"),
+    (chatWidget.style.display = "block"),
+    (dealIcon.style.display = "block"));
+}
+(dealIcon.id = "corover-deal-icon"),
+  (dealIcon.style.cssText =
+    "    right: 166px; position: fixed;bottom: 51px; width: 156px; cursor: pointer; padding-right: 4px;z-index: 9999999;"),
+  chatWidget.addEventListener("click", openBot),
+  chatWidget.addEventListener("mouseover", function () {}, !1),
+  dealIcon.addEventListener(
+    "click",
+    function () {
+      window.open(
+        "https://www.amazon.in/Car-Motorbike-Store/b?ie=UTF8&node=4772060031&_encoding=UTF8&tag=corover-carandbike-21&linkCode=ur2&linkId=6dec2c14410567ec3091bc30aa8f45da&camp=3638&creative=24630"
+      );
+    },
+    !1
+  ),
+  chatWidget.addEventListener("mouseout", function () {}, !1),
+  closeBtn.addEventListener("click", function (t) {}, !1),
+  minBtn.addEventListener(
+    "click",
+    function (t) {
+      (minimize = !0),
+        t.stopPropagation(),
+        (chatWidget.style.bottom = "59px"),
+        isMobile
+          ? ((chatWidget.style.zoom = "0.5"),
+            (closeBtn.style.display = "none"),
+            (maxBtn.style.display = "block"),
+            (this.style.display = "none"))
+          : ((chatWidget.style.zoom = "0.5"),
+            (closeBtn.style.display = "none"),
+            (maxBtn.style.display = "none"),
+            (this.style.display = "none"));
+    },
+    !1
+  ),
+  maxBtn.addEventListener(
+    "click",
+    function (t) {
+      (minimize = !1),
+        t.stopPropagation(),
+        (chatWidget.style.zoom = "normal"),
+        (closeBtn.style.display = "block"),
+        (chatWidget.style.bottom = "2px"),
+        (minBtn.style.display = "block"),
+        (this.style.display = "none");
+    },
+    !1
+  ),
+  closeCbBtn.addEventListener(
+    "click",
+    function () {
+      chatbox.setAttribute("state", "close")
+      (chatbox.style.display = "none"),
+        (chatWidget.style.display = "block"),
+        sendmsgforyoutube(!1);
+    },
+    !1
+  ),
+  document.addEventListener("keydown", logKey);
+let appendChatWidget = () => {
+  chatWidget.appendChild(closeBtn),
+    chatWidget.appendChild(maxBtn),
+    chatWidget.appendChild(tootltip),
+    chatWidget.appendChild(tootltip1),
+    // chatWidget.appendChild(chatdown),
+   
+      document.body.appendChild(chatWidget)
+   
+    document.body.appendChild(widgetFrameClBtn);
+};
+appendChatWidget(),
+  chatbox.appendChild(titleBar),
+  chatbox.appendChild(frameBody),
+  document.body.appendChild(chatbox),
+  (dealIcon.src =
+    "https://cdn.jsdelivr.net/gh/corover/assets@latest/sebi_assets/DEALS....png");
+
+let style = document.createElement("style");
+if (
+  ((style.innerHTML =
+    "\n\n@-moz-keyframes blink {\n    0% {\n        opacity:1;\n    }\n    50% {\n        opacity:0;\n    }\n    100% {\n        opacity:1;\n    }\n} \n\n@-webkit-keyframes blink {\n    0% {\n        opacity:1;\n    }\n    50% {\n        opacity:0;\n    }\n    100% {\n        opacity:1;\n    }\n}\n/* IE */\n@-ms-keyframes blink {\n    0% {\n        opacity:1;\n    }\n    50% {\n        opacity:0;\n    }\n    100% {\n        opacity:1;\n    }\n} \n/* Opera and prob css3 final iteration */\n@keyframes blink {\n    0% {\n        opacity:1;\n    }\n    50% {\n        opacity:0;\n    }\n    100% {\n        opacity:1;\n    }\n} \n.corover-dialog {\n  z-index: 999999;\n  display: none;\n  position: absolute;\n  background: white;\n  line-height: 16px !important;\n  color: black;\n  font-family: sans-serif;\n  padding: 7px 17px 7px 17px;\n  width: 250px;\n  text-align: left;\n  right: 23px;\n  bottom: 114px;\n  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(95, 71, 71, 0.24);\n  border-radius: 10px;\n  font-size: 12px;\n}\n\n.corover-deals-image {\n    -moz-animation: blink normal 2s infinite ease-in-out; /* Firefox */\n    -webkit-animation: blink normal 2s infinite ease-in-out; /* Webkit */\n    -ms-animation: blink normal 2s infinite ease-in-out; /* IE */\n    animation: blink normal 2s infinite ease-in-out; /* Opera and prob css3 final iteration */\n}\n\n\n    @media only screen and (max-width:640px) {\n    #corover-chatbox {\n        width: 100% !important;\n        height: calc(100% - 20px) !important;\n        top: 20px !important;\n        right: 0px !important;\n        left: 0px !important;\n        bottom: 0px !important;\n    }\n}"),
+  document.head.appendChild(style),
+  isMobile)
+)
+  document.getElementById("corover-close-btn").style.display = "none";
+else {
+  function t() {
+    0 == minimize
+      ? ((document.getElementById("corover-close-btn").style.display = "none"),
+        (tootltip.style.display = "block"))
+      : (document.getElementById("corover-max-btn").style.display = "block");
+  }
+  function e() {
+    (document.getElementById("corover-close-btn").style.display = "none"),
+      (tootltip.style.display = "none");
+  }
+  // document.getElementById("corover-cb-widget").addEventListener("mouseover", t),
+  //   document
+  //     .getElementById("corover-cb-widget")
+  //     .addEventListener("mouseleave", e);
+}
+(style.innerHTML =
+  "@media only screen and (max-width:840px) and (orientation:landscape){#corover-chatbox{height:100%!important;height:calc(100% - 20px)!important;top:20px!important;right:0!important}}@media only screen and (max-width:640px) and (orientation:portrait){#corover-chatbox{width:100%!important;height:93%!important;right:0!important;left:0!important;bottom:0!important}}\n.coroverAvtr {\n  /* Start the shake animation and make the animation last for 0.5 seconds */\n  animation: shake 0.5s;\n\n  /* When the animation is finished, start again */\n  animation-iteration-count: infinite;\n}\n\n@keyframes shake {\n  0% { transform: translate(1px, 1px) rotate(0deg); }\n  10% { transform: translate(-1px, -2px) rotate(-1deg); }\n  20% { transform: translate(-3px, 0px) rotate(1deg); }\n  30% { transform: translate(3px, 2px) rotate(0deg); }\n  40% { transform: translate(1px, -1px) rotate(1deg); }\n  50% { transform: translate(-1px, 2px) rotate(-1deg); }\n  60% { transform: translate(-3px, 1px) rotate(0deg); }\n  70% { transform: translate(3px, 1px) rotate(-1deg); }\n  80% { transform: translate(-1px, -1px) rotate(1deg); }\n  90% { transform: translate(1px, 2px) rotate(0deg); }\n  100% { transform: translate(1px, -2px) rotate(-1deg); }\n}\n\n"),
+  document.head.appendChild(style),
+  setInterval(() => {
+    document.getElementById("corover-cb-widget").classList.add("coroverAvtr"),
+      setTimeout(() => {
+        document
+          .getElementById("corover-cb-widget")
+          .classList.remove("coroverAvtr");
+      }, 1e3);
+  }, 6e3);
+  
+  if (!urls.includes(window.location.href)) {
+    setTimeout(() => {
+      openBotFirst(event);
+    }, 29000);
+  }
