@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ApartmentCard from "../../components/Card/Card";
+import PropertyDetail from "../Property/PropertyDetail/PropertyDetail";
 
 const Home = () => {
 
@@ -12,6 +13,9 @@ const Home = () => {
       country: "USA",
       description: "A spacious 2-bedroom apartment in the heart of the city.",
       image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+      area: "1200 sq.ft",
+      services: ["24/7 Security", "Maintenance", "Housekeeping"],
+      amenities: ["Gym", "Swimming Pool", "Parking", "Wi-Fi"],
     },
     {
       id: 2,
@@ -21,6 +25,9 @@ const Home = () => {
       country: "Canada",
       description: "A luxury studio with all modern amenities.",
       image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+      area: "600 sq.ft",
+      services: ["24/7 Concierge", "Maintenance"],
+      amenities: ["Wi-Fi", "Balcony", "Smart Home Features"],
     },
     {
       id: 3,
@@ -28,8 +35,11 @@ const Home = () => {
       price: 1500,
       city: "Miami",
       country: "USA",
-      description: "A spacious 2-bedroom apartment in the heart of the city.",
+      description: "A luxurious 2-bedroom apartment with stunning ocean views.",
       image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+      area: "1500 sq.ft",
+      services: ["24/7 Security", "Private Beach Access"],
+      amenities: ["Swimming Pool", "Jacuzzi", "Private Parking"],
     },
     {
       id: 4,
@@ -37,16 +47,35 @@ const Home = () => {
       price: 3000,
       city: "Dubai",
       country: "UAE",
-      description: "A luxury studio with all modern amenities.",
+      description: "An opulent penthouse with panoramic city views.",
       image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+      area: "2500 sq.ft",
+      services: ["Valet Parking", "Private Chef", "Housekeeping"],
+      amenities: ["Infinity Pool", "Rooftop Garden", "Cinema Room"],
     },
   ];
 
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
+  const [selectedApartment, setSelectedApartment] = useState(null);
+
+  const handleChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchTerm(query);
+  };
 
   const handleSearch = () => {
-    console.log(`Searching for apartments in: ${searchTerm}`);
-  };
+    // Filter logic
+    const query = searchTerm;
+    const filtered = apartmentsData.filter(
+      (apartment) =>
+        apartment.title.toLowerCase().includes(query) ||
+        apartment.city.toLowerCase().includes(query) ||
+        apartment.country.toLowerCase().includes(query)
+    );
+    setFilteredApartments(filtered);
+  }
 
   return (
     <div>
@@ -66,9 +95,9 @@ const Home = () => {
           <div className="relative flex items-center">
             <input
               type="text"
-              placeholder="Enter city, neighborhood, or ZIP code"
+              placeholder="Enter city, neighborhood, or title"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleChange}
               className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-amber-900 transition-all duration-300"
             />
             <button
@@ -79,16 +108,158 @@ const Home = () => {
             </button>
           </div>
         </div>
-
       </div>
+
+      {/* Apartments Section */}
       <div className="Apartment p-4">
-        <h1 className='font-semibold text-2xl underline'>Top Apartment</h1>
+        <h1 className="font-semibold text-2xl underline">Top Apartments</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {apartmentsData.map((apartment, index) => (
-            <ApartmentCard key={index} {...apartment} />
+          {filteredApartments.map((apartment) => (
+            <ApartmentCard
+              key={apartment.id}
+              {...apartment}
+              onClick={() => setSelectedApartment(apartment)}
+            />
           ))}
         </div>
+        {filteredApartments.length === 0 && (
+          <p className="text-center text-gray-500 mt-4">No apartments found.</p>
+        )}
       </div>
+
+      {/* Our Services */}
+      <section className="bg-white py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">Our Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1076/1076928.png"
+                alt="Personal Assistance"
+                className="h-16 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold text-center">
+                Personalized Assistance
+              </h3>
+              <p className="text-gray-600 text-center mt-2">
+                Our dedicated team helps you find your dream home effortlessly.
+              </p>
+            </div>
+            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3658/3658538.png"
+                alt="Flexible Leasing"
+                className="h-16 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold text-center">
+                Flexible Leasing
+              </h3>
+              <p className="text-gray-600 text-center mt-2">
+                Short-term and long-term rental options to suit your needs.
+              </p>
+            </div>
+            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1611/1611310.png"
+                alt="24/7 Support"
+                className="h-16 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold text-center">
+                24/7 Support
+              </h3>
+              <p className="text-gray-600 text-center mt-2">
+                We’re here to assist you anytime, anywhere.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Collaborations */}
+      <section className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Trusted Partners
+          </h2>
+          <p className="text-center mb-6">
+            We collaborate with industry-leading real estate agencies and
+            developers.
+          </p>
+          <div className="flex justify-center gap-8">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png"
+              alt="Airbnb"
+              className="h-12"
+            />
+            <img
+              src="https://logos-world.net/wp-content/uploads/2020/11/Zillow-Logo.jpg"
+              alt="Zillow"
+              className="h-12"
+            />
+            <img
+              src="https://logos-world.net/wp-content/uploads/2021/10/Realtor-Logo.png"
+              alt="Realtor"
+              className="h-12"
+            />
+            <img
+              src="https://cdn.prod.website-files.com/65402b8a17def72907241a6d/65402b8a17def72907241cc5_10-booking.com.jpg"
+              alt="Booking.com"
+              className="h-12"
+            />
+            <img
+              src="https://e7.pngegg.com/pngimages/428/420/png-clipart-expedia-logo-brand-organization-w-hotels-logo-blue-text.png"
+              alt="Expedia"
+              className="h-12"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="bg-gray-50 py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Why Choose Us?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+                alt="Verified Listings"
+                className="h-16 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold">Verified Listings</h3>
+              <p>Every property is vetted to ensure quality and accuracy.</p>
+            </div>
+            <div className="text-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/7069/7069212.png"
+                alt="Affordable Prices"
+                className="h-16 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold">Affordable Pricing</h3>
+              <p>Competitive rates without compromising on quality.</p>
+            </div>
+            <div className="text-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3209/3209263.png"
+                alt="Seamless Experience"
+                className="h-16 mx-auto mb-4"
+              />
+              <h3 className="text-xl font-semibold">Seamless Experience</h3>
+              <p>Easy-to-use platform for a hassle-free property search.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {selectedApartment && (
+        <PropertyDetail
+          apartment={selectedApartment}
+          onClose={() => setSelectedApartment(null)}
+        />
+      )}
+
     </div>
   );
 };

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PropertyDetail from "./PropertyDetail/PropertyDetail";
+import ApartmentCard from "../../components/Card/Card";
 
 const Property = () => {
   const apartmentsData = [
@@ -10,6 +12,9 @@ const Property = () => {
       country: "USA",
       description: "A spacious 2-bedroom apartment in the heart of the city.",
       image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+      area: "1200 sq.ft",
+      services: ["24/7 Security", "Maintenance", "Housekeeping"],
+      amenities: ["Gym", "Swimming Pool", "Parking", "Wi-Fi"],
     },
     {
       id: 2,
@@ -19,6 +24,9 @@ const Property = () => {
       country: "Canada",
       description: "A luxury studio with all modern amenities.",
       image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+      area: "600 sq.ft",
+      services: ["24/7 Concierge", "Maintenance"],
+      amenities: ["Wi-Fi", "Balcony", "Smart Home Features"],
     },
     {
       id: 3,
@@ -26,8 +34,11 @@ const Property = () => {
       price: 1500,
       city: "Miami",
       country: "USA",
-      description: "A spacious 2-bedroom apartment in the heart of the city.",
+      description: "A luxurious 2-bedroom apartment with stunning ocean views.",
       image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+      area: "1500 sq.ft",
+      services: ["24/7 Security", "Private Beach Access"],
+      amenities: ["Swimming Pool", "Jacuzzi", "Private Parking"],
     },
     {
       id: 4,
@@ -35,13 +46,18 @@ const Property = () => {
       price: 3000,
       city: "Dubai",
       country: "UAE",
-      description: "A luxury studio with all modern amenities.",
+      description: "An opulent penthouse with panoramic city views.",
       image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+      area: "2500 sq.ft",
+      services: ["Valet Parking", "Private Chef", "Housekeeping"],
+      amenities: ["Infinity Pool", "Rooftop Garden", "Cinema Room"],
     },
   ];
+  
 
   const [apartments, setApartments] = useState(apartmentsData);
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
+  const [selectedApartment, setSelectedApartment] = useState(null);
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -52,7 +68,7 @@ const Property = () => {
       new Set(apartmentsData.map((apt) => apt.country))
     );
     setCountries(uniqueCountries);
-  }, [apartmentsData]);
+  }, []);
 
   useEffect(() => {
     if (selectedCountry) {
@@ -128,29 +144,21 @@ const Property = () => {
         <h1 className="text-3xl font-extrabold text-gray-800 mb-8">Apartments for Rent</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredApartments.map((apt) => (
-            <div
-              key={apt.id}
-              className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transform transition duration-300"
-            >
-              <img
-                src={apt.image}
-                alt={apt.title}
-                className="w-full h-48 object-cover rounded-t-lg"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{apt.title}</h3>
-                <p className="text-sm text-gray-600 mb-2">
-                  {apt.city}, {apt.country}
-                </p>
-                <p className="text-lg font-bold text-amber-900">${apt.price}/month</p>
-              </div>
-            </div>
+            <ApartmentCard key={apt.id} {...apt} onClick={() => setSelectedApartment(apt)} />
           ))}
         </div>
         {filteredApartments.length === 0 && (
           <p className="text-center text-gray-500 mt-8">No apartments found.</p>
         )}
       </main>
+
+      {selectedApartment && (
+        <PropertyDetail
+          apartment={selectedApartment}
+          onClose={() => setSelectedApartment(null)}
+        />
+      )}
+
     </div>
   );
 };
