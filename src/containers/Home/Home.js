@@ -140,46 +140,46 @@ const Home = () => {
       </div>
 
       {/* Our Services */}
-      <section className="bg-white py-12">
+      <section className="bg-gray-800 py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Services</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+            <div className="p-6 bg-gray-700 rounded-lg shadow-md">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/1076/1076928.png"
                 alt="Personal Assistance"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold text-center">
+              <h3 className="text-xl font-semibold text-center text-white">
                 Personalized Assistance
               </h3>
-              <p className="text-gray-600 text-center mt-2">
+              <p className="text-gray-50 text-center mt-2">
                 Our dedicated team helps you find your dream home effortlessly.
               </p>
             </div>
-            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+            <div className="p-6 bg-gray-700 rounded-lg shadow-md">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/3658/3658538.png"
                 alt="Flexible Leasing"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold text-center">
+              <h3 className="text-xl font-semibold text-center text-white">
                 Flexible Leasing
               </h3>
-              <p className="text-gray-600 text-center mt-2">
+              <p className="text-gray-50 text-center mt-2">
                 Short-term and long-term rental options to suit your needs.
               </p>
             </div>
-            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+            <div className="p-6 bg-gray-700 rounded-lg shadow-md">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/1611/1611310.png"
                 alt="24/7 Support"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold text-center">
+              <h3 className="text-xl font-semibold text-center text-white">
                 24/7 Support
               </h3>
-              <p className="text-gray-600 text-center mt-2">
+              <p className="text-gray-50 text-center mt-2">
                 We’re here to assist you anytime, anywhere.
               </p>
             </div>
@@ -188,7 +188,7 @@ const Home = () => {
       </section>
 
       {/* Collaborations */}
-      <section className="bg-gray-800 text-white py-12">
+      <section className="py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Trusted Partners
@@ -199,7 +199,7 @@ const Home = () => {
           </p>
           <div className="flex justify-center gap-8">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png"
+              src="https://download.logo.wine/logo/Airbnb/Airbnb-Logo.wine.png"
               alt="Airbnb"
               className="h-12"
             />
@@ -219,7 +219,7 @@ const Home = () => {
               className="h-12"
             />
             <img
-              src="https://e7.pngegg.com/pngimages/428/420/png-clipart-expedia-logo-brand-organization-w-hotels-logo-blue-text.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSem2pzDthyzcJV7wZBHwpAfH5L4tMLSRjBQ&s"
               alt="Expedia"
               className="h-12"
             />
@@ -228,9 +228,9 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-gray-50 py-12">
+      <section className="bg-gray-800 py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">
             Why Choose Us?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -240,8 +240,8 @@ const Home = () => {
                 alt="Verified Listings"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold">Verified Listings</h3>
-              <p>Every property is vetted to ensure quality and accuracy.</p>
+              <h3 className="text-xl font-semibold text-white">Verified Listings</h3>
+              <p className="text-gray-50">Every property is vetted to ensure quality and accuracy.</p>
             </div>
             <div className="text-center">
               <img
@@ -249,8 +249,8 @@ const Home = () => {
                 alt="Affordable Prices"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold">Affordable Pricing</h3>
-              <p>Competitive rates without compromising on quality.</p>
+              <h3 className="text-xl font-semibold text-white">Affordable Pricing</h3>
+              <p className="text-gray-50">Competitive rates without compromising on quality.</p>
             </div>
             <div className="text-center">
               <img
@@ -258,8 +258,8 @@ const Home = () => {
                 alt="Seamless Experience"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold">Seamless Experience</h3>
-              <p>Easy-to-use platform for a hassle-free property search.</p>
+              <h3 className="text-xl font-semibold text-white">Seamless Experience</h3>
+              <p className="text-gray-50">Easy-to-use platform for a hassle-free property search.</p>
             </div>
           </div>
         </div>
