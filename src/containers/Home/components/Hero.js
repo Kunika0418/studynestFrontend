@@ -3,15 +3,11 @@ import bannerVideo from "../../../assets/video/Banner_video.mp4";
 import "../Home.css";
 
 
-const Hero = ({ apartmentsData, handleSearch }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange }) => {
+  
   
 
-  const handleChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchTerm(query);
-  };
-
+  
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen bg-slate-400 relative">

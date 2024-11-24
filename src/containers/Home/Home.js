@@ -5,8 +5,6 @@ import PropertyDetail from "../Property/PropertyDetail/PropertyDetail";
 import Hero from "./components/Hero";
 import TopCities from "./components/TopCities";
 
-
-
 const Home = () => {
   const apartmentsData = [
     {
@@ -71,8 +69,14 @@ const Home = () => {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
   const [selectedApartment, setSelectedApartment] = useState(null);
+
+  const handleChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchTerm(query);
+  };
 
   const handleSearch = () => {
     // Filter logic
@@ -88,7 +92,7 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} />
+      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm = {searchTerm} handleChange = {handleChange}/>
       <TopCities />
 
       {/* Apartments Section */}
