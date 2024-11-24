@@ -1,4 +1,6 @@
 import "./App.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.js";
 import Footer from "./components/Footer/Footer.js";

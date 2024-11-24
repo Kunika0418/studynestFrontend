@@ -12,7 +12,10 @@ const Home = () => {
       city: "New York",
       country: "USA",
       description: "A spacious 2-bedroom apartment in the heart of the city.",
-      image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+      images: [
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+      ],
       area: "1200 sq.ft",
       services: ["24/7 Security", "Maintenance", "Housekeeping"],
       amenities: ["Gym", "Swimming Pool", "Parking", "Wi-Fi"],
@@ -24,7 +27,10 @@ const Home = () => {
       city: "Toronto",
       country: "Canada",
       description: "A luxury studio with all modern amenities.",
-      image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+      images: [
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+      ],
       area: "600 sq.ft",
       services: ["24/7 Concierge", "Maintenance"],
       amenities: ["Wi-Fi", "Balcony", "Smart Home Features"],
@@ -36,7 +42,10 @@ const Home = () => {
       city: "Miami",
       country: "USA",
       description: "A luxurious 2-bedroom apartment with stunning ocean views.",
-      image: "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+      images: [
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+      ],
       area: "1500 sq.ft",
       services: ["24/7 Security", "Private Beach Access"],
       amenities: ["Swimming Pool", "Jacuzzi", "Private Parking"],
@@ -48,7 +57,10 @@ const Home = () => {
       city: "Dubai",
       country: "UAE",
       description: "An opulent penthouse with panoramic city views.",
-      image: "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+      images: [
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+      ],
       area: "2500 sq.ft",
       services: ["Valet Parking", "Private Chef", "Housekeeping"],
       amenities: ["Infinity Pool", "Rooftop Garden", "Cinema Room"],
