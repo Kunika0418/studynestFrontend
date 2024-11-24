@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import ApartmentCard from "../../components/Card/Card";
 import PropertyDetail from "../Property/PropertyDetail/PropertyDetail";
 
-const Home = () => {
+import Hero from "./components/Hero";
+import TopCities from "./components/TopCities";
 
+
+
+const Home = () => {
   const apartmentsData = [
     {
       id: 1,
@@ -14,7 +18,7 @@ const Home = () => {
       description: "A spacious 2-bedroom apartment in the heart of the city.",
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
-        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
       ],
       area: "1200 sq.ft",
       services: ["24/7 Security", "Maintenance", "Housekeeping"],
@@ -29,7 +33,7 @@ const Home = () => {
       description: "A luxury studio with all modern amenities.",
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
-        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
       ],
       area: "600 sq.ft",
       services: ["24/7 Concierge", "Maintenance"],
@@ -44,7 +48,7 @@ const Home = () => {
       description: "A luxurious 2-bedroom apartment with stunning ocean views.",
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
-        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
       ],
       area: "1500 sq.ft",
       services: ["24/7 Security", "Private Beach Access"],
@@ -59,7 +63,7 @@ const Home = () => {
       description: "An opulent penthouse with panoramic city views.",
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
-        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384"
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
       ],
       area: "2500 sq.ft",
       services: ["Valet Parking", "Private Chef", "Housekeeping"],
@@ -67,15 +71,8 @@ const Home = () => {
     },
   ];
 
-
-  const [searchTerm, setSearchTerm] = useState("");
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
   const [selectedApartment, setSelectedApartment] = useState(null);
-
-  const handleChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchTerm(query);
-  };
 
   const handleSearch = () => {
     // Filter logic
@@ -87,43 +84,15 @@ const Home = () => {
         apartment.country.toLowerCase().includes(query)
     );
     setFilteredApartments(filtered);
-  }
+  };
 
   return (
-    <div>
-      <div className="flex flex-col items-center py-20 bg-slate-400"> {/* Added pt-20 for spacing */}
-        {/* Header Section */}
-        <div className="w-full max-w-6xl text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-800 animate-fade-in">
-            Find Your Dream Apartment
-          </h1>
-          <p className="mt-4 text-gray-600 text-lg md:text-xl animate-slide-up">
-            Discover modern apartments in the best neighborhoods at competitive prices.
-          </p>
-        </div>
-
-        {/* Search Bar Section */}
-        <div className="mt-10 w-full max-w-2xl">
-          <div className="relative flex items-center">
-            <input
-              type="text"
-              placeholder="Enter city, neighborhood, or title"
-              value={searchTerm}
-              onChange={handleChange}
-              className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-amber-900 transition-all duration-300"
-            />
-            <button
-              onClick={handleSearch}
-              className="absolute right-2 py-2 px-6 bg-amber-800 text-white rounded-full shadow-md hover:bg-amber-900 transition-all duration-300"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-col gap-10">
+      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} />
+      <TopCities />
 
       {/* Apartments Section */}
-      <div className="Apartment p-4">
+      <div className="Apartment px-4">
         <h1 className="font-semibold text-2xl underline">Top Apartments</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
           {filteredApartments.map((apartment) => (
@@ -142,7 +111,9 @@ const Home = () => {
       {/* Our Services */}
       <section className="bg-gray-800 py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-white">Our Services</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">
+            Our Services
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-gray-700 rounded-lg shadow-md">
               <img
@@ -240,8 +211,12 @@ const Home = () => {
                 alt="Verified Listings"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold text-white">Verified Listings</h3>
-              <p className="text-gray-50">Every property is vetted to ensure quality and accuracy.</p>
+              <h3 className="text-xl font-semibold text-white">
+                Verified Listings
+              </h3>
+              <p className="text-gray-50">
+                Every property is vetted to ensure quality and accuracy.
+              </p>
             </div>
             <div className="text-center">
               <img
@@ -249,8 +224,12 @@ const Home = () => {
                 alt="Affordable Prices"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold text-white">Affordable Pricing</h3>
-              <p className="text-gray-50">Competitive rates without compromising on quality.</p>
+              <h3 className="text-xl font-semibold text-white">
+                Affordable Pricing
+              </h3>
+              <p className="text-gray-50">
+                Competitive rates without compromising on quality.
+              </p>
             </div>
             <div className="text-center">
               <img
@@ -258,8 +237,12 @@ const Home = () => {
                 alt="Seamless Experience"
                 className="h-16 mx-auto mb-4"
               />
-              <h3 className="text-xl font-semibold text-white">Seamless Experience</h3>
-              <p className="text-gray-50">Easy-to-use platform for a hassle-free property search.</p>
+              <h3 className="text-xl font-semibold text-white">
+                Seamless Experience
+              </h3>
+              <p className="text-gray-50">
+                Easy-to-use platform for a hassle-free property search.
+              </p>
             </div>
           </div>
         </div>
@@ -271,7 +254,6 @@ const Home = () => {
           onClose={() => setSelectedApartment(null)}
         />
       )}
-
     </div>
   );
 };
