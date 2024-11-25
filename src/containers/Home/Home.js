@@ -24,6 +24,11 @@ const Home = () => {
       area: "1200 sq.ft",
       services: ["24/7 Security", "Maintenance", "Housekeeping"],
       amenities: ["Gym", "Swimming Pool", "Parking", "Wi-Fi"],
+      rating: 4.5, // Add rating to the apartment
+      reviews: [
+        { user: "John Doe", rating: 5, comment: "Great place to live!" },
+        { user: "Jane Smith", rating: 4, comment: "Very nice apartment, but a bit pricey." },
+      ],
     },
     {
       id: 2,
@@ -39,6 +44,11 @@ const Home = () => {
       area: "600 sq.ft",
       services: ["24/7 Concierge", "Maintenance"],
       amenities: ["Wi-Fi", "Balcony", "Smart Home Features"],
+      rating: 4.0, // Add rating to the apartment
+      reviews: [
+        { user: "John Doe", rating: 5, comment: "Great place to live!" },
+        { user: "Jane Smith", rating: 4, comment: "Very nice apartment, but a bit pricey." },
+      ],
     },
     {
       id: 3,
@@ -54,6 +64,11 @@ const Home = () => {
       area: "1500 sq.ft",
       services: ["24/7 Security", "Private Beach Access"],
       amenities: ["Swimming Pool", "Jacuzzi", "Private Parking"],
+      rating: 4.1, // Add rating to the apartment
+      reviews: [
+        { user: "John Doe", rating: 5, comment: "Great place to live!" },
+        { user: "Jane Smith", rating: 4, comment: "Very nice apartment, but a bit pricey." },
+      ],
     },
     {
       id: 4,
@@ -69,6 +84,11 @@ const Home = () => {
       area: "2500 sq.ft",
       services: ["Valet Parking", "Private Chef", "Housekeeping"],
       amenities: ["Infinity Pool", "Rooftop Garden", "Cinema Room"],
+      rating: 4.7, // Add rating to the apartment
+      reviews: [
+        { user: "John Doe", rating: 5, comment: "Great place to live!" },
+        { user: "Jane Smith", rating: 4, comment: "Very nice apartment, but a bit pricey." },
+      ],
     },
   ];
 

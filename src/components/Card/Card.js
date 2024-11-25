@@ -2,8 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useNavigate } from 'react-router-dom';
 
-const ApartmentCard = ({ images, title, price, city, country, area, services, onClick }) => {
+const ApartmentCard = ({ id,images, title, price, city, country, area, services, onClick }) => {
   const settings = {
     dots: true, // Enable dots
     infinite: true,
@@ -19,6 +20,12 @@ const ApartmentCard = ({ images, title, price, city, country, area, services, on
       </div>
     ),
   };
+
+  const navigate = useNavigate();
+
+  const handleButton = () => {
+    navigate(`/Property/${id}`);
+  }
 
   return (
     <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
@@ -64,7 +71,7 @@ const ApartmentCard = ({ images, title, price, city, country, area, services, on
       {/* Button to view details */}
       <div className="px-6 pb-4">
         <button
-          onClick={onClick}
+          onClick={handleButton}
           className="w-full py-2 px-4 bg-amber-800 text-white rounded-lg hover:bg-amber-900 transition duration-300"
         >
           View Details
