@@ -87,16 +87,9 @@ const apartmentsData = [
   },
 ];
 
-
-
-
 const PropertyDetail = () => {
-  const [userRating, setUserRating] = useState(0); // State to handle user rating input
 
-  const handleRating = (rating) => {
-    setUserRating(rating); // Set the user rating
-  };
-
+  const [activeTab, setActiveTab] = useState('Overview'); // Set default active tab
   const { PropertyId } = useParams();
   const apartment = apartmentsData.find((apt) => apt.id === parseInt(PropertyId));
   const recommendedApartments = apartmentsData.filter((apt) => apt.id !== parseInt(PropertyId)).slice(0, 3);
@@ -111,12 +104,14 @@ const PropertyDetail = () => {
 
   const sliderSettings = {
     dots: true,
+    dotsClass: "slick-dots slick-thumb",
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
     customPaging: (i) => (
-      <div className="w-20 h-12 overflow-hidden rounded-lg">
+      <div className="overflow-hidden w-[5rem] h-[3rem] rounded-md">
         <img
           src={apartment.images[i]}
           alt={`Thumbnail ${i + 1}`}
@@ -125,8 +120,10 @@ const PropertyDetail = () => {
       </div>
     ),
     appendDots: (dots) => (
-      <div className="relative w-full h-full flex justify-center">
-        <ul className="w-full gap-20 flex justify-center">{dots}</ul>
+      <div className="relative w-full h-full flex justify-center px-10">
+        <ul className="w-full gap-10 flex justify-center">
+          {dots}
+        </ul>
       </div>
     ),
   };
@@ -151,48 +148,42 @@ const PropertyDetail = () => {
     );
   };
 
-  return (
-    <div className="bg-gray-50 min-h-screen py-4">
-      <div className="max-w-7xl mx-auto p-6 bg-white shadow-md rounded-lg overflow-hidden">
-        {/* Property Details */}
-        <div className="flex flex-col md:flex-row gap-10">
-          {/* Left Section: Slider */}
-          <div className="w-full md:w-1/2">
-            <h1 className="text-3xl font-bold mb-4">{apartment.title}</h1>
-            <Slider {...sliderSettings}>
-              {apartment.images.map((image, index) => (
-                <div key={index} className="relative">
-                  <img
-                    src={image}
-                    alt={`Slide ${index + 1}`}
-                    className="w-full h-[400px] object-cover rounded-lg"
-                  />
+
+  const renderTabs = () => {
+    switch (activeTab) {
+      case 'Overview':
+        return (
+          <div className="px-10">
+            <div className="description mb-8">
+              <h2 className="text-2xl font-semibold text-gray-800">Description</h2>
+              <p className="text-gray-600 mt-2">{apartment.description}</p>
+            </div>
+            <div className="Location mb-8">
+              <h2 className="text-2xl font-semibold text-gray-800">Location</h2>
+              <p className="text-gray-600">
+                {apartment.city}, {apartment.country}
+              </p>
+            </div>
+            <div className="Price mb-8">
+              <h2 className="text-2xl font-semibold text-gray-800">Price</h2>
+              <p className="text-amber-800 font-bold text-xl">${apartment.price}/month</p>
+            </div>
+            <div className="rating">
+              <h2 className="text-2xl font-semibold text-gray-800">Rating</h2>
+              <div className="flex justify-start flex-col">
+                <p className="text-xl font-semibold">{apartment.rating}/5</p>
+                <div className="flex items-center">
+                  {renderStars(apartment.rating)}
+                  <span className="text-gray-600">({apartment.reviews.length} reviews)</span>
                 </div>
-              ))}
-            </Slider>
-          </div>
-
-          {/* Right Section: Details */}
-          <div className="w-full md:w-1/2 py-6 pr-20">
-            <h2 className="text-2xl font-semibold text-gray-800">Description</h2>
-            <p className="text-gray-600 mt-2">{apartment.description}</p>
-
-            <div className="mt-6 flex gap-40">
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800">Location</h2>
-                <p className="text-gray-600">
-                  {apartment.city}, {apartment.country}
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800">Price</h2>
-                <p className="text-amber-800 font-bold text-xl">${apartment.price}/month</p>
               </div>
             </div>
-
-
-            <div className="mt-6">
+          </div>
+        );
+      case 'Facilities':
+        return (
+          <div className="px-10">
+            <div className="amenities mb-8">
               <h2 className="text-2xl font-semibold text-gray-800">Amenities</h2>
               <ul className="grid grid-cols-3 gap-4 mt-2">
                 {apartment.amenities.map((amenity, index) => (
@@ -205,55 +196,70 @@ const PropertyDetail = () => {
                 ))}
               </ul>
             </div>
-
-            <div className="mt-6 flex gap-40">
-              <div className="">
-                <h2 className="text-2xl font-semibold text-gray-800">Services</h2>
-                <ul className="list-disc list-inside mt-2 text-gray-600">
-                  {apartment.services.map((service, index) => (
-                    <li key={index}>{service}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800">Rating</h2>
-                <div className="flex justify-center flex-col">
-                  <div className="">
-                    <p className="text-xl font-semibold">{apartment.rating}/5</p>
-                  </div>
-                  <div className="">
-                    {renderStars(apartment.rating)}
-                    <span className="text-gray-600">({apartment.reviews.length} reviews)</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <button className="bg-amber-800 hover:bg-amber-900 text-white px-6 py-3 rounded-lg shadow-lg transition">
-                Contact Seller
-              </button>
-              <Link to="/" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-lg transition">
-                Back to Listings
-              </Link>
+            <div className="services">
+              <h2 className="text-2xl font-semibold text-gray-800">Services</h2>
+              <ul className="list-disc list-inside mt-2 text-gray-600">
+                {apartment.services.map((service, index) => (
+                  <li key={index}>{service}</li>
+                ))}
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="m-4 max-w-7xl mx-auto p-6 bg-white shadow-md rounded-lg overflow-hidden">
-        {/* User Reviews and Ratings */}
-        <div className="mt-4">
-          <h2 className="text-2xl font-semibold text-gray-800">User Reviews</h2>
-          <div className="space-y-4 mt-4">
-            {apartment.reviews.map((review, index) => (
-              <div key={index} className="p-4 bg-gray-100 rounded-lg shadow-sm">
-                <p className="font-semibold">{review.user}</p>
-                <div className="flex items-center space-x-2">
-                  {renderStars(review.rating)}
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="bg-gray-50 min-h-screen py-4">
+      <div className="max-w-7xl mx-auto pt-8 px-10 bg-white shadow-md rounded-lg overflow-hidden">
+        {/* Property Details */}
+        <div className="">
+          <h1 className="text-3xl font-bold mb-6">{apartment.title}</h1>
+          <div className="w-full h-[500px]">
+            <Slider {...sliderSettings} dotsClass="h-[4rem] mt-3">
+              {apartment.images.map((image, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={image}
+                    alt={`Slide ${index + 1}`}
+                    className="w-full h-[400px] object-cover rounded-lg"
+                  />
                 </div>
-                <p className="text-gray-600 mt-2">{review.comment}</p>
-              </div>
-            ))}
+              ))}
+            </Slider>
+          </div>
+          <div className="w-full py-2 px-4">
+            <div className="flex justify-center border-y gap-10">
+              <button
+                className={`py-2 px-4 font-semibold ${activeTab === 'Overview' ? 'border-b-2 border-amber-800 text-amber-800' : 'text-gray-600'
+                  }`}
+                onClick={() => setActiveTab('Overview')}
+              >
+                Overview
+              </button>
+              <button
+                className={`py-2 px-4 font-semibold ${activeTab === 'Facilities' ? 'border-b-2 border-amber-800 text-amber-800' : 'text-gray-600'
+                  }`}
+                onClick={() => setActiveTab('Facilities')}
+              >
+                Facilities
+              </button>
+            </div>
+
+            {/* Tab Content */}
+            <div className="mt-6 border-b pb-10">
+              {renderTabs()}
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-4 my-6">
+            <button className="bg-amber-800 hover:bg-amber-900 text-white px-6 py-3 rounded-lg shadow-lg transition">
+              Book Now
+            </button>
+            <Link to="/" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-lg transition">
+              Back to Listings
+            </Link>
           </div>
         </div>
       </div>
