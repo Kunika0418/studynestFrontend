@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer.js";
 import Home from "./containers/Home/Home.js";
 import Property from "./containers/Property/Property.js";
 import Service from "./containers/Service/Service.js";
+import PropertyDetail from "./containers/Property/PropertyDetail/PropertyDetail.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Property" element={<Property />} />
         <Route path="/Services" element={<Service />} />
+        <Route path="/Property/:PropertyId" element={<PropertyDetail />} />
       </Routes>
       <Footer />
     </>
