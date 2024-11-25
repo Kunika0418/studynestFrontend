@@ -3,7 +3,7 @@
 }
 
 .text-gradient {
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+    background: linear-gradient(135deg, #6C0F0A, #a04031, #ff9e88);
     background-size: 300% 300%;
     animation: gradient-animation 6s ease infinite;
 }

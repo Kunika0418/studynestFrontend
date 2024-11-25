@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import bannerVideo from "../../../assets/video/Banner_video.mp4";
+import React from "react";
+
 import "../Home.css";
 
-
-const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange }) => {
-  
-  
-
-  
+const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange, bannerVideo }) => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen bg-slate-400 relative">
+      <div className="flex flex-col justify-center items-center h-screen bg-bg-300 relative">
         {" "}
         {/* Added pt-20 for spacing */}
         <div className="w-full h-full absolute top-0 z-0">
@@ -18,8 +13,9 @@ const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange }) => {
             src={bannerVideo}
             className="h-full w-full object-cover"
             autoPlay
-            mute = "true"
+            muted
             loop
+            preload="auto"
           />
         </div>
         <div className="absolute w-full h-full bg-white/30 bg-opacity-30 z-0"></div>

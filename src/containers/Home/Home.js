@@ -5,6 +5,9 @@ import PropertyDetail from "../Property/PropertyDetail/PropertyDetail";
 import Hero from "./components/Hero";
 import TopCities from "./components/TopCities";
 
+import bannerVideo from "../../assets/video/Banner_video.mp4";
+
+
 const Home = () => {
   const apartmentsData = [
     {
@@ -92,7 +95,8 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm = {searchTerm} handleChange = {handleChange}/>
+      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm = {searchTerm} handleChange = {handleChange} bannerVideo={bannerVideo}/>
+
       <TopCities />
 
       {/* Apartments Section */}

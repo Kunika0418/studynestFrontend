@@ -1,9 +1,12 @@
 // components/Navbar.jsx
-import React, { useState } from 'react';
-import { IoMdPerson } from 'react-icons/io';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { IoMdPerson } from "react-icons/io";
 import { IoIosLogIn } from "react-icons/io";
-import logo from '../../assets/logo/logo.jpg';
-import AuthModal from '../Login/Modal';
+import logo from "../../assets/logo/logo.jpg";
+import AuthModal from "../Login/Modal";
+
+import "./Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,9 +24,9 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white sticky top-0 z-20 shadow-md">
+    <div className="bg-white/30 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md">
       <nav className="navbar flex justify-between items-center px-6 py-3 shadow-md">
-        <div className="flex items-center space-x-3">
+        <Link to={"/"} className="flex justify-center items-center space-x-3">
           <div className="w-12 h-12">
             <img
               src={logo}
@@ -31,40 +34,37 @@ const Navbar = () => {
               className="w-full h-full object-contain rounded-full"
             />
           </div>
-          <a
-            href="/"
-            className="text-xl font-bold text-gray-800 hover:text-amber-800 transition duration-300"
-          >
+          <div className="text-xl font-semibold font-sans text-primary-100">
             StudyNest
-          </a>
-        </div>
+          </div>
+        </Link>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center space-x-6">
-          <li>
-            <a
-              href="/Property"
-              className="text-gray-700 hover:text-amber-800 transition duration-300"
+        <ul className="hidden md:flex justify-center items-center gap-10">
+          <li className="">
+            <Link
+              to={"/Property"}
+              className="link relative text-gray-700 hover:text-amber-800 transition duration-300"
             >
               Property
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/Services"
-              className="text-gray-700 hover:text-amber-800 transition duration-300"
+            <Link
+              to={"/Services"}
+              className="link relative text-gray-700 hover:text-primary-100 transition duration-300"
             >
               Services
-            </a>
+            </Link>
           </li>
-          <li>
+          <li className="flex justify-center items-center">
             {/* Login/Logout Button */}
             <button
               onClick={handleLoginLogout}
-              className="text-gray-700 hover:text-amber-800 text-2xl transition duration-300"
-              aria-label={isLoggedIn ? 'Logout' : 'Login'}
+              className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300"
+              aria-label={isLoggedIn ? "Logout" : "Login"}
             >
-              {isLoggedIn ? <IoIosLogIn/> : <IoMdPerson />}
+              {isLoggedIn ? <IoIosLogIn /> : <IoMdPerson />}
             </button>
           </li>
         </ul>
@@ -75,7 +75,7 @@ const Navbar = () => {
           className="md:hidden text-2xl text-gray-700"
           aria-label="Toggle Menu"
         >
-          {isMenuOpen ? 'X' : '☰'}
+          {isMenuOpen ? "X" : "☰"}
         </button>
       </nav>
 
@@ -84,20 +84,20 @@ const Navbar = () => {
         <div className="md:hidden bg-white p-4 shadow-lg">
           <ul>
             <li className="py-2">
-              <a
-                href="/Property"
+              <Link
+                to={"/Property"}
                 className="block text-gray-700 hover:text-amber-800 transition duration-300"
               >
                 Property
-              </a>
+              </Link>
             </li>
             <li className="py-2">
-              <a
-                href="/Services"
-                className="block text-gray-700 hover:text-amber-800 transition duration-300"
+              <Link
+                to={"/Services"}
+                className="block text-gray-700 hover:text-primary-100 transition duration-300"
               >
                 Services
-              </a>
+              </Link>
             </li>
             <li className="py-2">
               {/* Login/Logout Button for Mobile */}
@@ -105,7 +105,7 @@ const Navbar = () => {
                 onClick={handleLoginLogout}
                 className="text-gray-700 hover:text-amber-800"
               >
-                {isLoggedIn ? 'Logout' : 'Login'}
+                {isLoggedIn ? "Logout" : "Login"}
               </button>
             </li>
           </ul>
