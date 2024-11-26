@@ -4,11 +4,12 @@ import "../Home.css"
 const TopCities = () => {
   return (
     <>
-      <div className="w-full h-auto px-10 flex flex-col items-center gap-12 py-20">
-        <div>
-          <h2 className="text-2xl font-medium font-sans text-primary-200">
-            Top Cities
+      <div className="w-full h-auto px-10 flex flex-col items-center gap-12 py-10">
+        <div className="flex flex-col justify-center items-center gap-4">
+          <h2 className="text-2xl font-semibold font-sans text-accent-100">
+            Top{" "}<span className="text-3xl font-bold text-primary-200">Cities</span>
           </h2>
+          <span className="text-text-200 font-sans font-medium">We help you discover your ideal student home across countries and cities around the globe.</span>
         </div>
         <div className="grid grid-cols-3 gap-28">
           <div className="w-80 h-44 rounded-lg overflow-hidden relative cursir-pointer">

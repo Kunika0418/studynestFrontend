@@ -42,7 +42,7 @@ const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange, bannerVi
               />
               <button
                 onClick={handleSearch}
-                className="absolute right-2 py-2 px-6 bg-primary-100 text-white rounded-full shadow-md hover:bg-amber-900 transition-all duration-300"
+                className="absolute right-2 py-2 px-6 bg-primary-100 text-white rounded-full shadow-md hover:bg-primary-100/90 transition-all duration-300"
               >
                 Search
               </button>
