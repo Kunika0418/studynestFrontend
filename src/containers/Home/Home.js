@@ -9,6 +9,7 @@ import bannerVideo from "../../assets/video/Banner_video.mp4";
 
 
 const Home = () => {
+
   const apartmentsData = [
     {
       id: 1,
@@ -20,6 +21,14 @@ const Home = () => {
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
         "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
       ],
       area: "1200 sq.ft",
       services: ["24/7 Security", "Maintenance", "Housekeeping"],
@@ -40,6 +49,15 @@ const Home = () => {
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
         "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+  
       ],
       area: "600 sq.ft",
       services: ["24/7 Concierge", "Maintenance"],
@@ -60,6 +78,15 @@ const Home = () => {
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
         "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+  
       ],
       area: "1500 sq.ft",
       services: ["24/7 Security", "Private Beach Access"],
@@ -80,6 +107,15 @@ const Home = () => {
       images: [
         "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
         "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+        "https://ulcdn.universityliving.com/cms/mm8yiT6fpKnzU8cfWW3JzzCdu7Uc1G.webp?format=auto&width=384",
+        "https://ulcdn.universityliving.com/cms/E7fQRg0O2CuQWmp12dhJAPBg61kBnh.jpeg?format=auto&width=384",
+        "https://media.uhzcdn.com/image/1393/01HVCWGG3YX6N3VNP4VPQBCNFY_z.webp",
+        "https://media.uhzcdn.com/image/1389/01HVCWFJC2BXK4RD2SNSD4B2P2_z.webp",
+        "https://media.uhzcdn.com/image/1385/01J60KG2SMH713NPXD8GJ19MWZ_g.webp",
+  
       ],
       area: "2500 sq.ft",
       services: ["Valet Parking", "Private Chef", "Housekeeping"],
