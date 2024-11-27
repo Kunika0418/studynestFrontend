@@ -35,11 +35,11 @@ const BuyForm = ({ apartment }) => {
                 <h2 className="text-2xl font-semibold text-center">${apartment.price}/month</h2>
 
                 <button className="bg-amber-100 text-amber-700 px-4 py-2 rounded mt-4 w-full text-left">
-                    <span className="font-semibold">Advance rent</span> 2 weeks' Rent
+                    <span className="font-semibold">Advance rent</span> 2 months' Rent
                     <span className="float-right">→</span>
                 </button>
             </div>
-            <div className="form p-4">
+            <div className="form px-4 pb-4">
                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                     <div>
                         <input
@@ -74,7 +74,7 @@ const BuyForm = ({ apartment }) => {
                             placeholder='Email'
                             required
                         />
-                        {formData.email.length == 0 && (
+                        {formData.email.length === 0 && (
                             <p className="text-red-500 text-sm mt-1">Email address is required</p>
                         )}
                     </div>
@@ -84,15 +84,15 @@ const BuyForm = ({ apartment }) => {
                             type="checkbox"
                             name="terms"
                             id="terms"
-                            className="h-4 w-4 text-blue-600"
+                            className="h-4 w-4 text-amber-600"
                         />
                         <label htmlFor="terms" className="ml-2 text-gray-600 text-sm">
                             By continuing, you agree to our{' '}
-                            <a href="#" className="text-blue-600">
+                            <a href="#" className="text-amber-600">
                                 Privacy Policy
                             </a>{' '}
                             and{' '}
-                            <a href="#" className="text-blue-600">
+                            <a href="#" className="text-amber-600">
                                 Terms of Service
                             </a>
                         </label>
@@ -100,7 +100,7 @@ const BuyForm = ({ apartment }) => {
 
                     <button
                         type="submit"
-                        className="w-full py-3 mt-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700"
+                        className="w-full py-3 mt-4 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800"
                     >
                         Find My Home
                     </button>
