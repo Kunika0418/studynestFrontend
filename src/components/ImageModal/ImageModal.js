@@ -13,7 +13,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
             onClick={onClose}
         >
             <div
-                className="relative w-full max-w-3xl bg-white p-4 rounded-lg overflow-hidden shadow-lg h-[35rem]"
+                className="relative w-full max-w-5xl rounded-lg overflow-hidden shadow-lg h-[37rem]"
                 onClick={(e) => e.stopPropagation()} // Prevent click on modal content from closing the modal
             >
                 {/* Main Swiper for showing large images */}
@@ -28,7 +28,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
                 >
                     {images.map((image, index) => (
                         <SwiperSlide key={index} className="flex justify-center">
-                            <img src={image} alt={`Image ${index}`} className="w-full object-cover h-[26rem]" />
+                            <img src={image} alt={`Image ${index}`} className="w-full object-cover h-[28rem]" />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -38,9 +38,9 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
                     modules={[Thumbs]}
                     watchSlidesProgress
                     onSwiper={setThumbsSwiper}
-                    spaceBetween={10}
-                    slidesPerView={4}
-                    className="mt-4 rounded-lg border-t-2 border-gray-200"
+                    spaceBetween={6}
+                    slidesPerView={5}
+                    className="mt-4 rounded-lg"
                 >
                     {images.map((image, index) => (
                         <SwiperSlide key={index}>
