@@ -47,7 +47,7 @@ code {
 
 /* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 6px; /* Thinner scrollbar */
+  width: 8px; /* Thinner scrollbar */
   height: 6px; /* Thinner horizontal scrollbar (if needed) */
 }
 
@@ -57,13 +57,13 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #FF8F00, #FF6F00); /* Gradient thumb */
+  background: linear-gradient(45deg, #6C0F0A, #6C0F0A); /* Gradient thumb */
   border-radius: 10px; /* Fully rounded thumb */
   border: 1px solid #f3f4f6; /* Thin border to match the track */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #FF8F00, #FF6F00); /* Darker gradient on hover */
+  background: linear-gradient(45deg, #ff9e88, #ff9e88); /* Darker gradient on hover */
 }
 
 /* Firefox Scrollbar Styles */

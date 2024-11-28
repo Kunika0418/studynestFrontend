@@ -1,4 +1,4 @@
-.link::after{
+.link_nav::after{
     content: "";
     position: absolute;
     width: 0;
@@ -9,7 +9,7 @@
     transition: width 0.3s ease-in-out;
 }
 
-.link:hover::after{
+.link_nav:hover::after{
     animation: fadeIn 0.5s;
     width: 100%;
 }

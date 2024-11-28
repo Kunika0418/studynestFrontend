@@ -30,11 +30,11 @@ const BuyForm = ({ apartment }) => {
     };
 
     return (
-        <div className={`max-w-sm mx-auto border border-gray-400 rounded-xl`}>
-            <div className='border-b bg-gray-50 p-4 rounded-t-xl'>
-                <h2 className="text-2xl font-semibold text-center">${apartment.price}/month</h2>
+        <div className={`max-w-sm mx-auto border-2 border-green-500 rounded-xl`}>
+            <div className='border-b border-bg-300 bg-gradient-to-b from-green-300 to-bg-green-200 p-4 rounded-t-xl'>
+                <h2 className="text-2xl text-accent-100 font-semibold text-center">${apartment.price}/month</h2>
 
-                <button className="bg-amber-100 text-amber-700 px-4 py-2 rounded mt-4 w-full text-left">
+                <button className="bg-amber-100 text-primary-100 px-4 py-2 rounded mt-4 w-full text-left">
                     <span className="font-semibold">Advance rent</span> 2 months' Rent
                     <span className="float-right">→</span>
                 </button>
@@ -48,7 +48,7 @@ const BuyForm = ({ apartment }) => {
                             value={formData.fullName}
                             onChange={handleChange}
                             placeholder='Full Name'
-                            className="w-full border px-4 py-2 rounded mt-1"
+                            className="w-full border border-accent-200 px-4 py-2 rounded-lg mt-1 outline-none"
                             required
                         />
                     </div>
@@ -60,7 +60,7 @@ const BuyForm = ({ apartment }) => {
                             value={formData.phoneNumber}
                             onChange={handleChange}
                             placeholder='Phone Number'
-                            className="w-full border px-4 py-2 rounded mt-1"
+                            className="w-full border border-accent-200 px-4 py-2 rounded-lg mt-1 outline-none"
                         />
                     </div>
 
@@ -70,7 +70,7 @@ const BuyForm = ({ apartment }) => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full border px-4 py-2 rounded mt-1"
+                            className="w-full border border-accent-200 px-4 py-2 rounded-lg mt-1 outline-none"
                             placeholder='Email'
                             required
                         />
@@ -79,20 +79,20 @@ const BuyForm = ({ apartment }) => {
                         )}
                     </div>
 
-                    <div className="flex items-center">
+                    <div className="flex items-start">
                         <input
                             type="checkbox"
                             name="terms"
                             id="terms"
-                            className="h-4 w-4 text-amber-600"
+                            className="h-4 w-4 text-primary-100 mt-[0.15rem]"
                         />
                         <label htmlFor="terms" className="ml-2 text-gray-600 text-sm">
                             By continuing, you agree to our{' '}
-                            <a href="#" className="text-amber-600">
+                            <a href="#" className="text-primary-100">
                                 Privacy Policy
                             </a>{' '}
                             and{' '}
-                            <a href="#" className="text-amber-600">
+                            <a href="#" className="text-primary-100">
                                 Terms of Service
                             </a>
                         </label>
@@ -100,7 +100,7 @@ const BuyForm = ({ apartment }) => {
 
                     <button
                         type="submit"
-                        className="w-full py-3 mt-4 bg-amber-700 text-white font-semibold rounded-lg hover:bg-amber-800"
+                        className="w-full py-3 mt-4 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 font-semibold rounded-lg transition duration-500 ease-in-out"
                     >
                         Find My Home
                     </button>

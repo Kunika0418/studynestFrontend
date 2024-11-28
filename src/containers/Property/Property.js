@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropertyDetail from "./PropertyDetail/PropertyDetail";
 import ApartmentCard from "../../components/Card/Card";
 import { apartmentsData } from "../../components/Data/Data";
+import daisyui from "daisyui";
 
 const Property = () => {
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
@@ -41,7 +42,8 @@ const Property = () => {
   // Effect to filter apartments based on country, city, and price range
   useEffect(() => {
     const filtered = apartmentsData.filter((apt) => {
-      const isCountryMatch = !selectedCountry || apt.country === selectedCountry;
+      const isCountryMatch =
+        !selectedCountry || apt.country === selectedCountry;
       const isCityMatch = !selectedCity || apt.city === selectedCity;
 
       // Price filter logic
@@ -57,43 +59,62 @@ const Property = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
-      <aside className="bg-white py-4 px-6 border-b flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-800">Filter</h2>
+      <aside className="bg-white py-4 px-6 border-b border-primary-100 flex justify-between items-center">
+        <h2 className="text-lg font-medium text-accent-100 font-sans">
+          Filters
+        </h2>
         <div className="flex gap-4">
           <div>
-            <label htmlFor="country" className="block text-sm font-semibold text-gray-600 mb-2">
+            <label
+              htmlFor="country"
+              className="block text-sm font-semibold text-gray-600 mb-2"
+            >
               Country
             </label>
             <select
               id="country"
               aria-label="Select country"
-              className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-amber-600"
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
+              className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
             >
-              <option value="">All Countries</option>
+              <option
+                value=""
+                className="text-accent-100 text-sm font-medium font-sans"
+              >
+                All Countries
+              </option>
               {countries.map((country) => (
-                <option key={country} value={country}>
+                <option
+                  className="text-accent-100 text-sm font-medium font-sans"
+                  key={country}
+                  value={country}
+                >
                   {country}
                 </option>
               ))}
             </select>
           </div>
           <div>
-            <label htmlFor="city" className="block text-sm font-semibold text-gray-600 mb-2">
+            <label
+              htmlFor="city"
+              className="block text-sm font-semibold text-gray-600 mb-2"
+            >
               City
             </label>
             <select
               id="city"
               aria-label="Select city"
-              className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-amber-600"
+              className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
               disabled={!selectedCountry}
             >
-              <option value="">All Cities</option>
+              <option value=""
+              className="text-accent-100 text-sm font-medium font-sans"
+              >All Cities</option>
               {cities.map((city) => (
-                <option key={city} value={city}>
+                <option className="text-accent-100 text-sm font-medium font-sans" key={city} value={city}>
                   {city}
                 </option>
               ))}
@@ -102,25 +123,30 @@ const Property = () => {
 
           {/* Price Range Filter */}
           <div>
-            <label htmlFor="priceRange" className="block text-sm font-semibold text-gray-600 mb-2">
+            <label
+              htmlFor="priceRange"
+              className="block text-sm font-semibold text-gray-600 mb-2"
+            >
               Price Range
             </label>
             <div className="flex gap-4">
               <input
                 type="number"
                 id="minPrice"
-                className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-amber-600"
+                className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 placeholder="Min Price"
+                min="0"
               />
               <input
                 type="number"
                 id="maxPrice"
-                className="w-full border border-gray-300 rounded-md p-2 focus:ring focus:ring-amber-600"
+                className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 placeholder="Max Price"
+                min="0"
               />
             </div>
           </div>
@@ -129,12 +155,21 @@ const Property = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6">
-        <h1 className="text-3xl font-extrabold text-gray-800 mb-8">Apartments for Rent</h1>
+        <h1 className="text-2xl font-semibold font-sans text-accent-100 mb-8">
+          Available{" "}
+          <span className="text-4xl text-primary-200 font-bold">
+            Properties
+          </span>
+        </h1>
 
         {/* Filtered Apartments */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredApartments.map((apt) => (
-            <ApartmentCard key={apt.id} {...apt} onClick={() => setSelectedApartment(apt)} />
+            <ApartmentCard
+              key={apt.id}
+              {...apt}
+              onClick={() => setSelectedApartment(apt)}
+            />
           ))}
         </div>
 

@@ -67,7 +67,7 @@ const WhyWe = () => {
             return (
               <div
                 key={index+1}
-                className="h-full w-72 flex flex-col justify-center items-center gap-2 p-8  border-none cursor-pointer relative group"
+                className="h-full w-72 flex flex-col justify-center items-center gap-2 p-8  border-none cursor-pointer relative group hover:-translate-y-2 transition-transform duration-500 ease-in-out"
               >
                 <div className="h-44 w-56 bg-slate-300 overflow-hidden rounded-lg">
                   <img src={item.img} className="h-full w-full object-cover" alt="error occured"/>
@@ -76,7 +76,7 @@ const WhyWe = () => {
                 <span className="text-justify text-sm text-accent-100">
                   {item.description}
                 </span>
-                <div className="w-56 h-[0.2rem] bg-primary-100 shadow-lg opacity-0 group-hover:opacity-100 shadow-primary-300 absolute bottom-4 traslate-y-0 group-hover:-translate-y-2 transition duration-500"></div>
+                <div className="w-56 h-[0.2rem] bg-primary-100 shadow-lg opacity-0 group-hover:opacity-100 shadow-primary-300 absolute bottom-4 traslate-y-0 group-hover:-translate-y-2 transition duration-500 ease-in-out"></div>
               </div>
             );
           })}

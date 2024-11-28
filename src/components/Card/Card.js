@@ -20,7 +20,7 @@ const ApartmentCard = ({ id, images, title, price, city, country, area, services
     <div className="w-full">
       <Link to={`/Property/${id}`}>
         {/* Apartment Image Slider */}
-        <div className='rounded-sm overflow-hidden shadow-lg bg-white flex'>
+        <div className='h-48 rounded-lg overflow-hidden border border-primary-300 shadow-lg shadow-slate-400 hover:shadow-xl hover:shadow-primary-300 transition-shadow duration-500 ease-in-out flex'>
           <div className="relative w-[21rem] h-48">
             <Slider {...settings}>
               {images.length > 0 ? (

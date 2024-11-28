@@ -45,7 +45,7 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Property"}
-                className="link relative text-gray-700 hover:text-amber-800 transition duration-300"
+                className="link_nav relative text-accent-100 hover:text-primary-100 transition duration-300"
               >
                 Property
               </Link>
@@ -53,7 +53,7 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Services"}
-                className="link relative text-gray-700 hover:text-primary-100 transition duration-300"
+                className="link_nav relative text-accent-100 hover:text-primary-100 transition duration-300"
               >
                 Services
               </Link>
@@ -87,7 +87,7 @@ const Navbar = () => {
               <li className="py-2">
                 <Link
                   to={"/Property"}
-                  className="block text-gray-700 hover:text-amber-800 transition duration-300"
+                  className="block text-gray-700 hover:text-primary-100 transition duration-300"
                 >
                   Property
                 </Link>
