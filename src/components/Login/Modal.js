@@ -163,7 +163,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          <div className="grid grid-cols-2 gap-x-4">
+          {isSignUp && <div className="grid grid-cols-2 gap-x-4">
             <div className="mb-4">
               <label
                 htmlFor="phoneno"
@@ -242,7 +242,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                 <option value="Other">Other</option>
               </select>
             </div>
-          </div>
+          </div>}
 
           {/* Submit Button */}
           <div className="mb-4">
