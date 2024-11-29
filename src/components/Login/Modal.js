@@ -5,6 +5,7 @@ import { IoEye, IoEyeOff, IoEyeOffOutline } from "react-icons/io5";
 const AuthModal = ({ isOpen, onClose }) => {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between Login and SignUp
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const modalRef = useRef(null); // Ref for the modal
 
   // Focus management
@@ -143,18 +144,18 @@ const AuthModal = ({ isOpen, onClose }) => {
                   className="outline-none w-full text-accent-100"
                   required
                 />
-                {showPassword && (
+                {showConfirmPassword && (
                   <IoEye
                     onClick={() => {
-                      setShowPassword(!showPassword);
+                      setShowConfirmPassword(!showConfirmPassword);
                     }}
                     className="text-accent-100 text-xl cursor-pointer"
                   />
                 )}
-                {!showPassword && (
+                {!showConfirmPassword && (
                   <IoEyeOff
                     onClick={() => {
-                      setShowPassword(!showPassword);
+                      setShowConfirmPassword(!showConfirmPassword);
                     }}
                     className="text-accent-100 text-xl cursor-pointer"
                   />
