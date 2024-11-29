@@ -8,11 +8,14 @@ import Home from "./containers/Home/Home.js";
 import Property from "./containers/Property/Property.js";
 import Service from "./containers/Service/Service.js";
 import PropertyDetail from "./containers/Property/PropertyDetail/PropertyDetail.js";
+import WhastappIcon from "./components/WhatsappIcon/WhatsappIcon.js";
+
 
 function App() {
   return (
     <>
       <Navbar />
+      <WhastappIcon />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Property" element={<Property />} />

@@ -1,8 +1,10 @@
 // components/AuthModal.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { IoEye, IoEyeOff, IoEyeOffOutline } from "react-icons/io5";
 
 const AuthModal = ({ isOpen, onClose }) => {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between Login and SignUp
+  const [showPassword, setShowPassword] = useState(false);
   const modalRef = useRef(null); // Ref for the modal
 
   // Focus management
@@ -63,7 +65,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         </button>
 
         {/* Title */}
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        <h2 className="text-2xl font-semibold text-accent-100 mb-4">
           {isSignUp ? "Sign Up" : "Login"}
         </h2>
 
@@ -72,17 +74,17 @@ const AuthModal = ({ isOpen, onClose }) => {
           {/* Username */}
           <div className="mb-4">
             <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700"
+              htmlFor="fullname"
+              className="block text-sm font-medium text-accent-100"
             >
-              Username
+              Full Name
             </label>
             <input
-              id="username"
-              name="username"
+              id="fullname"
+              name="fullname"
               type="text"
-              placeholder="Enter your username"
-              className="w-full p-2 border border-gray-300 rounded-md"
+              placeholder="Enter your full name"
+              className="w-full p-2 border border-gray-300 text-accent-100 rounded-lg outline-none mt-2"
               required
             />
           </div>
@@ -91,25 +93,162 @@ const AuthModal = ({ isOpen, onClose }) => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-accent-100"
             >
               Password
             </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              className="w-full p-2 border border-gray-300 rounded-md"
-              required
-            />
+            <div className="p-2 w-full border border-gray-300 rounded-lg flex flex-row justify-between items-center mt-2">
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="outline-none w-full text-accent-100"
+                required
+              />
+              {showPassword && (
+                <IoEye
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  className="text-accent-100 text-xl cursor-pointer"
+                />
+              )}
+              {!showPassword && (
+                <IoEyeOff
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  className="text-accent-100 text-xl cursor-pointer"
+                />
+              )}
+            </div>
+          </div>
+
+          {/* Confirm Password */}
+          {isSignUp && (
+            <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-accent-100"
+              >
+                Confirm Password
+              </label>
+              <div className="p-2 w-full border border-gray-300 rounded-lg flex flex-row justify-between items-center mt-2">
+                <input
+                  id="confirmpassword"
+                  name="confirmpassword"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your confirm password"
+                  className="outline-none w-full text-accent-100"
+                  required
+                />
+                {showPassword && (
+                  <IoEye
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
+                    className="text-accent-100 text-xl cursor-pointer"
+                  />
+                )}
+                {!showPassword && (
+                  <IoEyeOff
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
+                    className="text-accent-100 text-xl cursor-pointer"
+                  />
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-2 gap-x-4">
+            <div className="mb-4">
+              <label
+                htmlFor="phoneno"
+                className="block text-sm font-medium text-accent-100"
+              >
+                Phone no
+              </label>
+              <input
+                id="phoneno"
+                name="phoneno"
+                type="tel"
+                placeholder="Enter your mobile number"
+                className="w-full p-2 border border-gray-300 text-accent-100 rounded-lg outline-none mt-2"
+                required
+                maxLength={10}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="dob"
+                className="block text-sm font-medium text-accent-100"
+              >
+                DOB
+              </label>
+              <input
+                id="dob"
+                name="dob"
+                type="date"
+                placeholder="Date Of Birth"
+                className="w-full p-2 border border-gray-300 text-accent-100 rounded-lg outline-none mt-2"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="nationality"
+                className="block text-sm font-medium text-accent-100"
+              >
+                Nationality
+              </label>
+              <select
+                id="nationality"
+                name="nationality"
+                className="w-full p-2 border border-gray-300 text-accent-100 rounded-lg outline-none mt-2"
+                required
+              >
+                <option value="" disabled selected>
+                  Select Country
+                </option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="China">China</option>
+                <option value="Europe">Europe</option>
+                <option value="Russia">Russia</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="dob"
+                className="block text-sm font-medium text-accent-100"
+              >
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                className="w-full p-2 border border-gray-300 text-accent-100 rounded-lg outline-none mt-2"
+                required
+              >
+                <option value="" disabled selected>
+                  Select Gender
+                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
 
           {/* Submit Button */}
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-amber-800 text-white rounded-md hover:bg-amber-900 transition duration-300"
+              className="w-full py-2 px-4 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 rounded-lg transition duration-500 ease-in-out"
             >
               {isSignUp ? "Create Account" : "Login"}
             </button>
@@ -120,7 +259,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         <div className="text-center">
           <button
             onClick={handleSwitchForm}
-            className="text-sm text-amber-800 hover:underline"
+            className="text-sm text-primary-100 hover:underline transition duration-300 ease-in-out"
           >
             {isSignUp
               ? "Already have an account? Login"
