@@ -68,6 +68,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           isSignUp ? navigate("/Profile") : navigate("/Property");
         }
         onClose();
+        window.location.reload();
       } else {
         setError(data.message || "Error occurred during authentication.");
         toast.error("Maybe Email or Password is incorrect.");
