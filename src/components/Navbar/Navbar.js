@@ -1,10 +1,17 @@
 // components/Navbar.jsx
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, Fragment } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { IoIosLogIn } from "react-icons/io";
 import logo from "../../assets/logo/logo.jpg";
 import AuthModal from "../Login/Modal";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
+import { toast } from "react-toastify";
 
 import "./Navbar.css";
 
@@ -12,6 +19,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -21,6 +30,12 @@ const Navbar = () => {
     } else {
       setIsModalOpen(true); // Open modal for login/signup
     }
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully");
+    navigate("/");
   };
 
   return (
@@ -60,13 +75,49 @@ const Navbar = () => {
             </li>
             <li className="flex justify-center items-center">
               {/* Login/Logout Button */}
-              <button
-                onClick={handleLoginLogout}
-                className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300"
-                aria-label={isLoggedIn ? "Logout" : "Login"}
-              >
-                {isLoggedIn ? <IoIosLogIn /> : <IoMdPerson />}
-              </button>
+              {localStorage.getItem("token") && (
+                <Popover className="relative">
+                  <PopoverButton className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300 mt-2 outline-none">
+                    <IoMdPerson />
+                  </PopoverButton>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <PopoverPanel
+                      anchor="bottom"
+                      className="flex flex-col justify-center items-center gap-1 bg-white border border-primary-100 rounded-xl p-2 w-32 z-20 mt-4 -ml-4"
+                    >
+                      <Link
+                        className="hover:bg-primary-100 hover:text-bg-100 transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
+                        to={"/Profile"}
+                      >
+                        Profile
+                      </Link>
+                      <div
+                        className="hover:bg-primary-100 hover:text-bg-100 transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
+                        onClick={handleLogOut}
+                      >
+                        Log Out
+                      </div>
+                    </PopoverPanel>
+                  </Transition>
+                </Popover>
+              )}
+              {!localStorage.getItem("token") && (
+                <button
+                  onClick={handleLoginLogout}
+                  className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300"
+                  aria-label={isLoggedIn ? "Logout" : "Login"}
+                >
+                  <IoMdPerson />
+                </button>
+              )}
             </li>
           </ul>
 
@@ -114,10 +165,12 @@ const Navbar = () => {
         )}
       </div>
       {/* Modal for Login/Signup */}
-      {isModalOpen && <AuthModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)} // Close the modal
-      />}
+      {isModalOpen && (
+        <AuthModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)} // Close the modal
+        />
+      )}
     </>
   );
 };
