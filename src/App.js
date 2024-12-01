@@ -20,6 +20,7 @@ function App() {
   const [user, setUser] = useState({});
 
   const decodeToken = (token) => {
+    console.log("Token to Decode:", token);
     try {
       const decoded = jwtDecode(token);
       console.log("Decoded Token:", decoded);
