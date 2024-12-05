@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 
 const EditProperty = ({ closeModal }) => {
-  const [propertyId, setPropertyId] = useState("");  // State to hold the property ID
+  const [propertyId, setPropertyId] = useState(""); // State to hold the property ID
   const [property, setProperty] = useState({
     title: "",
     price: "",
     city: "",
     country: "",
     description: "",
-    amenities: "",
-    services: "",
-    images: [],  // Image file state
+    amenities: [],
+    services: [],
+    images: [], // Image file state
   });
-  const [isPropertyFetched, setIsPropertyFetched] = useState(false);  // Flag to indicate whether property data is fetched
-  const [isLoading, setIsLoading] = useState(false);  // Flag to indicate loading state
-  const [imagePreviews, setImagePreviews] = useState([]);  // Image previews for selected files
+  const [isPropertyFetched, setIsPropertyFetched] = useState(false); // Flag to indicate whether property data is fetched
+  const [isLoading, setIsLoading] = useState(false); // Flag to indicate loading state
+  const [imagePreviews, setImagePreviews] = useState([]); // Image previews for selected files
+
+  // Predefined amenities and services
+  const amenitiesOptions = ["Pool", "Gym", "Parking", "Wi-Fi", "Spa", "Garden"];
+  const servicesOptions = ["Cleaning", "Security", "Concierge", "Maintenance", "Laundry"];
 
   // Fetch the property details based on the propertyId when it's entered
   useEffect(() => {
     if (propertyId) {
-      setIsLoading(true);  // Set loading to true before fetching
+      setIsLoading(true); // Set loading to true before fetching
       console.log(`Fetching property details for ID: ${propertyId}`);
       // Simulate API fetch - Replace with your API call
       setTimeout(() => {
@@ -29,12 +33,12 @@ const EditProperty = ({ closeModal }) => {
           city: "Sample City",
           country: "Sample Country",
           description: "This is a sample property description.",
-          amenities: "Pool, Gym, Parking",
-          services: "Cleaning, Security",
-          images: ["image1.jpg", "image2.jpg"],  // Example images
+          amenities: ["Pool", "Gym"],
+          services: ["Cleaning", "Security"],
+          images: ["image1.jpg", "image2.jpg"], // Example images
         });
-        setIsPropertyFetched(true);  // Mark property data as fetched
-        setIsLoading(false);  // Set loading to false after fetch
+        setIsPropertyFetched(true); // Mark property data as fetched
+        setIsLoading(false); // Set loading to false after fetch
       }, 1000); // Simulating API call delay
     }
   }, [propertyId]);
@@ -44,10 +48,30 @@ const EditProperty = ({ closeModal }) => {
     setProperty((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleAmenityChange = (e) => {
+    const { value, checked } = e.target;
+    setProperty((prev) => ({
+      ...prev,
+      amenities: checked
+        ? [...prev.amenities, value]
+        : prev.amenities.filter((item) => item !== value),
+    }));
+  };
+
+  const handleServiceChange = (e) => {
+    const { value, checked } = e.target;
+    setProperty((prev) => ({
+      ...prev,
+      services: checked
+        ? [...prev.services, value]
+        : prev.services.filter((item) => item !== value),
+    }));
+  };
+
   const handleImageChange = (e) => {
     const files = e.target.files;
     const fileArray = Array.from(files);
-    
+
     // Preview the selected images
     const previews = fileArray.map((file) =>
       URL.createObjectURL(file)
@@ -69,7 +93,7 @@ const EditProperty = ({ closeModal }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-4xl relative overflow-auto max-h-[80vh]">
+      <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-3xl relative overflow-auto max-h-[80vh]">
         {/* Close Button */}
         <button
           onClick={closeModal}
@@ -224,15 +248,23 @@ const EditProperty = ({ closeModal }) => {
               >
                 Amenities
               </label>
-              <input
-                type="text"
-                id="amenities"
-                name="amenities"
-                value={property.amenities}
-                onChange={handleInputChange}
-                placeholder="Enter amenities (e.g. Pool, Gym)"
-                className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
+              <div className="space-y-2">
+                {amenitiesOptions.map((amenity) => (
+                  <div key={amenity} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={amenity}
+                      value={amenity}
+                      checked={property.amenities.includes(amenity)}
+                      onChange={handleAmenityChange}
+                      className="mr-2"
+                    />
+                    <label htmlFor={amenity} className="text-gray-700">
+                      {amenity}
+                    </label>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Services */}
@@ -243,18 +275,26 @@ const EditProperty = ({ closeModal }) => {
               >
                 Services
               </label>
-              <input
-                type="text"
-                id="services"
-                name="services"
-                value={property.services}
-                onChange={handleInputChange}
-                placeholder="Enter services (e.g. Cleaning, Security)"
-                className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
+              <div className="space-y-2">
+                {servicesOptions.map((service) => (
+                  <div key={service} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={service}
+                      value={service}
+                      checked={property.services.includes(service)}
+                      onChange={handleServiceChange}
+                      className="mr-2"
+                    />
+                    <label htmlFor={service} className="text-gray-700">
+                      {service}
+                    </label>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Image Upload and Preview */}
+            {/* Property Images */}
             <div className="mb-6">
               <label
                 htmlFor="images"
