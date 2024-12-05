@@ -1,8 +1,17 @@
 import React from "react";
-
+import { CountryTabs } from "../../../components/SearchTab/SearchTab";
 import "../Home.css";
 
-const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange, bannerVideo }) => {
+const Hero = ({
+  apartmentsData,
+  handleSearch,
+  searchTerm,
+  handleChange,
+  bannerVideo,
+  isModalOpen,
+  setIsModalOpen,
+  handleClick,
+}) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen bg-bg-300 relative">
@@ -31,13 +40,17 @@ const Hero = ({ apartmentsData, handleSearch, searchTerm, handleChange, bannerVi
         </div>
         {/* Search Bar Section */}
         <div className="w-full h-auto flex justify-center items-center mb-20">
-          <div className="mt-10 w-full max-w-2xl">
+          <div className="mt-10 w-full max-w-2xl relative">
+            <div>
+              {isModalOpen && <CountryTabs setIsModalOpen={setIsModalOpen} />}
+            </div>
             <div className="relative flex items-center">
               <input
                 type="text"
                 placeholder="Enter city, neighborhood, or title"
                 value={searchTerm}
                 onChange={handleChange}
+                onClick={handleClick}
                 className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all duration-300"
               />
               <button
