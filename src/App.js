@@ -25,15 +25,11 @@ function App() {
       const decoded = jwtDecode(token);
       console.log("Decoded Token:", decoded);
       setUser(decoded);
+      return decoded;
     } catch (error) {
       console.error("Invalid token", error);
     }
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    decodeToken(token);
-  }, []);
 
   return (
     <>
@@ -55,7 +51,7 @@ function App() {
         <Route path="/Property" element={<Property />} />
         <Route path="/Services" element={<Service />} />
         <Route path="/Property/:PropertyId" element={<PropertyDetail />} />
-        <Route path="/Profile" element={<Profile user={user} />} />
+        <Route path="/Profile" element={<Profile decodeToken={decodeToken} />} />
         <Route path="/Admin" element={<Admin/>} />
       </Routes>
       <Footer />

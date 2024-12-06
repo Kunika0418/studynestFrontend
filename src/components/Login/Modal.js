@@ -3,11 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Oval } from "react-loader-spinner";
+import axios from "axios";
 
 const AuthModal = ({ isOpen, onClose }) => {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between Login and SignUp
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const modalRef = useRef(null); // Ref for the modal
@@ -30,9 +34,12 @@ const AuthModal = ({ isOpen, onClose }) => {
 
   const handleAuth = async (e) => {
     e.preventDefault();
+    setDisabled(true);
+    setIsLoading(true);
     setError(null);
+  
     const formData = new FormData(e.target);
-
+  
     // Prepare data to send to the API
     const payload = {
       name: formData.get("fullname"),
@@ -45,39 +52,31 @@ const AuthModal = ({ isOpen, onClose }) => {
         gender: formData.get("gender"),
       }),
     };
-
+  
     const url = isSignUp ? `/api/auth/signup` : `/api/auth/login`;
-
+  
     try {
-      const response = await fetch(process.env.REACT_APP_SERVER_URI + url, {
-        method: "POST",
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}${url}`, payload, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success(
-          isSignUp ? "Account created successfully!" : "Login successful!"
-        );
-        localStorage.setItem("token", data.token);
-        {
-          isSignUp ? navigate("/Profile") : navigate("/Property");
-        }
-        onClose();
-        window.location.reload();
-      } else {
-        setError(data.message || "Error occurred during authentication.");
-        toast.error("Maybe Email or Password is incorrect.");
-      }
+  
+      // Handle success
+      toast.success(isSignUp ? "Account created successfully!" : "Login successful!");
+      localStorage.setItem("token", response.data.token);
+      navigate(isSignUp ? "/Profile" : "/Property");
+      onClose();
     } catch (err) {
-      setError(err.message || "An error occurred.");
-      toast.error("An error occurred.");
+      // Handle error
+      setError(err.response?.data?.message || "An error occurred during authentication.");
+      toast.error(err.response?.data?.message || "An error occurred.");
+    } finally {
+      setDisabled(false);
+      setIsLoading(false);
     }
   };
+  
 
   const handleSwitchForm = () => setIsSignUp(!isSignUp);
 
@@ -314,9 +313,26 @@ const AuthModal = ({ isOpen, onClose }) => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 rounded-lg transition duration-500 ease-in-out"
+              disabled={disabled}
+              className="flex flex-row items-center justify-center w-full py-2 px-4 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 rounded-lg transition duration-500 ease-in-out"
             >
               {isSignUp ? "Create Account" : "Login"}
+              {isLoading && (
+                <div className="ml-4 transition duration-500 ease-in-out">
+                  <Oval
+                    visible={true}
+                    height="20"
+                    width="20"
+                    secondaryColor="#ffffff"
+                    strokeWidth={4}
+                    strokeWidthSecondary={4}
+                    color="#f5f5f5"
+                    ariaLabel="oval-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                </div>
+              )}
             </button>
           </div>
         </form>
