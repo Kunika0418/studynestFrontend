@@ -10,6 +10,7 @@ import Service from "./containers/Service/Service.js";
 import PropertyDetail from "./containers/Property/PropertyDetail/PropertyDetail.js";
 import Profile from "./containers/Profile/Profile.js";
 import WhastappIcon from "./components/WhatsappIcon/WhatsappIcon.js";
+import Admin from "./containers/Admin/Admin.js";
 import { jwtDecode } from "jwt-decode";
 
 import { ToastContainer } from "react-toastify";
@@ -55,6 +56,7 @@ function App() {
         <Route path="/Services" element={<Service />} />
         <Route path="/Property/:PropertyId" element={<PropertyDetail />} />
         <Route path="/Profile" element={<Profile user={user} />} />
+        <Route path="/Admin" element={<Admin/>} />
       </Routes>
       <Footer />
     </>
