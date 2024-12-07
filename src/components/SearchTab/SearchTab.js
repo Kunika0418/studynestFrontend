@@ -3,36 +3,64 @@ import { TabButton } from './Tab/TabButton';
 import { TabContent } from './Tab/TabContent';
 import { X } from 'lucide-react';
 
+// Data
 const countries = [
-  {
-    code: 'UK',
-    flag: '🇬🇧',
-    data: {
-      cities: ['London', 'Manchester', 'Leicester', 'Sheffield', 'Nottingham'],
-      universities: ['Aston University', 'De Montfort University', 'University of Manchester']
-    }
-  },
-  {
-    code: 'AUS',
-    flag: '🇦🇺',
-    data: {
-      cities: ['Sydney', 'Melbourne', 'Brisbane', 'Perth'],
-      universities: ['University of Sydney', 'University of Melbourne', 'Monash University']
-    }
-  },
-  {
-    code: 'IRL',
-    flag: '🇮🇪',
-    data: {
-      cities: ['Dublin', 'Cork', 'Galway', 'Limerick'],
-      universities: ['Trinity College Dublin', 'University College Dublin', 'NUI Galway']
-    }
-  }
+  { id: 'USA', name: 'USA', flag: '🇺🇸' },
+  { id: 'UK', name: 'UK', flag: '🇬🇧' },
+  { id: 'CAN', name: 'Canada', flag: '🇨🇦' },
+  { id: 'DEU', name: 'Germany', flag: '🇩🇪' },
 ];
 
-export const CountryTabs = ({ setIsModalOpen }) => {
+const cities = {
+  'USA': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'],
+  'UK': ['London', 'Leicester', 'Sheffield', 'Manchester', 'Birmingham'],
+  'CAN': ['Toronto', 'Vancouver', 'Montreal', 'Ottawa', 'Calgary'],
+  'DEU': ['Berlin', 'Munich', 'Frankfurt', 'Hamburg', 'Cologne'],
+};
+
+const properties = {
+  USA: [
+    'Luxury Condo in New York',
+    'Beachfront House in Los Angeles',
+    'Modern Apartment in Chicago',
+    'Cozy Studio in Houston',
+    'Spacious Loft in Miami',
+  ],
+  UK: [
+    'Luxury Apartment in London',
+    'Student Housing in Manchester',
+    'Affordable Flats in Birmingham',
+    'Cozy Studio in Leeds',
+  ],
+  CAN: [
+    'Modern Condo in Toronto',
+    'Lakefront Villa in Vancouver',
+    'Charming House in Montreal',
+    'Cozy Cottage in Ottawa',
+    'Luxury Penthouse in Calgary',
+  ],
+  DEU: [
+    'City Center Apartment in Berlin',
+    'Spacious Flat in Munich',
+    'Modern Loft in Frankfurt',
+    'Luxury House in Hamburg',
+    'Family Home in Cologne',
+  ],
+};
+
+
+
+export const CountryTabs = ({ setIsModalOpen,searchTerm }) => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-  const [activeTab, setActiveTab] = useState('cities');
+
+  const filteredCities = cities[selectedCountry.name].filter((city) =>
+    city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredProperties = properties[selectedCountry.name].filter((property) =>
+    property.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
 
   return (
     // <div className='fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50'
@@ -41,14 +69,14 @@ export const CountryTabs = ({ setIsModalOpen }) => {
     <div className='absolute flex justify-center w-full max-w-2xl h-fit top-16'>
       <div className="w-full rounded-lg overflow-hidden shadow-lg bg-white ">
         <div className='flex justify-between pr-2'>
-          <div className="flex gap-2">
+          <div className="flex">
             {countries.map((country) => (
               <TabButton
-                key={country.code}
-                country={country.code}
+                key={country.id}
+                country={country.name}
                 flag={country.flag}
                 setIsModalOpen={setIsModalOpen}
-                isSelected={selectedCountry.code === country.code}
+                isSelected={selectedCountry.name === country.name}
                 onClick={() => setSelectedCountry(country)}
               />
             ))}
@@ -60,8 +88,18 @@ export const CountryTabs = ({ setIsModalOpen }) => {
 
         <div className="space-y-6 px-4 py-2">
           <TabContent
-            type={activeTab}
-            items={selectedCountry.data}
+            items={filteredCities}
+            name={"Cities"}
+            title={'city'}
+            isModalOpen={setIsModalOpen}
+          />
+        </div>
+        <div className="space-y-6 px-4 py-2">
+          <TabContent
+            items={filteredProperties}
+            name={"Properties"}
+            title={'title'}
+            isModalOpen={setIsModalOpen}
           />
         </div>
       </div>
