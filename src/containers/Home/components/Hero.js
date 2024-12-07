@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CountryTabs } from "../../../components/SearchTab/SearchTab";
 import "../Home.css";
 
@@ -8,14 +8,17 @@ const Hero = ({
   searchTerm,
   handleChange,
   bannerVideo,
-  isModalOpen,
-  setIsModalOpen,
-  handleClick,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Handler to open modal when the search input is focused
+  const handleFocus = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen bg-bg-300 relative">
-        {" "}
         {/* Added pt-20 for spacing */}
         <div className="w-full h-full absolute top-0 z-0">
           <video
@@ -41,16 +44,16 @@ const Hero = ({
         {/* Search Bar Section */}
         <div className="w-full h-auto flex justify-center items-center mb-20">
           <div className="mt-10 w-full max-w-2xl relative">
-            <div>
-              {isModalOpen && <CountryTabs setIsModalOpen={setIsModalOpen} />}
-            </div>
+            {isModalOpen && (
+              <CountryTabs setIsModalOpen={setIsModalOpen} searchTerm={searchTerm} />
+            )}
             <div className="relative flex items-center">
               <input
                 type="text"
                 placeholder="Enter city, neighborhood, or title"
                 value={searchTerm}
                 onChange={handleChange}
-                onClick={handleClick}
+                onFocus={handleFocus}  // Open modal when focused
                 className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all duration-300"
               />
               <button

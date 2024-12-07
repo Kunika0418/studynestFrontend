@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "swiper/css/bundle";
 import BuyForm from "../../../components/BuyFrom/BuyForm";
@@ -6,9 +6,45 @@ import ImageModal from "../../../components/ImageModal/ImageModal";
 import { IoLocationSharp, IoShieldCheckmark } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
-import { apartmentsData } from "../../../components/Data/Data";
+// import { apartmentsData } from "../../../components/Data/Data";
+import axios from "axios";
 
-const PropertyDetail = () => {
+const PropertyDetail = async () => {
+  const [apartment, setApartment] = useState();
+  const [apartmentsData,setApartmentsData] = useState();
+  const { PropertyId } = useParams();
+  console.log(PropertyId);
+
+  useEffect(async () => {
+    await axios.get(
+      `http://localhost:5000/api/propertyauth/properties`
+    )
+    .then((response) => {
+      const Data = response.data;
+      if (Data) {
+        setApartmentsData(Data);
+        console.log(apartmentsData)
+      }
+    })
+    .catch((err) => console.error('Error fetching filtered data:', err));
+    
+  }, [])
+
+  useEffect(async () => {
+    await axios.get(
+      `http://localhost:5000/api/propertyauth/property/${PropertyId}`
+    )
+    .then((response) => {
+      const Data = response.data;
+      if (Data) {
+        setApartment(Data);
+        console.log(apartment)
+      }
+    })
+    .catch((err) => console.error('Error fetching filtered data:', err));
+    
+  }, [])
+  
   const openModal = (image) => {
     setSelectedImage(image);
     setModalOpen(true);
@@ -21,10 +57,6 @@ const PropertyDetail = () => {
 
   const [activeTab, setActiveTab] = useState("Overview");
   const [isExpanded, setIsExpanded] = useState(false);
-  const { PropertyId } = useParams();
-  const apartment = apartmentsData.find(
-    (apt) => apt.id === parseInt(PropertyId)
-  );
   const recommendedApartments = apartmentsData
     .filter((apt) => apt.id !== parseInt(PropertyId))
     .slice(0, 3);

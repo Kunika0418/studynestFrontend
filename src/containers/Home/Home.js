@@ -25,9 +25,6 @@ const Home = () => {
     setSearchTerm(query);
   };
 
-  const handleClick= () => {
-    setIsModalOpen(true);
-  }
 
   const handleSearch = () => {
     // Filter logic
@@ -44,7 +41,7 @@ const Home = () => {
   return (
     <div className="flex flex-col gap-10">
 
-      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm={searchTerm} handleChange={handleChange} bannerVideo={bannerVideo} handleClick={handleClick} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm={searchTerm} handleChange={handleChange} bannerVideo={bannerVideo} />
       
       <Parameters />
 

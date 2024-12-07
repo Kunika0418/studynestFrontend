@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 
-const ApartmentCard = ({ id, images, title, price, city, country, area, services }) => {
+const ApartmentCard = ({ _id, images, title, price, city, country, area, services }) => {
   const settings = {
     dots: false, // Enable dots
     infinite: true,
@@ -18,7 +18,7 @@ const ApartmentCard = ({ id, images, title, price, city, country, area, services
 
   return (
     <div className="w-full">
-      <Link to={`/Property/${id}`}>
+      <Link to={`/Property/${_id}`}>
         {/* Apartment Image Slider */}
         <div className='h-48 rounded-lg overflow-hidden border border-primary-300 shadow-lg shadow-slate-400 hover:shadow-xl hover:shadow-primary-300 transition-shadow duration-500 ease-in-out flex'>
           <div className="relative w-[21rem] h-48">
