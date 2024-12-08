@@ -4,7 +4,7 @@ import BasicInfoFields from "./BasicInfo/BasicInfoFields";
 import ServicesList from "./Services/ServicesList";
 import AmenitiesList from "./Amenities/AmenitiesList";
 import { toast } from "react-toastify";
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URI}/api/propertyauth`,
@@ -84,43 +84,56 @@ const PropertyForm = () => {
   const createProperty = async (propertyData, images) => {
     try {
       const formData = new FormData();
-      
+
       // Append property data
-      formData.append('slug', propertyData.title.toLowerCase().replace(/\s+/g, '-'));
-      formData.append('title', propertyData.title);
-      formData.append('price', propertyData.price);
-      formData.append('city', propertyData.city);
-      formData.append('country', propertyData.country);
-      formData.append('description', propertyData.description);
-      formData.append('area', propertyData.area);
-      
+      formData.append(
+        "slug",
+        propertyData.title.toLowerCase().replace(/\s+/g, "-")
+      );
+      formData.append("title", propertyData.title);
+      formData.append("price", propertyData.price);
+      formData.append("city", propertyData.city);
+      formData.append("country", propertyData.country);
+      formData.append("description", propertyData.description);
+      formData.append("area", propertyData.area);
+
       // Append services as JSON string
-      formData.append('services', JSON.stringify(propertyData.services.filter(service => service.trim())));
-      
+      formData.append(
+        "services",
+        JSON.stringify(
+          propertyData.services.filter((service) => service.trim())
+        )
+      );
+
       // Append amenities as JSON string
-      formData.append('amenities', JSON.stringify(propertyData.amenities.filter(group => 
-        group.title.trim() && group.items.some(item => item.trim())
-      )));
-      
+      formData.append(
+        "amenities",
+        JSON.stringify(
+          propertyData.amenities.filter(
+            (group) =>
+              group.title.trim() && group.items.some((item) => item.trim())
+          )
+        )
+      );
+
       // Append images
       images.forEach((image) => {
-        formData.append('images', image);
+        formData.append("images", image);
       });
 
-      console.log('formData', formData);
-  
-      const response = await api.post('/property', formData, {
+      console.log("formData", formData);
+
+      const response = await api.post("/property", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
-  
+
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
     }
   };
-
 
   const validateForm = () => {
     if (!formData.title.trim()) return "Title is required";
