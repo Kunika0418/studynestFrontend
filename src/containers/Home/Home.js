@@ -18,7 +18,6 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
   const [selectedApartment, setSelectedApartment] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e) => {
     const query = e.target.value.toLowerCase();
