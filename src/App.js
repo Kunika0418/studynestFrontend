@@ -1,6 +1,7 @@
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.js";
 import Footer from "./components/Footer/Footer.js";
@@ -10,12 +11,15 @@ import Service from "./containers/Service/Service.js";
 import PropertyDetail from "./containers/Property/PropertyDetail/PropertyDetail.js";
 import Profile from "./containers/Profile/Profile.js";
 import WhastappIcon from "./components/WhatsappIcon/WhatsappIcon.js";
-import Admin from "./containers/Admin/Admin.js";
+import Login from "./containers/Admin/Login.js";
+import Signup from "./containers/Admin/Signup.js";
+import Dashboard from "./containers/Admin/Dashboard.js";
+
+
 import { jwtDecode } from "jwt-decode";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
 
 function App() {
   const [user, setUser] = useState({});
@@ -52,7 +56,9 @@ function App() {
         <Route path="/Services" element={<Service />} />
         <Route path="/Property/:PropertyId" element={<PropertyDetail />} />
         <Route path="/Profile" element={<Profile decodeToken={decodeToken} />} />
-        <Route path="/Admin" element={<Admin/>} />
+        <Route path="/Admin/Login" element={<Login />} />
+        <Route path="/Admin/Signup" element={<Signup />} />
+        <Route path="/Admin/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </>
