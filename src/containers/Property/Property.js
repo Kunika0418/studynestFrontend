@@ -30,13 +30,13 @@ const Property = () => {
           response = await axios.get(
             `http://localhost:5000/api/propertyauth/properties/search?${filterType}=${filterValue}`
           );
-          localStorage.removeItem("name");
-          localStorage.removeItem("item");
         } else {
           response = await axios.get(
             `http://localhost:5000/api/propertyauth/properties`
           );
         }
+        localStorage.removeItem("item");
+        localStorage.removeItem("name");
         const fetchedData = response.data;
         setData(fetchedData.properties);
         setFilteredApartments(fetchedData.properties);
@@ -44,10 +44,10 @@ const Property = () => {
           new Set(fetchedData.properties.map((apt) => apt.country))
         );
         setCountries(uniqueCountries);
-        setLoading(false); 
+        setLoading(false);
       } catch (err) {
         setError("Error fetching data:", err);
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -59,7 +59,9 @@ const Property = () => {
     if (selectedCountry) {
       const uniqueCities = Array.from(
         new Set(
-          data.filter((apt) => apt.country === selectedCountry).map((apt) => apt.city)
+          data
+            .filter((apt) => apt.country === selectedCountry)
+            .map((apt) => apt.city)
         )
       );
       setCities(uniqueCities);
@@ -72,7 +74,8 @@ const Property = () => {
   // Filter apartments based on country, city, and price range
   useEffect(() => {
     const filtered = data.filter((apt) => {
-      const isCountryMatch = !selectedCountry || apt.country === selectedCountry;
+      const isCountryMatch =
+        !selectedCountry || apt.country === selectedCountry;
       const isCityMatch = !selectedCity || apt.city === selectedCity;
       const isPriceMatch =
         (!minPrice || apt.price >= parseInt(minPrice)) &&
@@ -87,34 +90,44 @@ const Property = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
+        <div
+          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+          role="status"
+        ></div>
         <span className="ml-2">Loading...</span>
       </div>
     );
-  }  
+  }
   if (error) {
+    localStorage.removeItem("name");
+    localStorage.removeItem("item");
     return (
       <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
         <p className="text-2xl text-red-500">No apartments are found</p>
         <button
           className="text-white ring-2 ring-amber-900 bg-amber-700 hover:bg-amber-800 px-4 py-2 rounded-xl"
-          onClick={() => navigate('/')}
+          onClick={() => window.location.reload()}
         >
-          Home
+          All Properties
         </button>
       </div>
     );
-  }  
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
       {/* Filters Sidebar */}
       <aside className="bg-white py-4 px-6 border-b border-primary-100 flex justify-between items-center">
-        <h2 className="text-lg font-medium text-accent-100 font-sans">Filters</h2>
+        <h2 className="text-lg font-medium text-accent-100 font-sans">
+          Filters
+        </h2>
         <div className="flex gap-4">
           {/* Country Filter */}
           <div>
-            <label htmlFor="country" className="block text-sm font-semibold text-gray-600 mb-2">
+            <label
+              htmlFor="country"
+              className="block text-sm font-semibold text-gray-600 mb-2"
+            >
               Country
             </label>
             <select
@@ -134,7 +147,10 @@ const Property = () => {
 
           {/* City Filter */}
           <div>
-            <label htmlFor="city" className="block text-sm font-semibold text-gray-600 mb-2">
+            <label
+              htmlFor="city"
+              className="block text-sm font-semibold text-gray-600 mb-2"
+            >
               City
             </label>
             <select
@@ -155,7 +171,10 @@ const Property = () => {
 
           {/* Price Range Filter */}
           <div>
-            <label htmlFor="priceRange" className="block text-sm font-semibold text-gray-600 mb-2">
+            <label
+              htmlFor="priceRange"
+              className="block text-sm font-semibold text-gray-600 mb-2"
+            >
               Price Range
             </label>
             <div className="flex gap-4">
@@ -184,7 +203,9 @@ const Property = () => {
       <main className="flex-1 p-6">
         <h1 className="text-2xl font-semibold font-sans text-accent-100 mb-8">
           Available{" "}
-          <span className="text-4xl text-primary-200 font-bold">Properties</span>
+          <span className="text-4xl text-primary-200 font-bold">
+            Properties
+          </span>
         </h1>
 
         {/* Filtered Apartments */}
@@ -198,7 +219,9 @@ const Property = () => {
               />
             ))
           ) : (
-            <p className="text-center text-gray-500 mt-8">No apartments found.</p>
+            <p className="text-center text-gray-500 mt-8">
+              No apartments found.
+            </p>
           )}
         </div>
       </main>

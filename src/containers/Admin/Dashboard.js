@@ -24,11 +24,34 @@ const Dashboard = () => {
 
   return (
     <>
-      <button onClick={handleLogOut} className="btn btn-primary">
-        Log out
-      </button>
-      <AddProperty />
-      <EditProperty />
+      <div className="min-h-screen">
+        <div className="flex flex-row gap-4 p-6">
+          <button
+            onClick={handleLogOut}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Log out
+          </button>
+          <button
+            onClick={() => {
+              setIsAddProperty(!isAddProperty);
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Add Property
+          </button>
+          <button
+            onClick={() => {
+              setIsEditProperty(!isEditProperty);
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Edit Property
+          </button>
+        </div>
+        {isAddProperty && <AddProperty />}
+        {isEditProperty && <EditProperty />}
+      </div>
     </>
   );
 };

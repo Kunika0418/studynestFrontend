@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "swiper/css/bundle";
 import BuyForm from "../../../components/BuyFrom/BuyForm";
 import ImageModal from "../../../components/ImageModal/ImageModal";
@@ -7,7 +7,7 @@ import { IoLocationSharp, IoShieldCheckmark } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
 import axios from "axios";
-import sample from '../../../assets/images/room1.jpg'
+import sample from "../../../assets/images/room1.jpg";
 
 const PropertyDetail = () => {
   const { PropertyId } = useParams();
@@ -22,7 +22,9 @@ const PropertyDetail = () => {
   useEffect(() => {
     const fetchedData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/propertyauth/properties`);
+        const response = await axios.get(
+          `http://localhost:5000/api/propertyauth/properties`
+        );
         setApartmentsData(response.data.properties);
         setLoading(false);
       } catch (error) {
@@ -31,7 +33,7 @@ const PropertyDetail = () => {
       }
     };
     fetchedData();
-  }, []); // Empty dependency array to run only once  
+  }, []); // Empty dependency array to run only once
 
   const apartment = apartmentsData.find((apt) => apt._id === PropertyId);
 
@@ -97,11 +99,14 @@ const PropertyDetail = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
+        <div
+          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+          role="status"
+        ></div>
         <span className="ml-2">Loading...</span>
       </div>
     );
-  }  
+  }
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -114,7 +119,7 @@ const PropertyDetail = () => {
         </button>
       </div>
     );
-  }  
+  }
 
   return (
     <div className="min-h-screen py-8 ">
@@ -175,22 +180,24 @@ const PropertyDetail = () => {
                 />
               </div>
             ))}
-            {apartment.images.length>4 && <div
-              key={4}
-              className="relative overflow-hidden rounded-md opacity-75 w-full h-full cursor-pointer"
-              onClick={() => openModal(apartment.images[0])}
-            >
-              <img
-                src={apartment.images[4]}
-                alt="Others"
-                className="w-full h-full object-cover blur-sm"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-white text-2xl font-medium">
-                  +{apartment.images.length - 4} others
-                </p>
+            {apartment.images.length > 4 && (
+              <div
+                key={4}
+                className="relative overflow-hidden rounded-md opacity-75 w-full h-full cursor-pointer"
+                onClick={() => openModal(apartment.images[0])}
+              >
+                <img
+                  src={apartment.images[4]}
+                  alt="Others"
+                  className="w-full h-full object-cover blur-sm"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <p className="text-white text-2xl font-medium">
+                    +{apartment.images.length - 4} others
+                  </p>
+                </div>
               </div>
-            </div>}
+            )}
           </div>
         </div>
       </div>
@@ -199,10 +206,11 @@ const PropertyDetail = () => {
       <div className="flex space-x-4 w-full sticky top-[72px] h-16 bg-white z-10">
         <div className="flex justify-center border-b gap-10 w-full">
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Overview"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
+              activeTab === "Overview"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-              }`}
+            }`}
             onClick={() => {
               setActiveTab("Overview");
               scrollToSection("overview");
@@ -211,10 +219,11 @@ const PropertyDetail = () => {
             Overview
           </button>
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Facilities"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
+              activeTab === "Facilities"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-              }`}
+            }`}
             onClick={() => {
               setActiveTab("Facilities");
               scrollToSection("facilities");
@@ -223,10 +232,11 @@ const PropertyDetail = () => {
             Facilities
           </button>
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Services"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
+              activeTab === "Services"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-              }`}
+            }`}
             onClick={() => {
               setActiveTab("Services");
               scrollToSection("services");
@@ -235,10 +245,11 @@ const PropertyDetail = () => {
             Services
           </button>
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Properties"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
+              activeTab === "Properties"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-              }`}
+            }`}
             onClick={() => {
               setActiveTab("Properties");
               scrollToSection("properties");
@@ -257,13 +268,16 @@ const PropertyDetail = () => {
         {/* Left Section */}
         <div className="mb-6 w-[65%]">
           {/* Overview Section */}
-          <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">Overview</h2>
+          <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+            Overview
+          </h2>
           <div className="description mb-8">
             <p className="mt-2 text-justify">
               {isExpanded
                 ? apartment.description
-                : `${apartment.description.split(" ").slice(0, 50).join(" ")}${apartment.description.split(" ").length > 50 ? "..." : ""
-                }`}
+                : `${apartment.description.split(" ").slice(0, 50).join(" ")}${
+                    apartment.description.split(" ").length > 50 ? "..." : ""
+                  }`}
             </p>
             {apartment.description.split(" ").length > 50 && (
               <button
@@ -284,42 +298,56 @@ const PropertyDetail = () => {
           </div>
 
           {/* Amenities Section */}
-          <div id="facilities" className="w-full py-2 mt-4">
-            <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">Amenities</h2>
+          {apartment.amenities.length > 0 &&<div id="facilities" className="w-full py-2 mt-4">
+            <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+              Amenities
+            </h2>
             <div className="amenities">
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                {apartment.amenities.map((category, index) => (
-                  <div
-                    key={index}
-                    className="mb-6 border border-primary-300 bg-gray-50 px-6 py-4 rounded-lg"
-                  >
-                    <h3 className="text-lg text-accent-100 font-semibold mb-2">
-                      {category.title}
-                    </h3>
-                    <ul className="list-disc px-4 grid grid-cols-2 gap-x-4 gap-y-2">
-                      {category.items.map((item, itemIndex) => (
-                        <li className="text-accent-100 font-medium text-sm" key={itemIndex}>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </ul>
+              {apartment.amenities > 0 && (
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                  {apartment.amenities.map((category, index) => (
+                    <div
+                      key={index}
+                      className="mb-6 border border-primary-300 bg-gray-50 px-6 py-4 rounded-lg"
+                    >
+                      <h3 className="text-lg text-accent-100 font-semibold mb-2">
+                        {category.title}
+                      </h3>
+                      <ul className="list-disc px-4 grid grid-cols-2 gap-x-4 gap-y-2">
+                        {category.items.map((item, itemIndex) => (
+                          <li
+                            className="text-accent-100 font-medium text-sm"
+                            key={itemIndex}
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </ul>
+              )}
             </div>
-          </div>
+          </div>}
 
           {/* Services Section */}
-          <div id="services" className="w-full py-2 mb-6">
-            <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">Services</h2>
+          {apartment.services.length > 0 && <div id="services" className="w-full py-2 mb-6">
+            <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+              Services
+            </h2>
             <div className="services border border-primary-300 bg-gray-50 p-4 rounded-lg">
               <ul className="list-disc list-inside mt-2">
                 {apartment.services.map((service, index) => (
-                  <li className="text-accent-100 font-medium text-sm" key={index}>{service}</li>
+                  <li
+                    className="text-accent-100 font-medium text-sm"
+                    key={index}
+                  >
+                    {service}
+                  </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </div>}
         </div>
 
         {/* Right Section */}
@@ -330,12 +358,14 @@ const PropertyDetail = () => {
 
       {/* Similar Apartments */}
       <div id="properties" className="mt-4 px-20">
-        <h2 className="text-2xl font-sans text-primary-100 font-semibold mb-6">Similar Properties</h2>
+        <h2 className="text-2xl font-sans text-primary-100 font-semibold mb-6">
+          Similar Properties
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {recommendedApartments.map((apt) => (
             <a
               key={apt._id}
-              href={`/property/${apt._id}`}
+              href={`/Property/${apt._id}`}
               className="block bg-white border rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
             >
               <img
