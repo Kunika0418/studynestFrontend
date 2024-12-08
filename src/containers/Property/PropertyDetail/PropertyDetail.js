@@ -18,7 +18,29 @@ const PropertyDetail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
+
+  // const apartment = apartmentsData.find((apt) => apt._id === PropertyId);
+  const [apartment, setapartment] = useState({});
+
+  
+  
   useEffect(() => {
+
+    const fetchPropertyById = async (id) => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/property/${PropertyId}`
+        );
+        setapartment(response.data.property); 
+        console.log(response.data.property);
+        setLoading(false);
+        console.log(response);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
     const fetchedData = async () => {
       try {
         const response = await axios.get(
@@ -32,10 +54,11 @@ const PropertyDetail = () => {
         setLoading(false);
       }
     };
+
+    fetchPropertyById();
     fetchedData();
   }, []); // Empty dependency array to run only once
 
-  const apartment = apartmentsData.find((apt) => apt._id === PropertyId);
 
   const recommendedApartments = apartmentsData
     .filter((apt) => apt._id !== PropertyId)
@@ -365,9 +388,9 @@ const PropertyDetail = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {recommendedApartments.map((apt) => (
-            <a
+            <Link
               key={apt._id}
-              href={`/Property/${apt._id}`}
+              to={`/Property/${apt._id}`}
               className="block bg-white border rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
             >
               <img
@@ -380,7 +403,7 @@ const PropertyDetail = () => {
                 <p className="text-gray-500">{apt.city}</p>
                 <p className="text-amber-800 font-bold">${apt.price}/month</p>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

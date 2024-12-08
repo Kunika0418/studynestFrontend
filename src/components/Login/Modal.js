@@ -47,7 +47,7 @@ const AuthModal = ({ isOpen, onClose }) => {
       password: formData.get("password"),
       ...(isSignUp && {
         phone: formData.get("phoneno"),
-        dateofBirth: formData.get("dob"),
+        university: formData.get("university"),
         nationality: formData.get("nationality"),
         gender: formData.get("gender"),
       }),
@@ -249,16 +249,16 @@ const AuthModal = ({ isOpen, onClose }) => {
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="dob"
+                  htmlFor="university"
                   className="block text-sm font-medium text-accent-100"
                 >
-                  DOB
+                  University
                 </label>
                 <input
-                  id="dob"
-                  name="dob"
-                  type="date"
-                  placeholder="Date Of Birth"
+                  id="university"
+                  name="university"
+                  type="university"
+                  placeholder="University Name"
                   className="w-full p-2 border border-gray-300 text-accent-100 rounded-lg outline-none mt-2"
                   required
                 />

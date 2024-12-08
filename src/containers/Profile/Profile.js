@@ -10,6 +10,7 @@ const Profile = ({ decodeToken }) => {
     phone: "",
     nationality: "",
     gender: "",
+    university: "",
     dateOfBirth: "",
     moveInDate: "",
     moveOutDate: "",
@@ -120,7 +121,7 @@ const Profile = ({ decodeToken }) => {
             Your Profile
           </h2>
           <span className="capitalize text-sm text-accent-100 font-medium font-sans">
-            Please update your profile for providing you the better accomdation.
+            Please update your profile for providing you the better accomodation.
           </span>
         </div>
         <form onSubmit={handleSubmit}>
@@ -148,6 +149,19 @@ const Profile = ({ decodeToken }) => {
                 type="email"
                 name="email"
                 value={userData.email || ""}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 rounded"
+                required
+              />
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-sm font-medium text-gray-700">
+                University
+              </label>
+              <input
+                type="text"
+                name="university"
+                value={userData.university || ""}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded"
                 required
