@@ -7,7 +7,6 @@ import { IoLocationSharp, IoShieldCheckmark } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
 import axios from "axios";
-import sample from "../../../assets/images/room1.jpg";
 
 const PropertyDetail = () => {
   const { PropertyId } = useParams();
@@ -23,10 +22,11 @@ const PropertyDetail = () => {
     const fetchedData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/propertyauth/properties`
+          `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties`
         );
         setApartmentsData(response.data.properties);
         setLoading(false);
+        console.log(response);
       } catch (error) {
         setError(error.message);
         setLoading(false);
@@ -58,7 +58,7 @@ const PropertyDetail = () => {
 
     return (
       <div className="flex items-center space-x-1">
-        {[...Array(fullStars)].map((_, i) => (
+        {/* {[...Array(fullStars)].map((_, i) => (
           <span key={`full-${i}`} className="text-amber-500 text-2xl">
             ★
           </span>
@@ -68,7 +68,7 @@ const PropertyDetail = () => {
           <span key={`empty-${i}`} className="text-gray-300 text-2xl">
             ★
           </span>
-        ))}
+        ))} */}
       </div>
     );
   };
@@ -144,12 +144,12 @@ const PropertyDetail = () => {
               <IoLocationSharp className="text-primary-100" /> {apartment.city},{" "}
               {apartment.country}
             </p>
-            <div className="flex items-center border-2 border-amber-100 bg-amber-50 px-4 py-1 rounded-lg gap-2">
+            {/* <div className="flex items-center border-2 border-amber-100 bg-amber-50 px-4 py-1 rounded-lg gap-2">
               {renderStars(apartment.rating)}
               <span className="text-gray-600">
                 ({apartment.reviews.length} reviews)
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex w-full max-h-[400px] gap-2">
@@ -298,12 +298,12 @@ const PropertyDetail = () => {
           </div>
 
           {/* Amenities Section */}
-          {apartment.amenities.length > 0 &&<div id="facilities" className="w-full py-2 mt-4">
-            <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
-              Amenities
-            </h2>
-            <div className="amenities">
-              {apartment.amenities > 0 && (
+          {apartment.amenities.length > 0 && (
+            <div id="facilities" className="w-full py-2 mt-4">
+              <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+                Amenities
+              </h2>
+              <div className="amenities">
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                   {apartment.amenities.map((category, index) => (
                     <div
@@ -326,28 +326,30 @@ const PropertyDetail = () => {
                     </div>
                   ))}
                 </ul>
-              )}
+              </div>
             </div>
-          </div>}
+          )}
 
           {/* Services Section */}
-          {apartment.services.length > 0 && <div id="services" className="w-full py-2 mb-6">
-            <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
-              Services
-            </h2>
-            <div className="services border border-primary-300 bg-gray-50 p-4 rounded-lg">
-              <ul className="list-disc list-inside mt-2">
-                {apartment.services.map((service, index) => (
-                  <li
-                    className="text-accent-100 font-medium text-sm"
-                    key={index}
-                  >
-                    {service}
-                  </li>
-                ))}
-              </ul>
+          {apartment.services.length > 0 && (
+            <div id="services" className="w-full py-2 mb-6">
+              <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+                Services
+              </h2>
+              <div className="services border border-primary-300 bg-gray-50 p-4 rounded-lg">
+                <ul className="list-disc list-inside mt-2">
+                  {apartment.services.map((service, index) => (
+                    <li
+                      className="text-accent-100 font-medium text-sm"
+                      key={index}
+                    >
+                      {service}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>}
+          )}
         </div>
 
         {/* Right Section */}
