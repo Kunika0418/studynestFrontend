@@ -1,183 +1,221 @@
-// components/AddPropertyForm.js
-
 import React, { useState } from "react";
-import axios from "axios";
+import ImageUpload from "./ImageUpload";
+import BasicInfoFields from "./BasicInfo/BasicInfoFields";
+import ServicesList from "./Services/ServicesList";
+import AmenitiesList from "./Amenities/AmenitiesList";
+import { toast } from "react-toastify";
+import axios from 'axios';
 
-const AddProperty = () => {
+const api = axios.create({
+  baseURL: `${process.env.REACT_APP_SERVER_URI}/api/propertyauth`,
+});
+
+const PropertyForm = () => {
+  const [images, setImages] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    slug: "",
     title: "",
     price: "",
     city: "",
     country: "",
     description: "",
     area: "",
-    services: [],
-    amenities: {},
+    services: [""],
+    amenities: [{ title: "", items: [""] }],
   });
-  const [images, setImages] = useState([]);
 
-  const servicesOptions = ["Wi-Fi", "Parking", "Pool", "Gym", "Air Conditioning"];
-  const amenitiesOptions = {
-    Pool: ["Shared", "Private"],
-    Gym: ["Available"],
-    Parking: ["Indoor", "Outdoor"],
+  const handleImageChange = (files) => {
+    const newImages = Array.from(files).slice(0, 5);
+    setImages(newImages);
   };
 
-  // Handle input changes
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle checkboxes for services
-  const handleServiceChange = (e) => {
-    const { value, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      services: checked
-        ? [...prevData.services, value]
-        : prevData.services.filter((service) => service !== value),
-    }));
+  const handleServiceChange = (index, value) => {
+    const newServices = [...formData.services];
+    newServices[index] = value;
+    setFormData({ ...formData, services: newServices });
   };
 
-  // Handle amenities as key-value pairs
-  const handleAmenityChange = (e, key) => {
-    const { value, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      amenities: {
-        ...prevData.amenities,
-        [key]: checked ? [value] : [],
-      },
-    }));
+  const handleServiceAdd = () => {
+    setFormData({ ...formData, services: [...formData.services, ""] });
   };
 
-  // Handle image selection
-  const handleImageChange = (e) => {
-    setImages(Array.from(e.target.files));
+  const handleServiceRemove = (index) => {
+    const newServices = formData.services.filter((_, i) => i !== index);
+    setFormData({ ...formData, services: newServices });
   };
 
-  // Submit form data to backend
+  const handleAmenityGroupAdd = () => {
+    setFormData({
+      ...formData,
+      amenities: [...formData.amenities, { title: "", items: [""] }],
+    });
+  };
+
+  const handleAmenityTitleChange = (groupIndex, title) => {
+    const newAmenities = [...formData.amenities];
+    newAmenities[groupIndex].title = title;
+    setFormData({ ...formData, amenities: newAmenities });
+  };
+
+  const handleAmenityItemChange = (groupIndex, itemIndex, value) => {
+    const newAmenities = [...formData.amenities];
+    newAmenities[groupIndex].items[itemIndex] = value;
+    setFormData({ ...formData, amenities: newAmenities });
+  };
+
+  const handleAmenityItemAdd = (groupIndex) => {
+    const newAmenities = [...formData.amenities];
+    newAmenities[groupIndex].items.push("");
+    setFormData({ ...formData, amenities: newAmenities });
+  };
+
+  const handleAmenityItemRemove = (groupIndex, itemIndex) => {
+    const newAmenities = [...formData.amenities];
+    newAmenities[groupIndex].items = formData.amenities[
+      groupIndex
+    ].items.filter((_, i) => i !== itemIndex);
+    setFormData({ ...formData, amenities: newAmenities });
+  };
+
+  const createProperty = async (propertyData, images) => {
+    try {
+      const formData = new FormData();
+      
+      // Append property data
+      formData.append('slug', propertyData.title.toLowerCase().replace(/\s+/g, '-'));
+      formData.append('title', propertyData.title);
+      formData.append('price', propertyData.price);
+      formData.append('city', propertyData.city);
+      formData.append('country', propertyData.country);
+      formData.append('description', propertyData.description);
+      formData.append('area', propertyData.area);
+      
+      // Append services as JSON string
+      formData.append('services', JSON.stringify(propertyData.services.filter(service => service.trim())));
+      
+      // Append amenities as JSON string
+      formData.append('amenities', JSON.stringify(propertyData.amenities.filter(group => 
+        group.title.trim() && group.items.some(item => item.trim())
+      )));
+      
+      // Append images
+      images.forEach((image) => {
+        formData.append('images', image);
+      });
+
+      console.log('formData', formData);
+  
+      const response = await api.post('/property', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  };
+
+
+  const validateForm = () => {
+    if (!formData.title.trim()) return "Title is required";
+    if (!formData.price) return "Price is required";
+    if (!formData.city.trim()) return "City is required";
+    if (!formData.country.trim()) return "Country is required";
+    if (!formData.description.trim()) return "Description is required";
+    if (!formData.area.trim()) return "Area is required";
+    if (images.length === 0) return "At least one image is required";
+    if (!formData.services.some((service) => service.trim()))
+      return "At least one service is required";
+
+    const hasValidAmenityGroup = formData.amenities.some(
+      (group) => group.title.trim() && group.items.some((item) => item.trim())
+    );
+    if (!hasValidAmenityGroup)
+      return "At least one amenity group with one item is required";
+
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        value.forEach((el) => data.append(key + "[]", el));
-      } else if (typeof value === "object") {
-        data.append(key, JSON.stringify(value));
-      } else {
-        data.append(key, value);
-      }
-    });
+    const error = validateForm();
+    if (error) {
+      toast.error(error);
+      return;
+    }
 
-    images.forEach((img) => {
-      data.append("images", img);
-    });
-
+    setIsSubmitting(true);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/propertyauth/add",
-        data
-      );
-      console.log(response.data);
-      alert("Property added successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to add property!");
+      const response = await createProperty(formData, images);
+      toast.success("Property created successfully!");
+
+      // Reset form
+      setFormData({
+        title: "",
+        price: "",
+        city: "",
+        country: "",
+        description: "",
+        area: "",
+        services: [""],
+        amenities: [{ title: "", items: [""] }],
+      });
+      setImages([]);
+    } catch (error) {
+      toast.error(error.message || "Failed to create property");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <input
-        type="text"
-        placeholder="Property Slug"
-        name="slug"
-        required
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        placeholder="Property Title"
-        name="title"
-        required
-        onChange={handleInputChange}
-      />
-      <input
-        type="number"
-        placeholder="Price"
-        name="price"
-        required
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        placeholder="City"
-        name="city"
-        required
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        placeholder="Country"
-        name="country"
-        required
-        onChange={handleInputChange}
-      />
-      <textarea
-        placeholder="Property Description"
-        name="description"
-        rows="4"
-        required
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        placeholder="Area (sq. ft)"
-        name="area"
-        required
-        onChange={handleInputChange}
-      />
-      
-      <label>Services</label>
-      {servicesOptions.map((service) => (
-        <label key={service}>
-          <input
-            type="checkbox"
-            value={service}
-            onChange={handleServiceChange}
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-6 space-y-8">
+      <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
+        <h2 className="text-2xl font-bold text-[#6C0F0A]">Add New Property</h2>
+
+        <div className="space-y-6">
+          <ImageUpload images={images} onImageChange={handleImageChange} />
+
+          <BasicInfoFields formData={formData} onChange={handleInputChange} />
+
+          <ServicesList
+            services={formData.services}
+            onServiceChange={handleServiceChange}
+            onServiceAdd={handleServiceAdd}
+            onServiceRemove={handleServiceRemove}
           />
-          {service}
-        </label>
-      ))}
 
-      <label>Amenities</label>
-      {Object.keys(amenitiesOptions).map((amenity) => (
-        <div key={amenity}>
-          <h4>{amenity}</h4>
-          {amenitiesOptions[amenity].map((option) => (
-            <label key={option}>
-              <input
-                type="checkbox"
-                value={option}
-                onChange={(e) => handleAmenityChange(e, amenity)}
-              />
-              {option}
-            </label>
-          ))}
+          <AmenitiesList
+            amenities={formData.amenities}
+            onGroupAdd={handleAmenityGroupAdd}
+            onTitleChange={handleAmenityTitleChange}
+            onItemChange={handleAmenityItemChange}
+            onItemAdd={handleAmenityItemAdd}
+            onItemRemove={handleAmenityItemRemove}
+          />
         </div>
-      ))}
 
-      <input type="file" multiple accept="image/*" onChange={handleImageChange} />
-      <button type="submit">Add Property</button>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 ${
+            isSubmitting
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-[#a04031]"
+          }`}
+        >
+          {isSubmitting ? "Creating Property..." : "Submit Property"}
+        </button>
+      </div>
     </form>
   );
 };
 
-export default AddProperty;
+export default PropertyForm;
