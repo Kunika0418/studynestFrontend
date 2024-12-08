@@ -28,11 +28,11 @@ const Property = () => {
           const filterType = localStorage.getItem("name");
           const filterValue = localStorage.getItem("item");
           response = await axios.get(
-            `http://localhost:5000/api/propertyauth/properties/search?${filterType}=${filterValue}`
+            `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties/search?${filterType}=${filterValue}`
           );
         } else {
           response = await axios.get(
-            `http://localhost:5000/api/propertyauth/properties`
+            `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties`
           );
         }
         localStorage.removeItem("item");
