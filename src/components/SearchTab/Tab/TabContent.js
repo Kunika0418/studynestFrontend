@@ -2,10 +2,9 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export const TabContent = ({ items, name , isModalOpen,title }) => {
+export const TabContent = ({ items, name ,isModalOpen,title }) => {
   const navigate = useNavigate();
   const handleClick = (e) => {
-    console.log('Button Clicked');
     const itemValue = e.target.value; 
     localStorage.setItem('name',title);
     localStorage.setItem('item',itemValue);

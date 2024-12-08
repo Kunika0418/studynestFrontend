@@ -56,12 +56,6 @@ const Hero = ({
                 onFocus={handleFocus}  // Open modal when focused
                 className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all duration-300"
               />
-              <button
-                onClick={handleSearch}
-                className="absolute right-2 py-2 px-6 bg-primary-100 text-white rounded-full shadow-md hover:bg-primary-100/90 transition-all duration-300"
-              >
-                Search
-              </button>
             </div>
           </div>
         </div>

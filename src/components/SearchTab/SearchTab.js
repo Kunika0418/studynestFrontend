@@ -53,11 +53,11 @@ const properties = {
 export const CountryTabs = ({ setIsModalOpen,searchTerm }) => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
 
-  const filteredCities = cities[selectedCountry.name].filter((city) =>
+  const filteredCities = cities[selectedCountry.id].filter((city) =>
     city.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const filteredProperties = properties[selectedCountry.name].filter((property) =>
+  const filteredProperties = properties[selectedCountry.id].filter((property) =>
     property.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -73,10 +73,10 @@ export const CountryTabs = ({ setIsModalOpen,searchTerm }) => {
             {countries.map((country) => (
               <TabButton
                 key={country.id}
-                country={country.name}
+                country={country.id}
                 flag={country.flag}
                 setIsModalOpen={setIsModalOpen}
-                isSelected={selectedCountry.name === country.name}
+                isSelected={selectedCountry.id === country.id}
                 onClick={() => setSelectedCountry(country)}
               />
             ))}

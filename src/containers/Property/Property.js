@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PropertyDetail from "./PropertyDetail/PropertyDetail";
 import ApartmentCard from "../../components/Card/Card";
-import FetchData from "../Hook/FetchData"; // Assuming FetchData is a custom hook
 import axios from "axios";
 
 const Property = () => {
@@ -11,37 +11,55 @@ const Property = () => {
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [minPrice, setMinPrice] = useState(""); 
+  const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredApartments, setFilteredApartments] = useState([]);
-  
-  // Fetch data using the custom hook (it should be called directly in the component body)
-  const { data, loading, error } = FetchData(
-    'http://localhost:5000/api/propertyauth/properties'
-  );
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  // Handle data when available
+  // Fetch data on component mount
   useEffect(() => {
-    if (data && data.properties) {
-      setFilteredApartments(data.properties); // Set initial apartment list
-      // Load unique countries from the data
-      const uniqueCountries = Array.from(
-        new Set(data.properties.map((apt) => apt.country))
-      );
-      setCountries(uniqueCountries);
-    }
-  }, [data]);
+    const fetchData = async () => {
+      try {
+        let response;
+        if (localStorage.getItem("item") && localStorage.getItem("name")) {
+          const filterType = localStorage.getItem("name");
+          const filterValue = localStorage.getItem("item");
+          response = await axios.get(
+            `http://localhost:5000/api/propertyauth/properties/search?${filterType}=${filterValue}`
+          );
+          localStorage.removeItem("name");
+          localStorage.removeItem("item");
+        } else {
+          response = await axios.get(
+            `http://localhost:5000/api/propertyauth/properties`
+          );
+        }
+        const fetchedData = response.data;
+        setData(fetchedData.properties);
+        setFilteredApartments(fetchedData.properties);
+        const uniqueCountries = Array.from(
+          new Set(fetchedData.properties.map((apt) => apt.country))
+        );
+        setCountries(uniqueCountries);
+        setLoading(false); 
+      } catch (err) {
+        setError("Error fetching data:", err);
+        setLoading(false); 
+      }
+    };
 
-  // Fetch filtered data based on localStorage when conditions are met
-  
-  // Effect to load cities based on selected country
+    fetchData();
+  }, []);
+
+  // Update cities when country changes
   useEffect(() => {
-    if (selectedCountry && data && data.properties) {
+    if (selectedCountry) {
       const uniqueCities = Array.from(
         new Set(
-          data.properties
-            .filter((apt) => apt.country === selectedCountry)
-            .map((apt) => apt.city)
+          data.filter((apt) => apt.country === selectedCountry).map((apt) => apt.city)
         )
       );
       setCities(uniqueCities);
@@ -51,47 +69,42 @@ const Property = () => {
     }
   }, [selectedCountry, data]);
 
-  // Effect to filter apartments based on country, city, and price range
+  // Filter apartments based on country, city, and price range
   useEffect(() => {
-    if (data && data.properties) {
-      const filtered = data.properties.filter((apt) => {
-        const isCountryMatch = !selectedCountry || apt.country === selectedCountry;
-        const isCityMatch = !selectedCity || apt.city === selectedCity;
+    const filtered = data.filter((apt) => {
+      const isCountryMatch = !selectedCountry || apt.country === selectedCountry;
+      const isCityMatch = !selectedCity || apt.city === selectedCity;
+      const isPriceMatch =
+        (!minPrice || apt.price >= parseInt(minPrice)) &&
+        (!maxPrice || apt.price <= parseInt(maxPrice));
 
-        // Price filter logic
-        const isPriceMatch =
-          (!minPrice || apt.price >= parseInt(minPrice)) &&
-          (!maxPrice || apt.price <= parseInt(maxPrice));
+      return isCountryMatch && isCityMatch && isPriceMatch;
+    });
 
-        return isCountryMatch && isCityMatch && isPriceMatch;
-      });
-
-      setFilteredApartments(filtered);
-    }
+    setFilteredApartments(filtered);
   }, [selectedCountry, selectedCity, minPrice, maxPrice, data]);
-  
-  useEffect(() => {
-    if (localStorage.getItem('item') && localStorage.getItem('name')) {
-      const filterType = localStorage.getItem('name');
-      const filterValue = localStorage.getItem('item');
-      axios.get(
-        `http://localhost:5000/api/propertyauth/properties/search?${filterType}=${filterValue}`
-      )
-      .then((response) => {
-        const filteredData = response.data;
-        if (filteredData) {
-          setFilteredApartments(filteredData);
-          console.log(filteredData)
-        }
-      })
-      .catch((err) => console.error('Error fetching filtered data:', err));
-      localStorage.removeItem('name');
-      localStorage.removeItem('item');
-    }
-  }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
+        <span className="ml-2">Loading...</span>
+      </div>
+    );
+  }  
+  if (error) {
+    return (
+      <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
+        <p className="text-2xl text-red-500">No apartments are found</p>
+        <button
+          className="text-white ring-2 ring-amber-900 bg-amber-700 hover:bg-amber-800 px-4 py-2 rounded-xl"
+          onClick={() => navigate('/')}
+        >
+          Home
+        </button>
+      </div>
+    );
+  }  
 
   return (
     <div className="min-h-screen bg-gray-50 relative">
@@ -111,15 +124,11 @@ const Property = () => {
               className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
             >
               <option value="">All Countries</option>
-              {countries.length > 0 ? (
-                countries.map((country) => (
-                  <option key={country} value={country}>
-                    {country}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No Countries Available</option>
-              )}
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -136,15 +145,11 @@ const Property = () => {
               disabled={!selectedCountry}
             >
               <option value="">All Cities</option>
-              {cities.length > 0 ? (
-                cities.map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No Cities Available</option>
-              )}
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -160,7 +165,6 @@ const Property = () => {
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 placeholder="Min Price"
-                min="0"
                 className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
               />
               <input
@@ -169,7 +173,6 @@ const Property = () => {
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 placeholder="Max Price"
-                min="0"
                 className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
               />
             </div>

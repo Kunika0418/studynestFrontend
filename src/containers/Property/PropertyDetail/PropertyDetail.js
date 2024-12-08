@@ -1,50 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "swiper/css/bundle";
 import BuyForm from "../../../components/BuyFrom/BuyForm";
 import ImageModal from "../../../components/ImageModal/ImageModal";
 import { IoLocationSharp, IoShieldCheckmark } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
-// import { apartmentsData } from "../../../components/Data/Data";
 import axios from "axios";
+import sample from '../../../assets/images/room1.jpg'
 
-const PropertyDetail = async () => {
-  const [apartment, setApartment] = useState();
-  const [apartmentsData,setApartmentsData] = useState();
+const PropertyDetail = () => {
   const { PropertyId } = useParams();
-  console.log(PropertyId);
+  const [apartmentsData, setApartmentsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState("Overview");
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(async () => {
-    await axios.get(
-      `http://localhost:5000/api/propertyauth/properties`
-    )
-    .then((response) => {
-      const Data = response.data;
-      if (Data) {
-        setApartmentsData(Data);
-        console.log(apartmentsData)
+  useEffect(() => {
+    const fetchedData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/propertyauth/properties`);
+        setApartmentsData(response.data.properties);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
       }
-    })
-    .catch((err) => console.error('Error fetching filtered data:', err));
-    
-  }, [])
+    };
+    fetchedData();
+  }, []); // Empty dependency array to run only once  
 
-  useEffect(async () => {
-    await axios.get(
-      `http://localhost:5000/api/propertyauth/property/${PropertyId}`
-    )
-    .then((response) => {
-      const Data = response.data;
-      if (Data) {
-        setApartment(Data);
-        console.log(apartment)
-      }
-    })
-    .catch((err) => console.error('Error fetching filtered data:', err));
-    
-  }, [])
-  
+  const apartment = apartmentsData.find((apt) => apt._id === PropertyId);
+
+  const recommendedApartments = apartmentsData
+    .filter((apt) => apt._id !== PropertyId)
+    .slice(0, 3);
+
   const openModal = (image) => {
     setSelectedImage(image);
     setModalOpen(true);
@@ -54,22 +48,6 @@ const PropertyDetail = async () => {
     setModalOpen(false);
     setSelectedImage(null);
   };
-
-  const [activeTab, setActiveTab] = useState("Overview");
-  const [isExpanded, setIsExpanded] = useState(false);
-  const recommendedApartments = apartmentsData
-    .filter((apt) => apt.id !== parseInt(PropertyId))
-    .slice(0, 3);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(apartment.images[0]);
-
-  if (!apartment) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg text-gray-500">Property not found.</p>
-      </div>
-    );
-  }
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -93,6 +71,14 @@ const PropertyDetail = async () => {
     );
   };
 
+  if (!apartment) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-gray-500">Property not found.</p>
+      </div>
+    );
+  }
+
   // Scroll to the target section when a tab is clicked
   const scrollToSection = (section, margin = 150) => {
     const element = document.getElementById(section);
@@ -107,6 +93,28 @@ const PropertyDetail = async () => {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
+        <span className="ml-2">Loading...</span>
+      </div>
+    );
+  }  
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-red-500">Something went wrong: {error}</p>
+        <button
+          className="text-primary-100 underline"
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }  
 
   return (
     <div className="min-h-screen py-8 ">
@@ -167,10 +175,10 @@ const PropertyDetail = async () => {
                 />
               </div>
             ))}
-            <div
+            {apartment.images.length>4 && <div
               key={4}
               className="relative overflow-hidden rounded-md opacity-75 w-full h-full cursor-pointer"
-              onClick={() => openModal(apartment.images[4])}
+              onClick={() => openModal(apartment.images[0])}
             >
               <img
                 src={apartment.images[4]}
@@ -182,7 +190,7 @@ const PropertyDetail = async () => {
                   +{apartment.images.length - 4} others
                 </p>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </div>
@@ -191,11 +199,10 @@ const PropertyDetail = async () => {
       <div className="flex space-x-4 w-full sticky top-[72px] h-16 bg-white z-10">
         <div className="flex justify-center border-b gap-10 w-full">
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
-              activeTab === "Overview"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Overview"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-            }`}
+              }`}
             onClick={() => {
               setActiveTab("Overview");
               scrollToSection("overview");
@@ -204,11 +211,10 @@ const PropertyDetail = async () => {
             Overview
           </button>
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
-              activeTab === "Facilities"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Facilities"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-            }`}
+              }`}
             onClick={() => {
               setActiveTab("Facilities");
               scrollToSection("facilities");
@@ -217,11 +223,10 @@ const PropertyDetail = async () => {
             Facilities
           </button>
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
-              activeTab === "Services"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Services"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-            }`}
+              }`}
             onClick={() => {
               setActiveTab("Services");
               scrollToSection("services");
@@ -230,24 +235,10 @@ const PropertyDetail = async () => {
             Services
           </button>
           <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
-              activeTab === "Reviews"
+            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Properties"
                 ? "border-primary-100 text-primary-100"
                 : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-            }`}
-            onClick={() => {
-              setActiveTab("Reviews");
-              scrollToSection("reviews");
-            }}
-          >
-            Reviews
-          </button>
-          <button
-            className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
-              activeTab === "Properties"
-                ? "border-primary-100 text-primary-100"
-                : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
-            }`}
+              }`}
             onClick={() => {
               setActiveTab("Properties");
               scrollToSection("properties");
@@ -271,9 +262,8 @@ const PropertyDetail = async () => {
             <p className="mt-2 text-justify">
               {isExpanded
                 ? apartment.description
-                : `${apartment.description.split(" ").slice(0, 50).join(" ")}${
-                    apartment.description.split(" ").length > 50 ? "..." : ""
-                  }`}
+                : `${apartment.description.split(" ").slice(0, 50).join(" ")}${apartment.description.split(" ").length > 50 ? "..." : ""
+                }`}
             </p>
             {apartment.description.split(" ").length > 50 && (
               <button
@@ -338,31 +328,14 @@ const PropertyDetail = async () => {
         </aside>
       </div>
 
-      <div id="reviews" className="w-full py-6 px-20">
-        <div className="mb-6">
-          <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">Reviews</h2>
-          <div className="reviews mb-8 border border-primary-300 bg-gray-50 p-4 rounded-lg">
-            {apartment.reviews.map((review, index) => (
-              <div key={index} className="mb-4">
-                <p className="font-semibold">{review.user}</p>
-                <div className="flex items-center space-x-1">
-                  {renderStars(review.rating)}
-                </div>
-                <p className="text-gray-600">{review.comment}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Similar Apartments */}
       <div id="properties" className="mt-4 px-20">
         <h2 className="text-2xl font-sans text-primary-100 font-semibold mb-6">Similar Properties</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {recommendedApartments.map((apt) => (
-            <Link
-              key={apt.id}
-              to={`/property/${apt.id}`}
+            <a
+              key={apt._id}
+              href={`/property/${apt._id}`}
               className="block bg-white border rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
             >
               <img
@@ -375,7 +348,7 @@ const PropertyDetail = async () => {
                 <p className="text-gray-500">{apt.city}</p>
                 <p className="text-amber-800 font-bold">${apt.price}/month</p>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </div>
