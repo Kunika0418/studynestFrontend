@@ -94,6 +94,7 @@ const PropertyForm = () => {
       formData.append("price", propertyData.price);
       formData.append("city", propertyData.city);
       formData.append("country", propertyData.country);
+      formData.append("university", propertyData.university);
       formData.append("description", propertyData.description);
       formData.append("area", propertyData.area);
 
@@ -121,7 +122,6 @@ const PropertyForm = () => {
         formData.append("images", image);
       });
 
-      console.log("formData", formData);
 
       const response = await api.post("/property", formData, {
         headers: {
@@ -141,6 +141,7 @@ const PropertyForm = () => {
     if (!formData.city.trim()) return "City is required";
     if (!formData.country.trim()) return "Country is required";
     if (!formData.description.trim()) return "Description is required";
+    if (!formData.university.trim()) return "University is required";
     if (!formData.area.trim()) return "Area is required";
     if (images.length === 0) return "At least one image is required";
     if (!formData.services.some((service) => service.trim()))
@@ -175,6 +176,7 @@ const PropertyForm = () => {
         price: "",
         city: "",
         country: "",
+        university: "",
         description: "",
         area: "",
         services: [""],

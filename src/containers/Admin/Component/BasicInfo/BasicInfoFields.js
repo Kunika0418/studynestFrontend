@@ -41,6 +41,13 @@ const BasicInfoFields = ({ formData, onChange }) => {
           onChange={onChange}
           required
         />
+        <Input
+          label="University"
+          name="university"
+          value={formData.university}
+          onChange={onChange}
+          required
+        />
       </div>
 
       <div>
