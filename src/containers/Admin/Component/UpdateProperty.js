@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ImageUpload from "./ImageUpload";
 import BasicInfoFields from "./BasicInfo/BasicInfoFields";
 import ServicesList from "./Services/ServicesList";
@@ -6,27 +7,47 @@ import AmenitiesList from "./Amenities/AmenitiesList";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: `${process.env.REACT_APP_SERVER_URI}/api/propertyauth`,
-});
-
-const AddProperty = () => {
+const UpdateProperty = ({ property, onSuccess }) => {
   const [images, setImages] = useState([]);
+  const [existingImages, setExistingImages] = useState(property.images);
+  const [replaceImages, setReplaceImages] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    city: "",
-    country: "",
-    description: "",
-    area: "",
-    services: [""],
-    amenities: [{ title: "", items: [""] }],
+    title: property.title,
+    price: property.price,
+    city: property.city,
+    country: property.country,
+    description: property.description,
+    university: property.university,
+    area: property.area,
+    services: property.services,
+    amenities: property.amenities,
   });
+
+  const api = axios.create({
+    baseURL: `${process.env.REACT_APP_SERVER_URI}/api/propertyauth`,
+  });
+
+  const updateProperty = async (propertyId, formData) => {
+    try {
+      const response = await api.put(`/property/${propertyId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  };
 
   const handleImageChange = (files) => {
     const newImages = Array.from(files).slice(0, 5);
     setImages(newImages);
+  };
+
+  const handleExistingImageRemove = (index) => {
+    setExistingImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleInputChange = (e) => {
@@ -81,60 +102,6 @@ const AddProperty = () => {
     setFormData({ ...formData, amenities: newAmenities });
   };
 
-  const createProperty = async (propertyData, images) => {
-    try {
-      const formData = new FormData();
-
-      // Append property data
-      formData.append(
-        "slug",
-        propertyData.title.toLowerCase().replace(/\s+/g, "-")
-      );
-      formData.append("title", propertyData.title);
-      formData.append("price", propertyData.price);
-      formData.append("city", propertyData.city);
-      formData.append("country", propertyData.country);
-      formData.append("university", propertyData.university);
-      formData.append("description", propertyData.description);
-      formData.append("area", propertyData.area);
-
-      // Append services as JSON string
-      formData.append(
-        "services",
-        JSON.stringify(
-          propertyData.services.filter((service) => service.trim())
-        )
-      );
-
-      // Append amenities as JSON string
-      formData.append(
-        "amenities",
-        JSON.stringify(
-          propertyData.amenities.filter(
-            (group) =>
-              group.title.trim() && group.items.some((item) => item.trim())
-          )
-        )
-      );
-
-      // Append images
-      images.forEach((image) => {
-        formData.append("images", image);
-      });
-
-
-      const response = await api.post("/property", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      return response.data;
-    } catch (error) {
-      throw error.response?.data || error.message;
-    }
-  };
-
   const validateForm = () => {
     if (!formData.title.trim()) return "Title is required";
     if (!formData.price) return "Price is required";
@@ -143,7 +110,8 @@ const AddProperty = () => {
     if (!formData.description.trim()) return "Description is required";
     if (!formData.university.trim()) return "University is required";
     if (!formData.area.trim()) return "Area is required";
-    if (images.length === 0) return "At least one image is required";
+    if (existingImages.length === 0 && images.length === 0)
+      return "At least one image is required";
     if (!formData.services.some((service) => service.trim()))
       return "At least one service is required";
 
@@ -167,24 +135,39 @@ const AddProperty = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await createProperty(formData, images);
-      toast.success("Property created successfully!");
+      const formDataToSend = new FormData();
 
-      // Reset form
-      setFormData({
-        title: "",
-        price: "",
-        city: "",
-        country: "",
-        university: "",
-        description: "",
-        area: "",
-        services: [""],
-        amenities: [{ title: "", items: [""] }],
+      // Append property data
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "services" || key === "amenities") {
+          formDataToSend.append(key, JSON.stringify(value));
+        } else {
+          formDataToSend.append(key, value.toString());
+        }
       });
-      setImages([]);
+
+      if (!replaceImages) {
+        // Append existing images
+        existingImages.forEach((image) => {
+          formDataToSend.append("images", image);
+          console.log(image);
+        });
+      }
+
+      // Append new images images
+      images.forEach((image) => {
+        formDataToSend.append("images", image);
+        console.log(image);
+      });
+
+      // Append replaceImages flag
+      formDataToSend.append("replaceImages", replaceImages);
+
+      await updateProperty(property._id, formDataToSend);
+      toast.success("Property updated successfully!");
+      onSuccess();
     } catch (error) {
-      toast.error(error.message || "Failed to create property");
+      toast.error(error.message || "Failed to update property");
     } finally {
       setIsSubmitting(false);
     }
@@ -193,9 +176,43 @@ const AddProperty = () => {
   return (
     <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-6 space-y-8">
       <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
-        <h2 className="text-2xl font-bold text-[#6C0F0A]">Add New Property</h2>
+        <h2 className="text-2xl font-bold text-[#6C0F0A]">Edit Property</h2>
 
         <div className="space-y-6">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Current Images</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {existingImages.map((image, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={image}
+                    alt={`Property ${index + 1}`}
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleExistingImageRemove(index)}
+                    className="absolute top-2 right-2 bg-red-500 text-white h-6 w-6 rounded-full hover:bg-red-600"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={replaceImages}
+                onChange={(e) => setReplaceImages(e.target.checked)}
+                className="rounded text-[#6C0F0A]"
+              />
+              <span>Replace all existing images</span>
+            </label>
+          </div>
+
           <ImageUpload images={images} onImageChange={handleImageChange} />
 
           <BasicInfoFields formData={formData} onChange={handleInputChange} />
@@ -226,11 +243,16 @@ const AddProperty = () => {
               : "hover:bg-[#a04031]"
           }`}
         >
-          {isSubmitting ? "Creating Property..." : "Submit Property"}
+          {isSubmitting ? "Updating Property..." : "Update Property"}
         </button>
       </div>
     </form>
   );
 };
 
-export default AddProperty;
+UpdateProperty.propTypes = {
+  property: PropTypes.object.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+};
+
+export default UpdateProperty;
