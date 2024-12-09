@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropertyDetail from "./PropertyDetail/PropertyDetail";
 import ApartmentCard from "../../components/Card/Card";
 import axios from "axios";
+import { Oval } from "react-loader-spinner";
 
 const Property = () => {
   // State variables
@@ -90,10 +91,20 @@ const Property = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div
-          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-          role="status"
-        ></div>
+        <div className="ml-4 transition duration-500 ease-in-out">
+          <Oval
+            visible={true}
+            height="20"
+            width="20"
+            secondaryColor="#2c2c2c"
+            strokeWidth={4}
+            strokeWidthSecondary={4}
+            color="#6C0F0A"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
         <span className="ml-2">Loading...</span>
       </div>
     );
@@ -103,7 +114,7 @@ const Property = () => {
     localStorage.removeItem("item");
     return (
       <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
-        <p className="text-2xl text-red-500">No apartments are found</p>
+        <p className="text-lg font-sans text-red-500">No apartments are found</p>
         <button
           className="text-white ring-2 ring-amber-900 bg-amber-700 hover:bg-amber-800 px-4 py-2 rounded-xl"
           onClick={() => window.location.reload()}
@@ -209,7 +220,7 @@ const Property = () => {
         </h1>
 
         {/* Filtered Apartments */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
           {filteredApartments.length > 0 ? (
             filteredApartments.map((apt) => (
               <ApartmentCard
@@ -219,7 +230,7 @@ const Property = () => {
               />
             ))
           ) : (
-            <p className="text-center text-gray-500 mt-8">
+            <p className="text-gray-500 mt-8 col-span-2 text-center">
               No apartments found.
             </p>
           )}
