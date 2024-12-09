@@ -36,7 +36,7 @@ const WhyWe = () => {
 
   return (
     <>
-      <div className="w-full h-[35rem] bg-accent-100 relative flex justify-center items-center">
+      <div className="max-w-full h-[35rem] bg-accent-100 relative flex justify-center items-center">
         <div className="h-full w-full absolute top-0 left-0 overflow-hidden z-0">
           <img
             src={collegeStudents}

@@ -11,6 +11,7 @@ import EasyBook from "./components/EasyBook";
 import Testimonials from "./components/Testimonials";
 import { apartmentsData } from "../../components/Data/Data";
 import bannerVideo from "../../assets/video/Banner_video.mp4";
+import TopApartments from "./components/TopApartments";
 
 
 const Home = () => {
@@ -38,13 +39,15 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col">
 
       <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm={searchTerm} handleChange={handleChange} bannerVideo={bannerVideo} />
       
       <Parameters />
 
       <TopCities />
+
+      <TopApartments/>
 
       {/* Apartments Section */}
       {/* <div className="Apartment px-4">
