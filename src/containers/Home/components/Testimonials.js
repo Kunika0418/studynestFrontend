@@ -57,7 +57,7 @@ const Testimonials = () => {
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
-        className="w-[80rem] h-auto"
+        className="w-full max-w-screen-xl h-auto"
       >
         {testimonials.map((testimonial, index) => (
           <SwiperSlide key={index} className="flex justify-center mt-6 w-full">
