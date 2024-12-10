@@ -32,6 +32,7 @@ const TopApartments = () => {
                     new Set(allProperties.map((apt) => apt.country))
                 );
                 setCountries(uniqueCountries);
+                setSelectedCountry(uniqueCountries[0]);
             } catch (err) {
                 setError("Failed to fetch properties.");
             } finally {
@@ -66,7 +67,8 @@ const TopApartments = () => {
     }, [selectedCountry, properties]);
 
     useEffect(() => {
-        if (selectedCountry != "") {
+        if (selectedCountry !== "") {
+
             const filtered = properties.filter((apt) => {
                 const isCountryMatch =
                     !selectedCountry || apt.country === selectedCountry;
@@ -75,8 +77,8 @@ const TopApartments = () => {
             });
             setFilteredApartments(filtered); // Update filtered apartments
         }
-        else{
-            setFilteredApartments(properties)
+        else {
+            setFilteredApartments(properties);
         }
     }, [selectedCountry, selectedCity, properties]);
 
@@ -90,16 +92,7 @@ const TopApartments = () => {
 
     return (
         <div className="bg-slate-50 border-y-[1px] border-primary-100">
-            <FilterBar
-                countries={countries}
-                selectedCountry={selectedCountry}
-                setSelectedCountry={setSelectedCountry}
-                cities={cities}
-                selectedCity={selectedCity}
-                setSelectedCity={setSelectedCity}
-                price={false}
-            />
-            <div className="w-full h-auto flex flex-col items-center py-10">
+            <div className="w-full h-auto flex flex-col p-10">
                 <div className="flex flex-col justify-center items-center gap-4">
                     <h2 className="text-2xl font-semibold font-sans text-accent-100">
                         Top{" "}
@@ -108,14 +101,38 @@ const TopApartments = () => {
                         </span>
                     </h2>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-20 gap-y-10 mt-8">
-                    {viewed.map((property) => (
-                        <ApartmentCard
-                            key={property._id}
-                            {...property}
-                            onClick={() => setSelectedApartment(property)}
-                        />
-                    ))}
+                <FilterBar
+                    countries={countries}
+                    selectedCountry={selectedCountry}
+                    setSelectedCountry={setSelectedCountry}
+                    setSelectedCity={setSelectedCity}
+                    price={false}
+                />
+                <div className="flex">
+                    <div className="cities w-[20rem] min-h-full bg-gray-50 shadow-lg overflow-y-auto mt-8 border-r border-gray-200 p-4">
+                        {cities.map((city, index) => (
+                            <button
+                                key={index}
+                                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-full
+                                    ${selectedCity === city
+                                        ? 'bg-pink-600 text-white'
+                                        : 'bg-pink-50 hover:bg-pink-200'
+                                    }`}
+                                onClick={() => setSelectedCity(city)}
+                            >
+                                {city}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-6 mt-8 px-4">
+                        {viewed.map((property) => (
+                            <ApartmentCard
+                                key={property._id}
+                                {...property}
+                                onClick={() => setSelectedApartment(property)}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
             {selectedApartment && (

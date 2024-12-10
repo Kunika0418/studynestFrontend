@@ -43,17 +43,21 @@ const WhyWe = () => {
             className="h-full w-full object-cover absolute"
           />
         </div>
+
         <div className="h-full w-full bg-voilet/80 bg-opacity-50 absolute z-0"></div>
         <div className="flex flex-col justify-center items-center h-full w-full gap-6 mb-28 z-10">
           <div className="flex flex-col justify-center items-center gap-2">
             <h2 className="text-3xl font-semibold font-sans text-white">
+
               Why Are We the Top Choice of Students Looking for
             </h2>
             <h2 className="text-3xl font-extrabold font-sans text-pink">
               Accommodations Near University?
             </h2>
           </div>
+
           <div className="text-base font-sans text-white">
+
             Finding{" "}
             <span className="font-semibold underline underline-offset-4">
               student housing near you

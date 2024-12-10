@@ -1,73 +1,42 @@
-import React from 'react'
+import React from 'react';
 
-function FilterBar({ countries, selectedCountry, setSelectedCountry, cities, selectedCity, setSelectedCity, price, minPrice, setMinPrice, maxPrice, setMaxPrice }) {
+function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelectedCity, price, minPrice, setMinPrice, maxPrice, setMaxPrice }) {
     return (
         <div>
-            <aside className="bg-gray-50 py-4 px-6 border-b border-primary-100 flex justify-between items-center">
-                <div className="flex gap-4">
+            <aside className="bg-gray-50 py-4 px-6 shadow-sm">
+                <div className="flex items-center justify-between gap-8">
                     {/* Country Filter */}
-                    {countries && <div>
-                        <label
-                            htmlFor="country"
-                            className="block text-sm font-semibold text-gray-600 mb-2"
-                        >
-                            Country
-                        </label>
-                        <select
-                            id="country"
-                            value={selectedCountry}
-                            onChange={(e) => setSelectedCountry(e.target.value)}
-                            className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
-                        >
-                            <option value={""}>All Countries</option>
-                            {countries.map((country) => (
-                                <option key={country} value={country}>
+                    {countries && (
+                        <div className="flex gap-4 items-center">
+                            {countries.map((country, index) => (
+                                <button
+                                    key={index}
+                                    className={`h-12 px-4 rounded-full text-md font-medium transition-colors
+                                        ${selectedCountry === country
+                                            ? 'bg-pink-600 text-white'
+                                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                        }`}
+                                    onClick={() => {
+                                        setSelectedCountry(country);
+                                        setSelectedCity('');
+                                    }}
+                                >
                                     {country}
-                                </option>
+                                </button>
                             ))}
-                        </select>
-                    </div>}
-
-                    {/* City Filter */}
-                    {cities && <div>
-                        <label
-                            htmlFor="city"
-                            className="block text-sm font-semibold text-gray-600 mb-2"
-                        >
-                            City
-                        </label>
-                        <select
-                            id="city"
-                            value={selectedCity}
-                            onChange={(e) => setSelectedCity(e.target.value)}
-                            className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
-                            disabled={!selectedCountry}
-                        >
-                            <option value={""}>All Cities</option>
-                            {cities.map((city) => (
-                                <option key={city} value={city}>
-                                    {city}
-                                </option>
-                            ))}
-                        </select>
-                    </div>}
+                        </div>
+                    )}
 
                     {/* Price Range Filter */}
-                    {price && <div>
-                        <label
-                            htmlFor="priceRange"
-                            className="block text-sm font-semibold text-gray-600 mb-2"
-                        >
-                            Price Range
-                        </label>
-                        <div className="flex gap-4">
+                    {price && (
+                        <div className="flex gap-4 items-center">
                             <input
                                 type="number"
                                 id="minPrice"
                                 value={minPrice}
                                 onChange={(e) => setMinPrice(e.target.value)}
                                 placeholder="Min Price"
-                                className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
+                                className="w-32 py-2 px-3 border rounded-lg outline-none text-sm font-medium placeholder-gray-400"
                             />
                             <input
                                 type="number"
@@ -75,14 +44,14 @@ function FilterBar({ countries, selectedCountry, setSelectedCountry, cities, sel
                                 value={maxPrice}
                                 onChange={(e) => setMaxPrice(e.target.value)}
                                 placeholder="Max Price"
-                                className="w-full py-1 px-2 border-2 border-primary-100 rounded-lg outline-none text-accent-100 text-sm font-medium font-sans"
+                                className="w-32 py-2 px-3 border rounded-lg outline-none text-sm font-medium placeholder-gray-400"
                             />
                         </div>
-                    </div>}
+                    )}
                 </div>
             </aside>
         </div>
-    )
+    );
 }
 
-export default FilterBar
+export default FilterBar;

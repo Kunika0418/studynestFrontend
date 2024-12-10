@@ -34,7 +34,7 @@ const BuyForm = ({ apartment }) => {
             <div className='border-b border-bg-300 bg-gradient-to-b from-green-300 to-bg-green-200 p-4 rounded-t-xl'>
                 <h2 className="text-2xl text-accent-100 font-semibold text-center">${apartment.price}/month</h2>
 
-                <button className="bg-amber-100 text-primary-100 px-4 py-2 rounded mt-4 w-full text-left">
+                <button className="bg-pink-100 text-primary-100 px-4 py-2 rounded mt-4 w-full text-left">
                     <span className="font-semibold">Advance rent</span> 2 months' Rent
                     <span className="float-right">→</span>
                 </button>
