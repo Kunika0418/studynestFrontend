@@ -14,7 +14,7 @@ export const TabContent = ({ items, name ,isModalOpen,title }) => {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2 text-red-500">
+      <div className="flex items-center gap-2 text-darkpink">
         <MapPin className="w-4 h-4" />
         <h2 className="font-medium">Popular {name} in</h2>
       </div>

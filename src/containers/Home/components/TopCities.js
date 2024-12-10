@@ -5,8 +5,8 @@ const TopCities = () => {
   return (
     <div className="w-full h-auto px-5 md:px-10 flex flex-col items-center gap-12 py-10">
       <div className="flex flex-col justify-center items-center gap-4 text-center">
-        <h2 className="text-2xl font-semibold font-sans text-accent-100">
-          Top <span className="text-3xl font-bold text-primary-200">Cities</span>
+        <h2 className="text-3xl font-semibold font-sans text-voilet">
+          Top <span className="text-4xl font-bold text-pink">Cities</span>
         </h2>
         <span className="text-accent-100 font-sans font-medium max-w-2xl">
           We help you discover your ideal student home across countries and cities around the globe.

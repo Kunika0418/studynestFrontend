@@ -27,9 +27,9 @@ const EasyBook = () => {
   return (
     <>
       <div className="h-auto w-full flex flex-col justify-center items-center gap-5 py-6 px-10">
-        <h2 className="text-3xl font-semibold font-sans text-accent-100 capitalize">
+        <h2 className="text-3xl font-semibold font-sans text-voilet capitalize">
           Reserve your spot in{" "}
-          <span className="text-primary-200 capitalize">3 simple steps</span>
+          <span className="text-pink capitalize">3 simple steps</span>
         </h2>
         <h3 className="text-base font-sans text-accent-100">
           Reserve spots in top cities and universities worldwide.
@@ -39,19 +39,21 @@ const EasyBook = () => {
             return (
               <div
                 key={index}
-                className="h-80 w-96 flex flex-col justify-center items-center gap-2 rounded-lg border border-primary-300 overflow-hidden relative group cursor-pointer p-4 shadow-lg shadow-slate-400 hover:shadow-lg hover:shadow-primary-200 transition-shadow duration-500 ease-in-out"
+
+                className="h-80 w-96 flex flex-col justify-center items-center gap-2 rounded-lg border border-voilet overflow-hidden relative group cursor-pointer p-4 shadow-2xl shadow-slate-400 hover:shadow-3xl hover:shadow-voilet transition-shadow duration-500 ease-in-out"
+
               >
-                <div className="h-40 w-40 border-4 border-primary-100/80 rounded-full relative flex justify-center items-center">
+                <div className="h-40 w-40 border-4 border-darkpink/80 rounded-full relative flex justify-center items-center">
                   <img
                     src={item.img}
                     className="h-full w-full object-cover rounded-full"
                     alt="error occured"
                   />
-                  <div className="h-14 w-14 rounded-full bg-primary-100 absolute -right-6 border-8 border-white flex justify-center items-center text-white">
+                  <div className="h-14 w-14 rounded-full bg-darkpink absolute -right-6 border-8 border-white flex justify-center items-center text-white">
                     0{index + 1}
                   </div>
                 </div>
-                <h4 className="text-xl text-accent-100 font-semibold font-sans mt-4">
+                <h4 className="text-xl text-voilet font-semibold font-sans mt-4">
                   {item.title}
                 </h4>
                 <span className="text-sm font-medium text-accent-100 font-sans text-center">

@@ -4,6 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        pink: "#FA70A8",
+        voilet: "#242A56",
+        darkpink: "#EA4487",
         primary: {
           100: "#FFD1DC", // Light Pink - for subtle accents or hover states
           200: "#FF69B4", // Vibrant Pink - main buttons, highlights
@@ -22,27 +25,6 @@ module.exports = {
           200: "#FFF0F5", // Blush White - for section backgrounds
         },
       },
-      
-      // colors: {
-      //   primary: {
-      //     100: "#F35D77",
-      //     200: "#ff90a6",
-      //     300: "#fff8ff",
-      //   },
-      //   accent: {
-      //     100: "#FFC0CB",
-      //     200: "#99616c",
-      //   },
-      //   text: {
-      //     100: "#333333",
-      //     200: "#5c5c5c",
-      //   },
-      //   bg: {
-      //     100: "#FFFFFF",
-      //     200: "#f5f5f5",
-      //     300: "#cccccc",
-      //   },
-      // },
       fontFamily: {
         // Add your custom fonts along with emoji font family fallback
         sans: [

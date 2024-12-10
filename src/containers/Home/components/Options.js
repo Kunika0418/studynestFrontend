@@ -48,9 +48,9 @@ const Options = () => {
           }}
         >
         </div>
-        <h2 className="text-3xl font-semibold font-sans text-accent-100 capitalize z-10">
+        <h2 className="text-3xl font-semibold font-sans text-voilet capitalize z-10">
           Discover the Options: Explore the Range of{" "}
-          <span className="text-primary-200 capitalize z-10">
+          <span className="text-pink capitalize z-10">
             Student Housing Choices We Provide
           </span>
         </h2>
@@ -62,7 +62,7 @@ const Options = () => {
             return (
               <div
                 key={item.id}
-                className="h-[30rem] w-72 bg-slate-200 rounded-lg border border-primary-300 overflow-hidden relative group cursor-pointer"
+                className="h-[30rem] w-72 bg-slate-200 rounded-lg border border-voilet overflow-hidden relative group cursor-pointer"
               >
                 <img
                   src={item.image}

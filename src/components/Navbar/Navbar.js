@@ -2,7 +2,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
-import { IoIosLogIn } from "react-icons/io";
 import logo from "../../assets/logo/logo.jpg";
 import AuthModal from "../Login/Modal";
 import {
@@ -40,7 +39,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-white/30 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md">
+      <div className="bg-white/30 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md border-b-2 border-pink">
         <nav className="navbar flex justify-between items-center px-6 py-3 shadow-md">
           <Link to={"/"} className="flex justify-center items-center space-x-3">
             <div className="w-12 h-12">
@@ -50,7 +49,11 @@ const Navbar = () => {
                 className="w-full h-full object-contain rounded-full"
               />
             </div>
-            <div className="text-xl font-semibold font-sans text-primary-300">
+
+         
+
+            <div className="text-3xl font-semibold font-sans text-pink">
+
               StudyNest
             </div>
           </Link>
@@ -60,7 +63,10 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Property"}
-                className="link_nav relative text-accent-100 hover:text-primary-200 transition duration-300"
+
+
+                className="link_nav relative text-voilet text-base font-medium hover:text-voilet/80 transition duration-300"
+
               >
                 Property
               </Link>
@@ -68,7 +74,9 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Services"}
-                className="link_nav relative text-accent-100 hover:text-primary-200 transition duration-300"
+
+                className="link_nav relative text-voilet text-base font-medium hover:text-voilet/80 transition duration-300"
+
               >
                 Services
               </Link>
@@ -112,7 +120,7 @@ const Navbar = () => {
               {!localStorage.getItem("token") && (
                 <button
                   onClick={handleLoginLogout}
-                  className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300"
+                  className="bg-pink text-white px-3 py-2 rounded-md font-medium hover:bg-darkpink transition-colors duration-300"
                   aria-label={isLoggedIn ? "Logout" : "Login"}
                 >
                   Login / SignUp
