@@ -7,22 +7,24 @@ module.exports = {
         pink: "#FA70A8",
         voilet: "#242A56",
         darkpink: "#EA4487",
+        white: "#F9F9E0",
         primary: {
-          100: "#FFD1DC", // Light Pink - for subtle accents or hover states
-          200: "#FF69B4", // Vibrant Pink - main buttons, highlights
-          300: "#FF1493", // Deep Pink - bold elements, active states
+          100: "#6C0F0A",
+          200: "#a04031",
+          300: "#ff9e88",
         },
         accent: {
-          100: "#333333", // Softer Black - key contrast for text and elements
-          200: "#444444", // Dark Gray - for less prominent backgrounds
+          100: "#2c2c2c",
+          200: "#b0b0b0",
         },
         text: {
-          100: "#FFFFFF", // Pure White - primary text
-          200: "#F5F5F5", // Soft White - secondary or muted text
+          100: "#000000",
+          200: "#2c2c2c",
         },
         bg: {
-          100: "#FFFFFF", // Pure White - main background
-          200: "#FFF0F5", // Blush White - for section backgrounds
+          100: "#FFFFFF",
+          200: "#f5f5f5",
+          300: "#cccccc",
         },
       },
       fontFamily: {

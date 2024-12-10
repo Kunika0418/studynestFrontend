@@ -7,11 +7,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-
-  
-
     <footer className="bg-voilet text-white py-10">
-
       <div className="max-w-screen-xl mx-10 px-6 flex justify-between">
         {/* Column 1: Contact Information */}
         <div>

@@ -21,7 +21,7 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
       <Link to={`/Property/${_id}`}>
         {/* Apartment Image Slider */}
         <div className='flex justify-center'>
-          <div className='w-[24rem] rounded-lg overflow-hidden border border-primary-300 shadow-lg shadow-slate-400 hover:shadow-lg hover:shadow-primary-200 transition-shadow duration-500 ease-in-out'>
+          <div className='w-[24rem] rounded-lg overflow-hidden border border-voilet shadow-lg shadow-slate-400 hover:shadow-lg hover:shadow-voilet transition-shadow duration-500 ease-in-out'>
             <div className="relative w-[24rem] h-48">
               <Slider {...settings}>
                 {images.length > 0 ? (
@@ -44,10 +44,10 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
             </div>
 
             <div className="p-4 flex flex-col gap-[2px]">
-              <h2 className="text-xl font-bold">{title}</h2>
+              <h2 className="text-xl text-voilet font-bold">{title}</h2>
               <p className="text-sm mb-1">{city}, {country}</p>
-              <p className="text-sm mb-1">Area: {area}</p>
-              <p className="text-sm font-semibold mb-1">
+              <p className="text-sm mb-1 text-indigo-900">Area: {area}</p>
+              <p className="text-sm font-semibold mb-1 text-indigo-900">
                 Price: ${price}/month
               </p>
               <ul className="text-xs text-gray-600 mt-2 grid grid-cols-3">

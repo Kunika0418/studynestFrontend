@@ -49,12 +49,8 @@ const Navbar = () => {
                 className="w-full h-full object-contain rounded-full"
               />
             </div>
-
-         
-
-            <div className="text-3xl font-semibold font-sans text-pink">
-
-              StudyNest
+            <div className="text-3xl font-semibold font-sans text-voilet">
+              Study{""}<span className="text-pink">Nest</span>
             </div>
           </Link>
 
@@ -63,10 +59,7 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Property"}
-
-
                 className="link_nav relative text-voilet text-base font-medium hover:text-voilet/80 transition duration-300"
-
               >
                 Property
               </Link>
@@ -74,9 +67,7 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Services"}
-
                 className="link_nav relative text-voilet text-base font-medium hover:text-voilet/80 transition duration-300"
-
               >
                 Services
               </Link>
@@ -163,7 +154,7 @@ const Navbar = () => {
                 {/* Login/Logout Button for Mobile */}
                 <button
                   onClick={handleLoginLogout}
-                  className="text-gray-700 hover:text-pink-800"
+                  className="text-gray-700 hover:text-amber-800"
                 >
                   {isLoggedIn ? "Logout" : "Login"}
                 </button>

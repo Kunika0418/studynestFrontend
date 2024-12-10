@@ -11,9 +11,9 @@ function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelected
                             {countries.map((country, index) => (
                                 <button
                                     key={index}
-                                    className={`h-12 px-4 rounded-full text-md font-medium transition-colors
+                                    className={`h-12 px-4 rounded-full text-md font-medium transition-colors border border-slate-300
                                         ${selectedCountry === country
-                                            ? 'bg-pink-600 text-white'
+                                            ? 'bg-voilet text-pink'
                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                         }`}
                                     onClick={() => {

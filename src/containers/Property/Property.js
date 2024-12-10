@@ -104,7 +104,7 @@ const Property = () => {
             secondaryColor="#2c2c2c"
             strokeWidth={4}
             strokeWidthSecondary={4}
-            color="#6C0F0A"
+            color="#242A56"
             ariaLabel="oval-loading"
             wrapperStyle={{}}
             wrapperClass=""
@@ -136,16 +136,16 @@ const Property = () => {
       <FilterBar countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} setSelectedCity={setSelectedCity} price={true} minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} />
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1">
         <div className="container flex gap-4">
           <div className="cities w-[20rem] min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
             {cities.map((city, index) => (
               <button
                 key={index}
-                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-full
+                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-full border border-slate-300
                                         ${selectedCity === city
-                    ? 'bg-pink-600 text-white'
-                    : 'bg-pink-50 hover:bg-pink-200'
+                    ? 'bg-voilet text-pink'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 onClick={() => setSelectedCity(city)}
               >
@@ -154,9 +154,9 @@ const Property = () => {
             ))}
           </div>
           <div>
-            <h1 className="text-2xl font-semibold font-sans text-accent-100 mb-8">
+            <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
               Available{" "}
-              <span className="text-4xl text-primary-200 font-bold">
+              <span className="text-4xl text-pink font-bold">
                 Properties
               </span>
             </h1>

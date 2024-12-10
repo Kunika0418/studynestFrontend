@@ -54,7 +54,7 @@ const Hero = ({
                 value={searchTerm}
                 onChange={handleChange}
                 onFocus={handleFocus}  // Open modal when focused
-                className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all duration-300"
+                className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300"
               />
             </div>
           </div>

@@ -8,7 +8,7 @@ const TopCities = () => {
         <h2 className="text-3xl font-semibold font-sans text-voilet">
           Top <span className="text-4xl font-bold text-pink">Cities</span>
         </h2>
-        <span className="text-accent-100 font-sans font-medium max-w-2xl">
+        <span className="text-text-200 font-sans font-medium max-w-2xl">
           We help you discover your ideal student home across countries and cities around the globe.
         </span>
       </div>
