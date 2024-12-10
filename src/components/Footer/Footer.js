@@ -7,11 +7,11 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-100 text-white py-10">
+    <footer className="bg-voilet text-white py-10">
       <div className="max-w-screen-xl mx-10 px-6 flex justify-between">
         {/* Column 1: Contact Information */}
         <div>
-          <h3 className="text-2xl font-bold mb-4">Contact Us</h3>
+          <h3 className="text-2xl text-pink font-bold mb-4">Contact Us</h3>
           <p className="mb-2 cursor-pointer">
             Email:{" "}
             <span className="link relative transition duration-300 ease-in-out">
@@ -34,7 +34,7 @@ const Footer = () => {
 
         {/* Column 2: Quick Links */}
         <div>
-          <h3 className="text-2xl font-bold mb-4">Quick Links</h3>
+          <h3 className="text-2xl text-pink font-bold mb-4">Quick Links</h3>
           <ul className="flex flex-col gap-1">
             <li>
               <Link
@@ -65,7 +65,7 @@ const Footer = () => {
 
         {/* Column 3: Social Media */}
         <div>
-          <h3 className="text-2xl font-bold mb-4">Follow Us</h3>
+          <h3 className="text-2xl text-pink font-bold mb-4">Follow Us</h3>
           <div className="flex gap-4">
             <Link
               to="https://facebook.com"

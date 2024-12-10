@@ -37,8 +37,8 @@ const Testimonials = () => {
 
   return (
     <div className="bg-bg-200 py-12 px-4 sm:px-8 lg:px-16 w-full">
-      <h2 className="text-3xl font-bold text-center text-primary-100 mb-8">
-        What Our Students Say
+      <h2 className="text-3xl font-bold text-center text-voilet mb-8">
+        What Our{" "}<span className="text-pink">Students Say</span>
       </h2>
       <div className="flex justify-center items-center py-4">
       <Swiper
@@ -61,16 +61,16 @@ const Testimonials = () => {
       >
         {testimonials.map((testimonial, index) => (
           <SwiperSlide key={index} className="flex justify-center mt-6 w-full">
-            <div className="bg-bg-100 shadow-lg rounded-lg p-6 w-96 transform hover:scale-105 transition-transform duration-300 border border-primary-300">
+            <div className="bg-bg-100 shadow-lg rounded-lg p-6 w-96 transform hover:scale-105 transition-transform duration-300 border border-voilet">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}
-                className="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-primary-200"
+                className="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-voilet"
               />
               <p className="text-text-200 text-center italic mb-4">
                 "{testimonial.feedback}"
               </p>
-              <h3 className="text-lg font-bold text-center text-primary-100">
+              <h3 className="text-lg font-bold text-center text-darkpink">
                 {testimonial.name}
               </h3>
             </div>
