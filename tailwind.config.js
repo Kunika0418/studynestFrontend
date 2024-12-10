@@ -23,6 +23,26 @@ module.exports = {
           300: "#cccccc",
         },
       },
+      // colors: {
+      //   primary: {
+      //     100: "#F35D77",
+      //     200: "#ff90a6",
+      //     300: "#fff8ff",
+      //   },
+      //   accent: {
+      //     100: "#FFC0CB",
+      //     200: "#99616c",
+      //   },
+      //   text: {
+      //     100: "#333333",
+      //     200: "#5c5c5c",
+      //   },
+      //   bg: {
+      //     100: "#FFFFFF",
+      //     200: "#f5f5f5",
+      //     300: "#cccccc",
+      //   },
+      // },
       fontFamily: {
         // Add your custom fonts along with emoji font family fallback
         sans: [

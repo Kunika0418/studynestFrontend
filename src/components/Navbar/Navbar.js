@@ -115,7 +115,7 @@ const Navbar = () => {
                   className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300"
                   aria-label={isLoggedIn ? "Logout" : "Login"}
                 >
-                  <IoMdPerson />
+                  Login / SignUp
                 </button>
               )}
             </li>

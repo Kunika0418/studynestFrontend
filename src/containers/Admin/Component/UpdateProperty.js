@@ -146,22 +146,23 @@ const UpdateProperty = ({ property, onSuccess }) => {
         }
       });
 
+      console.log("Existing Images:", existingImages);
+      console.log("New Images:", images);
+
       if (!replaceImages) {
         // Append existing images
         existingImages.forEach((image) => {
           formDataToSend.append("images", image);
-          console.log(image);
         });
       }
 
       // Append new images images
       images.forEach((image) => {
         formDataToSend.append("images", image);
-        console.log(image);
       });
 
       // Append replaceImages flag
-      formDataToSend.append("replaceImages", replaceImages);
+      formDataToSend.append("replaceImages", replaceImages.toString());
 
       await updateProperty(property._id, formDataToSend);
       toast.success("Property updated successfully!");
