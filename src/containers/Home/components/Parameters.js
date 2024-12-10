@@ -34,7 +34,7 @@ const Parameters = () => {
   ];
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-6 px-6 py-16 -mt-10 bg-bg-200">
+      <div className="flex flex-wrap justify-center gap-6 px-6 pb-8 pt-16 -mt-10 bg-bg-200">
         {data.map((item, index) => (
           <div
             key={index}

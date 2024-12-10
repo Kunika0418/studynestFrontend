@@ -82,11 +82,11 @@ const PropertyDetail = () => {
   //   return (
   //     <div className="flex items-center space-x-1">
   //       {/* {[...Array(fullStars)].map((_, i) => (
-  //         <span key={`full-${i}`} className="text-amber-500 text-2xl">
+  //         <span key={`full-${i}`} className="text-pink-500 text-2xl">
   //           ★
   //         </span>
   //       ))}
-  //       {halfStar && <span className="text-amber-500 text-2xl">☆</span>}
+  //       {halfStar && <span className="text-pink-500 text-2xl">☆</span>}
   //       {[...Array(emptyStars)].map((_, i) => (
   //         <span key={`empty-${i}`} className="text-gray-300 text-2xl">
   //           ★
@@ -159,7 +159,7 @@ const PropertyDetail = () => {
                 <IoLocationSharp className="text-primary-100" /> {apartment.city},{" "}
                 {apartment.country}
               </p>
-              {/* <div className="flex items-center border-2 border-amber-100 bg-amber-50 px-4 py-1 rounded-lg gap-2">
+              {/* <div className="flex items-center border-2 border-pink-100 bg-pink-50 px-4 py-1 rounded-lg gap-2">
               {renderStars(apartment.rating)}
               <span className="text-gray-600">
                 ({apartment.reviews.length} reviews)
@@ -388,7 +388,7 @@ const PropertyDetail = () => {
                 <div className="p-4">
                   <h3 className="text-lg font-semibold">{apt.title}</h3>
                   <p className="text-gray-500">{apt.city}</p>
-                  <p className="text-amber-800 font-bold">${apt.price}/month</p>
+                  <p className="text-pink-800 font-bold">${apt.price}/month</p>
                 </div>
               </Link>
             ))}

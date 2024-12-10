@@ -44,6 +44,7 @@ const Property = () => {
           new Set(fetchedData.properties.map((apt) => apt.country))
         );
         setCountries(uniqueCountries);
+        setSelectedCountry(uniqueCountries[0]);
         setLoading(false);
       } catch (err) {
         setError("Error fetching data:", err);
@@ -73,22 +74,21 @@ const Property = () => {
 
   // Filter apartments based on country, city, and price range
   useEffect(() => {
-    if(selectedCountry!=""){
-
+    if (selectedCountry !== "") {
       const filtered = data.filter((apt) => {
         const isCountryMatch =
-        !selectedCountry || apt.country === selectedCountry;
-      const isCityMatch = !selectedCity || apt.city === selectedCity;
-      const isPriceMatch =
-        (!minPrice || apt.price >= parseInt(minPrice)) &&
-        (!maxPrice || apt.price <= parseInt(maxPrice));
-        
+          !selectedCountry || apt.country === selectedCountry;
+        const isCityMatch = !selectedCity || apt.city === selectedCity;
+        const isPriceMatch =
+          (!minPrice || apt.price >= parseInt(minPrice)) &&
+          (!maxPrice || apt.price <= parseInt(maxPrice));
+
         return isCountryMatch && isCityMatch && isPriceMatch;
       });
-      
+
       setFilteredApartments(filtered);
     }
-    else{
+    else {
       setFilteredApartments(data);
     }
   }, [selectedCountry, selectedCity, minPrice, maxPrice, data]);
@@ -121,7 +121,7 @@ const Property = () => {
       <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
         <p className="text-2xl font-semibold text-red-500">No apartments are found</p>
         <button
-          className="text-white ring-2 ring-amber-900 bg-amber-700 hover:bg-amber-800 px-4 py-2 rounded-xl"
+          className="text-white ring-2 ring-pink-900 bg-pink-700 hover:bg-pink-800 px-4 py-2 rounded-xl"
           onClick={() => window.location.reload()}
         >
           All Properties
@@ -133,30 +133,49 @@ const Property = () => {
   return (
     <div className="min-h-screen bg-gray-50 relative">
       {/* Filters Sidebar */}
-      <FilterBar countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} cities={cities} selectedCity={selectedCity} setSelectedCity={setSelectedCity} price={true} minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} />
+      <FilterBar countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} setSelectedCity={setSelectedCity} price={true} minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} />
 
       {/* Main Content */}
       <main className="flex-1 p-6">
-        <h1 className="text-2xl font-semibold font-sans text-accent-100 mb-8">
-          Available{" "}
-          <span className="text-4xl text-primary-200 font-bold">
-            Properties
-          </span>
-        </h1>
+        <div className="container flex gap-4">
+          <div className="cities w-[20rem] min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
+            {cities.map((city, index) => (
+              <button
+                key={index}
+                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-full
+                                        ${selectedCity === city
+                    ? 'bg-pink-600 text-white'
+                    : 'bg-pink-50 hover:bg-pink-200'
+                  }`}
+                onClick={() => setSelectedCity(city)}
+              >
+                {city}
+              </button>
+            ))}
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold font-sans text-accent-100 mb-8">
+              Available{" "}
+              <span className="text-4xl text-primary-200 font-bold">
+                Properties
+              </span>
+            </h1>
 
-        {/* Filtered Apartments */}
-        {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-3 gap-x-2 gap-y-6 w-full">
-          {filteredApartments.map((apt) => (
-            <ApartmentCard
-              key={apt._id}
-              {...apt}
-              onClick={() => setSelectedApartment(apt)}
-            />
-          ))}
-        </div>) : (
-          <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
-            <p className="text-2xl font-semibold text-red-500">No apartments are found</p>
-          </div>)}
+            {/* Filtered Apartments */}
+            {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-3 gap-x-2 gap-y-6 w-full">
+              {filteredApartments.map((apt) => (
+                <ApartmentCard
+                  key={apt._id}
+                  {...apt}
+                  onClick={() => setSelectedApartment(apt)}
+                />
+              ))}
+            </div>) : (
+              <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
+                <p className="text-2xl font-semibold text-red-500">No apartments are found</p>
+              </div>)}
+          </div>
+        </div>
       </main>
 
       {selectedApartment && (

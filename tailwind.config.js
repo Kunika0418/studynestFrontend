@@ -5,24 +5,24 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          100: "#6C0F0A",
-          200: "#a04031",
-          300: "#ff9e88",
+          100: "#FFD1DC", // Light Pink - for subtle accents or hover states
+          200: "#FF69B4", // Vibrant Pink - main buttons, highlights
+          300: "#FF1493", // Deep Pink - bold elements, active states
         },
         accent: {
-          100: "#2c2c2c",
-          200: "#b0b0b0",
+          100: "#333333", // Softer Black - key contrast for text and elements
+          200: "#444444", // Dark Gray - for less prominent backgrounds
         },
         text: {
-          100: "#000000",
-          200: "#2c2c2c",
+          100: "#FFFFFF", // Pure White - primary text
+          200: "#F5F5F5", // Soft White - secondary or muted text
         },
         bg: {
-          100: "#FFFFFF",
-          200: "#f5f5f5",
-          300: "#cccccc",
+          100: "#FFFFFF", // Pure White - main background
+          200: "#FFF0F5", // Blush White - for section backgrounds
         },
       },
+      
       // colors: {
       //   primary: {
       //     100: "#F35D77",
