@@ -13,13 +13,13 @@ const TopCities = () => {
                 backgroundPosition: "center",
               }}
             ></div>
-      <div className="flex flex-col justify-center items-center gap-4 text-center">
+      <div className="flex flex-col justify-center items-center gap-4 text-center z-10">
         <h2 className="text-3xl font-semibold font-sans text-voilet">
           Top <span className="text-4xl font-bold text-pink">Cities</span>
         </h2>
         <span className="text-text-200 font-sans font-medium max-w-2xl">
           We help you discover your ideal student home across countries and cities around the globe.
-        </span>
+        </span> 
       </div>
       <div className="grid grid-cols-4 gap-6">
         {[

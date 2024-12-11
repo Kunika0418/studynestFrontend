@@ -67,7 +67,7 @@ export const CountryTabs = ({ setIsModalOpen,searchTerm }) => {
     //   // onClick={()=>setIsModalOpen(false)}
     // >
     <div className='absolute flex justify-center w-full max-w-2xl h-fit top-16'>
-      <div className="w-full rounded-lg overflow-hidden shadow-lg bg-white ">
+      <div className="w-full rounded-lg overflow-hidden shadow-lg bg-offwhite">
         <div className='flex justify-between pr-2'>
           <div className="flex">
             {countries.map((country) => (

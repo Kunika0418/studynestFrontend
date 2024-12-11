@@ -97,10 +97,10 @@ const TopApartments = () => {
           <h2 className="text-3xl font-semibold font-sans text-voilet">
             Top <span className="text-4xl font-bold text-pink">Apartments</span>
           </h2>
-          <h3 className="text-base font-sans text-accent-100 z-10">
+          <h3 className="text-base font-sans font-medium text-accent-100 z-10">
           Find your dream home from our Rent added properties.
         </h3>
-        </div>
+        </div>  
         <FilterBar
           countries={countries}
           selectedCountry={selectedCountry}

@@ -53,7 +53,7 @@ const Options = () => {
             Student Housing Choices We Provide
           </span>
         </h2>
-        <h3 className="text-base font-sans text-accent-100 z-10">
+        <h3 className="text-base font-sans font-medium text-accent-100 z-10">
           Here’s a look at the various room types available for student rentals.
         </h3>
         <div className="flex flex-row justify-center items-center gap-4">
