@@ -39,7 +39,7 @@ const EasyBook = () => {
             return (
               <div
                 key={index}
-                className="h-80 w-96 flex flex-col justify-center items-center gap-2 rounded-lg border border-voilet overflow-hidden relative group cursor-pointer p-4 shadow-2xl shadow-slate-400 hover:shadow-3xl hover:shadow-voilet transition-shadow duration-500 ease-in-out"
+                className="h-80 md:w-96 xs:w-80 flex flex-col justify-center items-center gap-2 rounded-lg border border-voilet overflow-hidden relative group cursor-pointer p-4 shadow-2xl shadow-slate-400 hover:shadow-3xl hover:shadow-voilet transition-shadow duration-500 ease-in-out"
               >
                 <div className="h-40 w-40 border-4 border-darkpink/80 rounded-full relative flex justify-center items-center">
                   <img
