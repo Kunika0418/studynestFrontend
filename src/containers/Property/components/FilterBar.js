@@ -4,7 +4,7 @@ function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelected
     return (
         <div>
             <aside className="bg-gray-50 py-4 px-6 shadow-sm">
-                <div className="flex items-center justify-between gap-8">
+                <div className="flex sm:flex-row xs:flex-col items-center justify-between gap-8">
                     {/* Country Filter */}
                     {countries && (
                         <div className="flex gap-4 items-center">

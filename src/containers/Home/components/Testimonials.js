@@ -48,20 +48,23 @@ const Testimonials = () => {
             clickable: true,
             el: ".custom-pagination",
           }}
-        spaceBetween={30}
-        slidesPerView={1}
+        // spaceBetween={30}
+        slidesPerView={2}
         centeredSlides={true}
-        loop={true}
+        // loop={true}
         breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
+          350: { slidesPerView: 1 , spaceBetween:2 },
+          640: { slidesPerView: 1.95 , spaceBetween: 10},
+          780: { slidesPerView: 2.25 , spaceBetween: 10},
+          900: { slidesPerView: 2.4 , spaceBetween: 10},
+          1100: { slidesPerView: 2.5 , spaceBetween:2},
+          1270: { slidesPerView: 3 , spaceBetween:10},
         }}
-        className="w-full max-w-screen-xl h-auto"
+        className="w-full max-w-screen-xl h-auto flex"
       >
         {testimonials.map((testimonial, index) => (
           <SwiperSlide key={index} className="flex justify-center mt-6 w-full">
-            <div className="bg-bg-100 shadow-lg rounded-lg p-6 w-96 transform hover:scale-105 transition-transform duration-300 border border-voilet">
+            <div className="bg-bg-100 shadow-lg rounded-lg p-6 lg:w-96 md:w-80 transform hover:scale-105 transition-transform duration-300 border border-voilet">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}

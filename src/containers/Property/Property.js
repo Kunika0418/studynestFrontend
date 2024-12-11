@@ -131,14 +131,14 @@ const Property = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 relative">
+    <div className="bg-gray-50 relative w-full">
       {/* Filters Sidebar */}
       <FilterBar countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} setSelectedCity={setSelectedCity} price={true} minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} />
 
       {/* Main Content */}
-      <main className="flex-1">
-        <div className="container flex gap-4">
-          <div className="cities w-64 min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
+      <main className="w-full">
+        <div className="gap-4 flex sm:flex-row xs:flex-col w-full">
+          <div className="cities sm:w-64 xs:w-full min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
             {cities.map((city, index) => (
               <button
                 key={index}
@@ -162,7 +162,7 @@ const Property = () => {
             </h1>
 
             {/* Filtered Apartments */}
-            {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6 w-full">
+            {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 w-full">
               {filteredApartments.map((apt) => (
                 <ApartmentCard
                   key={apt._id}

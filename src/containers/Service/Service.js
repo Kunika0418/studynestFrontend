@@ -64,7 +64,7 @@ const Service = () => {
         </p>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16 z-10">
+        <div className="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 z-10">
           {services.map((service) => (
             <div
               key={service.id}
@@ -79,7 +79,7 @@ const Service = () => {
           ))}
         </div>
       </div>
-      <div className="bg-offwhite/50 rounded-lg px-20 py-10 md:py-20 md:px-40 max-w-full mx-auto border border-gray-200">
+      <div className="bg-offwhite/50 rounded-lg p-6 md:py-10 md:px-20 max-w-full mx-auto border border-gray-200">
         <h2 className="text-3xl font-bold text-voilet text-center mb-6">
           Have a Query<span className="text-5xl">?</span>{" "}<span className="text-darkpink">Tell Us</span>
         </h2>
@@ -126,7 +126,7 @@ const Service = () => {
           <div className="btn flex justify-center w-full">
             <button
               type="submit"
-              className="w-1/5 bg-voilet hover:bg-voilet/90 hover:scale-95 text-lightpink py-3 rounded-lg shadow-md transition duration-500 ease-in-out"
+              className="md:w-1/5 xs:w-1/2 bg-voilet hover:bg-voilet/90 hover:scale-95 text-lightpink py-3 rounded-lg shadow-md transition duration-500 ease-in-out"
             >
               Submit Query
             </button>

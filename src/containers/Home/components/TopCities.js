@@ -21,7 +21,7 @@ const TopCities = () => {
           We help you discover your ideal student home across countries and cities around the globe.
         </span> 
       </div>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
         {[
           { name: "London", image: "https://images.unsplash.com/photo-1448906654166-444d494666b3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
           { name: "Melbourne", image: "https://images.unsplash.com/photo-1545044846-351ba102b6d5?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
