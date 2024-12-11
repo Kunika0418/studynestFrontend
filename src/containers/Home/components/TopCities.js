@@ -34,7 +34,7 @@ const TopCities = () => {
         ].map((city, index) => (
           <div
             key={index}
-            className="w-full h-52 rounded-lg overflow-hidden relative cursor-pointer group"
+            className="w-full h-52 rounded-lg overflow-hidden relative cursor-pointer group border hover:border-voilet transition duration-500 ease-in-out"
           >
             <div className="w-full h-full text-white bg-black/40 flex justify-center items-center absolute text-xl font-semibold z-10 tracking-widest">
               {city.name}

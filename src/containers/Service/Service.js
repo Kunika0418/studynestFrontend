@@ -55,11 +55,11 @@ const Service = () => {
           }}
         ></div>
         {/* Heading */}
-        <h1 className="text-2xl font-semibold text-accent-100 text-center mb-8 z-10">
+        <h1 className="text-3xl font-semibold text-voilet text-center mb-8 z-10">
           Our{" "}
-          <span className="text-4xl text-primary-200 font-bold">Services</span>
+          <span className="text-4xl text-pink font-bold">Services</span>
         </h1>
-        <p className="text-base font-sans text-accent-100 text-center mb-12 z-10">
+        <p className="text-base font-sans font-semibold text-accent-100 text-center mb-12 z-10">
           We provide everything you need to buy, sell, or rent an apartment.
         </p>
 
@@ -68,10 +68,10 @@ const Service = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className="rounded-lg border border-primary-300 overflow-hidden shadow-2xl shadow-slate-400 hover:shadow-3xl hover:shadow-primary-300 transition duration-500 ease-in-out hover:scale-105 p-6 text-center text-accent-100 cursor-pointer bg-bg-200"
+              className="rounded-lg border border-voilet overflow-hidden shadow-2xl shadow-slate-400 hover:shadow-3xl hover:shadow-voilet transition duration-500 ease-in-out hover:scale-105 p-6 text-center text-accent-100 cursor-pointer bg-lightpink"
             >
               <div className="text-5xl mb-4">{service.icon}</div>
-              <h2 className="text-xl font-semibold text-accent-100 mb-2">
+              <h2 className="text-xl font-semibold text-darkpink mb-2">
                 {service.title}
               </h2>
               <p className="text-accent-100">{service.description}</p>
@@ -79,11 +79,11 @@ const Service = () => {
           ))}
         </div>
       </div>
-      <div className="bg-bg-200 rounded-lg px-20 py-10 md:py-20 md:px-40 max-w-full mx-auto border border-gray-200">
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
-          Have a Query? Tell Us
+      <div className="bg-offwhite/50 rounded-lg px-20 py-10 md:py-20 md:px-40 max-w-full mx-auto border border-gray-200">
+        <h2 className="text-3xl font-bold text-voilet text-center mb-6">
+          Have a Query<span className="text-5xl">?</span>{" "}<span className="text-darkpink">Tell Us</span>
         </h2>
-        <p className="text-gray-600 text-center mb-8">
+        <p className="text-gray-600 font-semibold text-center mb-8">
           Fill out the form below and we’ll get back to you promptly.
         </p>
         <form>
@@ -92,13 +92,13 @@ const Service = () => {
               type="text"
               id="name"
               placeholder="Your Full Name"
-              className="w-full px-4 py-3 mt-1 rounded-md border border-primary-100 outline-none"
+              className="w-full px-4 py-3 mt-1 rounded-md border border-voilet outline-none"
             />
             <input
               type="email"
               id="email"
               placeholder="Your Email"
-              className="w-full px-4 py-3 mt-1 rounded-md border border-primary-100 outline-none"
+              className="w-full px-4 py-3 mt-1 rounded-md border border-voilet outline-none"
             />
           </div>
           <div className="mb-4 flex gap-8">
@@ -106,13 +106,13 @@ const Service = () => {
               type="tel"
               id="Phone number"
               placeholder="Phone Number"
-              className="w-full px-4 py-3 mt-1 rounded-md border border-primary-100 outline-none"
+              className="w-full px-4 py-3 mt-1 rounded-md border border-voilet outline-none"
             />
             <input
               type="text"
               id="Country"
               placeholder="Travelling Country"
-              className="w-full px-4 py-3 mt-1 rounded-md border border-primary-100 outline-none"
+              className="w-full px-4 py-3 mt-1 rounded-md border border-voilet outline-none"
             />
           </div>
           <div className="mb-8">
@@ -120,13 +120,13 @@ const Service = () => {
               id="message"
               rows="4"
               placeholder="Your Description/Message"
-              className="w-full px-4 py-3 mt-1 rounded-md border border-primary-100 outline-none"
+              className="w-full px-4 py-3 mt-1 rounded-md border border-voilet outline-none"
             ></textarea>
           </div>
           <div className="btn flex justify-center w-full">
             <button
               type="submit"
-              className="w-1/5 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 py-3 rounded-lg shadow-md transition duration-500 ease-in-out"
+              className="w-1/5 bg-voilet hover:bg-voilet/90 hover:scale-95 text-lightpink py-3 rounded-lg shadow-md transition duration-500 ease-in-out"
             >
               Submit Query
             </button>

@@ -76,7 +76,7 @@ const Navbar = () => {
               {/* Login/Logout Button */}
               {localStorage.getItem("token") && (
                 <Popover className="relative">
-                  <PopoverButton className="text-gray-700 hover:text-primary-100 text-2xl transition duration-300 mt-2 outline-none">
+                  <PopoverButton className="text-gray-700 hover:text-voilet text-2xl transition duration-300 mt-2 outline-none">
                     <IoMdPerson />
                   </PopoverButton>
                   <Transition
@@ -90,16 +90,16 @@ const Navbar = () => {
                   >
                     <PopoverPanel
                       anchor="bottom"
-                      className="flex flex-col justify-center items-center gap-1 bg-white border border-primary-100 rounded-xl p-2 w-32 z-20 mt-4 -ml-4"
+                      className="flex flex-col justify-center items-center gap-1 bg-offwhite/80 border border-voilet rounded-xl p-2 w-32 z-20 mt-4 -ml-4"
                     >
                       <Link
-                        className="hover:bg-primary-100 hover:text-bg-100 transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
+                        className="hover:bg-voilet hover:text-white transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
                         to={"/Profile"}
                       >
                         Profile
                       </Link>
                       <div
-                        className="hover:bg-primary-100 hover:text-bg-100 transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
+                        className="hover:bg-voilet hover:text-white transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
                         onClick={handleLogOut}
                       >
                         Log Out

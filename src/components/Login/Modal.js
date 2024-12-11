@@ -93,7 +93,7 @@ const AuthModal = ({ isOpen, onClose }) => {
     >
       <div
         ref={modalRef}
-        className="bg-white p-8 rounded-lg w-full max-w-md relative shadow-lg transition-transform transform scale-95 animate-scale-in"
+        className="bg-offwhite p-8 rounded-lg w-full max-w-md relative shadow-lg transition-transform transform scale-95 animate-scale-in"
       >
         {/* Close Button */}
         <button
@@ -162,7 +162,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             >
               Password
             </label>
-            <div className="p-2 w-full border border-gray-300 rounded-lg flex flex-row justify-between items-center mt-2">
+            <div className="bg-white p-2 w-full border border-gray-300 rounded-lg flex flex-row justify-between items-center mt-2">
               <input
                 id="password"
                 name="password"
@@ -199,7 +199,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               >
                 Confirm Password
               </label>
-              <div className="p-2 w-full border border-gray-300 rounded-lg flex flex-row justify-between items-center mt-2">
+              <div className="bg-white p-2 w-full border border-gray-300 rounded-lg flex flex-row justify-between items-center mt-2">
                 <input
                   id="confirmpassword"
                   name="confirmpassword"
@@ -314,7 +314,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             <button
               type="submit"
               disabled={disabled}
-              className="flex flex-row items-center justify-center w-full py-2 px-4 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 rounded-lg transition duration-500 ease-in-out"
+              className="flex flex-row items-center justify-center w-full py-2 px-4 bg-blue hover:bg-blue/90 hover:scale-95 text-lightpink font-semibold rounded-lg transition duration-500 ease-in-out"
             >
               {isSignUp ? "Create Account" : "Login"}
               {isLoading && (
@@ -341,7 +341,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         <div className="text-center">
           <button
             onClick={handleSwitchForm}
-            className="text-sm text-primary-100 hover:underline transition duration-300 ease-in-out"
+            className="text-sm text-darkpink hover:underline transition duration-300 ease-in-out"
           >
             {isSignUp
               ? "Already have an account? Login"

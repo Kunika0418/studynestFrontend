@@ -117,8 +117,8 @@ const Profile = ({ decodeToken }) => {
     <div className="bg-bg-200 w-full h-auto py-10">
       <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow">
         <div className="flex flex-col gap-2 mb-6">
-          <h2 className="text-2xl font-sans text-primary-100 font-bold">
-            Your Profile
+          <h2 className="text-2xl font-sans text-pink font-bold">
+            Your{" "}<span className="text-voilet">Profile</span>
           </h2>
           <span className="capitalize text-sm text-accent-100 font-medium font-sans">
             Please update your profile for providing you the better accomodation.
@@ -352,7 +352,7 @@ const Profile = ({ decodeToken }) => {
             <button
               type="button"
               onClick={addGuarantor}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover:scale-95 transition duration-300 ease-in-out"
+              className="bg-voilet text-white px-4 py-2 rounded hover:bg-voilet/90 hover:scale-95 transition duration-300 ease-in-out"
             >
               Add Guarantor
             </button>
