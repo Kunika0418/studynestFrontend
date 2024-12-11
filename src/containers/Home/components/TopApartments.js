@@ -109,7 +109,7 @@ const TopApartments = () => {
           price={false}
         />
         <div className="flex sm:flex-row xs:flex-col w-full">
-          <div className="cities sm:w-64 xs:w-full min-h-full bg-offwhite/50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4 grid grid-flow-col overflow-x-auto lg:grid-flow-row">
+          <div className="cities sm:w-64 xs:w-full min-h-full bg-offwhite/50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4 grid grid-flow-row xs:overflow-auto xs:whitespace-nowrap">
             {cities.map((city, index) => (
               <button
                 key={index}
@@ -125,7 +125,7 @@ const TopApartments = () => {
               </button>
             ))}
           </div>
-          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-6 py-16 px-4">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-16 px-4">
             {viewed.map((property) => (
               <ApartmentCard
                 key={property._id}

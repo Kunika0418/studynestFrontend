@@ -138,7 +138,7 @@ const Property = () => {
       {/* Main Content */}
       <main className="w-full">
         <div className="gap-4 flex sm:flex-row xs:flex-col w-full">
-          <div className="cities sm:w-64 xs:w-full min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
+          <div className="cities sm:w-64 xs:w-full min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4 xs:overflow-auto xs:whitespace-nowrap">
             {cities.map((city, index) => (
               <button
                 key={index}

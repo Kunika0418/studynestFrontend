@@ -42,7 +42,7 @@ const Hero = ({
           </p>
         </div>
         {/* Search Bar Section */}
-        <div className="w-full h-auto flex justify-center items-center mb-20">
+        <div className="w-full h-auto flex justify-center items-center mb-20 px-4">
           <div className="mt-10 w-full max-w-2xl relative">
             {isModalOpen && (
               <CountryTabs setIsModalOpen={setIsModalOpen} searchTerm={searchTerm} />
