@@ -2,9 +2,14 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const ApartmentCard = ({ _id, images, title, price, city, country, area, services }) => {
+
+
+const ApartmentCard = ({ _id, images, title, price, city, country, area, services, views }) => {
+  const location = useLocation();
+  const path = location.pathname;
+
   const settings = {
     dots: false, // Enable dots
     infinite: true,
@@ -41,6 +46,7 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
                   />
                 )}
               </Slider>
+              {path === "/" && <div className='absolute bottom-2 left-2 px-4 py-1 bg-black/60 rounded-xl text-sm text-white font-sans'>{views} views last month</div>}
             </div>
 
             <div className="p-4 flex flex-col gap-[2px]">

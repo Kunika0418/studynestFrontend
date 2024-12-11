@@ -2,6 +2,7 @@ import React from "react";
 import backgroundDot from "../../../assets/images/backgroundDot.jpg";
 import "../Home.css";
 import { Link } from "react-router-dom";
+import housebg from "../../../assets/images/housesbg.png";
 
 
 const TopCities = () => {
@@ -15,7 +16,7 @@ const TopCities = () => {
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="flex flex-col justify-center items-center gap-4 text-center z-10">
+      <div className="flex flex-col justify-center items-center gap-4 text-center z-10 w-full">
         <h2 className="text-3xl font-semibold font-sans text-voilet">
           Top <span className="text-4xl font-bold text-pink">Cities</span>
         </h2>
@@ -23,6 +24,15 @@ const TopCities = () => {
           We help you discover your ideal student home across countries and
           cities around the globe.
         </span>
+        <div
+        className="h-24 w-full"
+        style={{
+          backgroundImage: `url(${housebg})`,
+          backgroundSize: "contain",
+          backgroundRepeat: "repeat",
+          backgroundPosition: "center",
+        }}
+      ></div>
       </div>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
         {[

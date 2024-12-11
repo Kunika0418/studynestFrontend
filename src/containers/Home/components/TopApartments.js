@@ -3,6 +3,7 @@ import axios from "axios";
 import ApartmentCard from "../../../components/Card/Card";
 import FilterBar from "../../Property/components/FilterBar";
 import PropertyDetail from "../../Property/PropertyDetail/PropertyDetail";
+import arrow from "../../../assets/images/arrow.png";
 
 
 const TopApartments = () => {
@@ -93,7 +94,8 @@ const TopApartments = () => {
   return (
     <div className="bg-offwhite/50">
       <div className="w-full h-auto flex flex-col pt-10">
-        <div className="flex flex-col justify-center items-center gap-4 mb-10">
+        <div className="flex flex-col justify-center items-center gap-4 mb-10 relative">
+        <div className="h-64 w-44 rotate-45 object-contain absolute -top-10 left-72"> <img src={arrow} /></div>
           <h2 className="text-3xl font-semibold font-sans text-voilet">
             Top <span className="text-4xl font-bold text-pink">Apartments</span>
           </h2>
