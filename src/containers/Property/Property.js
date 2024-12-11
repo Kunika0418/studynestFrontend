@@ -138,14 +138,14 @@ const Property = () => {
       {/* Main Content */}
       <main className="flex-1">
         <div className="container flex gap-4">
-          <div className="cities w-[20rem] min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
+          <div className="cities w-64 min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
             {cities.map((city, index) => (
               <button
                 key={index}
-                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-full border border-slate-300
+                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
                                         ${selectedCity === city
-                    ? 'bg-voilet text-pink'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-voilet text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-voilet hover:text-white'
                   }`}
                 onClick={() => setSelectedCity(city)}
               >
@@ -153,7 +153,7 @@ const Property = () => {
               </button>
             ))}
           </div>
-          <div>
+          <div className="px-4 py-10 flex flex-col justify-center">
             <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
               Available{" "}
               <span className="text-4xl text-pink font-bold">
@@ -162,7 +162,7 @@ const Property = () => {
             </h1>
 
             {/* Filtered Apartments */}
-            {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-3 gap-x-2 gap-y-6 w-full">
+            {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6 w-full">
               {filteredApartments.map((apt) => (
                 <ApartmentCard
                   key={apt._id}

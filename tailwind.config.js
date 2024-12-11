@@ -7,7 +7,8 @@ module.exports = {
         pink: "#FA70A8",
         voilet: "#242A56",
         darkpink: "#EA4487",
-        white: "#F9F9E0",
+        lightpink: "#FFE3CA",
+        offwhite: "#F9F9E0",
         primary: {
           100: "#6C0F0A",
           200: "#a04031",

@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-white/30 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md border-b-2 border-pink">
+      <div className="bg-offwhite/50 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md border-b-2 border-pink">
         <nav className="navbar flex justify-between items-center px-6 py-3 shadow-md">
           <Link to={"/"} className="flex justify-center items-center space-x-3">
             <div className="w-12 h-12">
@@ -50,7 +50,7 @@ const Navbar = () => {
               />
             </div>
             <div className="text-3xl font-semibold font-sans text-voilet">
-              Study{""}<span className="text-pink">Nest</span>
+              StudyNest
             </div>
           </Link>
 

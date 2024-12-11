@@ -5,8 +5,7 @@ import room2 from "../../../assets/images/room2.jpg";
 import room3 from "../../../assets/images/room3.jpg";
 import room4 from "../../../assets/images/room4.jpg";
 import backgroundHotel from "../../../assets/images/backgroundHotel.jpg";
-// import backgroundDot from "../../../assets/images/backgroundDot.jpg";
-// import backgroundDot1 from "../../../assets/images/backgroundDot1.jpg";
+
 
 const Options = () => {
   const data = [

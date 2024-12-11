@@ -36,7 +36,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="bg-bg-200 py-12 px-4 sm:px-8 lg:px-16 w-full">
+    <div className="bg-lightpink py-12 px-4 sm:px-8 lg:px-16 w-full">
       <h2 className="text-3xl font-bold text-center text-voilet mb-8">
         What Our{" "}<span className="text-pink">Students Say</span>
       </h2>

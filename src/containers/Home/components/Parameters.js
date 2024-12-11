@@ -38,7 +38,7 @@ const Parameters = () => {
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex items-center p-4 bg-white shadow-lg rounded-lg w-72 hover:shadow-xl border hover:border-primary-100 transition ease-in-out duration-300 cursor-pointer group"
+            className="flex items-center p-4 bg-white shadow-lg rounded-lg w-72 hover:shadow-xl border hover:border-voilet transition ease-in-out duration-300 cursor-pointer group"
           >
             <div className="flex-shrink-0 bg-gray-100 p-4 rounded-full mr-4">
               {item.icon}
