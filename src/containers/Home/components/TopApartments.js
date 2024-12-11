@@ -97,7 +97,7 @@ const TopApartments = () => {
           <h2 className="text-3xl font-semibold font-sans text-voilet">
             Top <span className="text-4xl font-bold text-pink">Apartments</span>
           </h2>
-          <h3 className="text-base font-sans font-medium text-accent-100 z-10">
+          <h3 className="text-base font-sans font-medium text-accent-100 z-10 px-4 text-justify">
           Find your dream home from our Rent added properties.
         </h3>
         </div>  
@@ -108,8 +108,8 @@ const TopApartments = () => {
           setSelectedCity={setSelectedCity}
           price={false}
         />
-        <div className="flex">
-          <div className="cities w-64 min-h-full bg-offwhite/50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4">
+        <div className="flex sm:flex-row xs:flex-col w-full">
+          <div className="cities sm:w-64 xs:w-full min-h-full bg-offwhite/50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4 grid grid-flow-col overflow-x-auto lg:grid-flow-row">
             {cities.map((city, index) => (
               <button
                 key={index}
@@ -125,7 +125,7 @@ const TopApartments = () => {
               </button>
             ))}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-6 py-16 px-4">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-6 py-16 px-4">
             {viewed.map((property) => (
               <ApartmentCard
                 key={property._id}

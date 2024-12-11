@@ -37,7 +37,7 @@ const Options = () => {
 
   return (
     <>
-      <div className="h-auto w-full mt-72 flex flex-col justify-center items-center gap-5 py-10 px-10 relative">
+      <div className="h-auto w-full xl:mt-72 md:mt-[37rem] sm:mt-[80em] xs:mt-[80em] flex flex-col justify-center items-center gap-5 py-10 px-10 relative">
         <div
           className="h-full w-full absolute top-0 left-0 bg-white/30 opacity-20 z-0"
           style={{
@@ -56,7 +56,7 @@ const Options = () => {
         <h3 className="text-base font-sans font-medium text-accent-100 z-10">
           Here’s a look at the various room types available for student rentals.
         </h3>
-        <div className="flex flex-row justify-center items-center gap-4">
+        <div className="grid xl:grid-flow-col lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
           {data.map((item) => {
             return (
               <div

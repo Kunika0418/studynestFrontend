@@ -8,9 +8,9 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="bg-voilet text-white py-10">
-      <div className="max-w-screen-xl mx-10 px-6 flex justify-between">
+      <div className="max-w-screen-xl mx-10 sm:px-4 flex justify-between">
         {/* Column 1: Contact Information */}
-        <div>
+        <div className="px-4">
           <h3 className="text-2xl text-pink font-bold mb-4">Contact Us</h3>
           <p className="mb-2 cursor-pointer">
             Email:{" "}
@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
 
         {/* Column 2: Quick Links */}
-        <div>
+        <div className="xs:hidden sm:block">
           <h3 className="text-2xl text-pink font-bold mb-4">Quick Links</h3>
           <ul className="flex flex-col gap-1">
             <li>
@@ -66,7 +66,7 @@ const Footer = () => {
         {/* Column 3: Social Media */}
         <div>
           <h3 className="text-2xl text-pink font-bold mb-4">Follow Us</h3>
-          <div className="flex gap-4">
+          <div className="grid xs:grid-cols-2 md:grid-flow-col gap-4">
             <Link
               to="https://facebook.com"
               target="_blank"
@@ -104,7 +104,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Section: Copyright */}
-      <div className="m-10">
+      <div className="sm:m-10 xs:m-4">
         <p className="text-bg-200 px-6">
           &copy; 2024 StudyNest. All rights reserved.
         </p>

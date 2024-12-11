@@ -66,7 +66,7 @@ export const CountryTabs = ({ setIsModalOpen,searchTerm }) => {
     // <div className='fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50'
     //   // onClick={()=>setIsModalOpen(false)}
     // >
-    <div className='absolute flex justify-center w-full max-w-2xl h-fit top-16'>
+    <div className=' absolute flex justify-center w-full max-w-2xl h-fit top-16'>
       <div className="w-full rounded-lg overflow-hidden shadow-lg bg-offwhite">
         <div className='flex justify-between pr-2'>
           <div className="flex">

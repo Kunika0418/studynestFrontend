@@ -34,7 +34,7 @@ const EasyBook = () => {
         <h3 className="text-base font-sans text-accent-100">
           Reserve spots in top cities and universities worldwide.
         </h3>
-        <div className="grid lg:grid-flow-col gap-4">
+        <div className="grid xl:grid-flow-col md:grid-cols-2 sm:grid-cols-1 gap-4">
           {data.map((item, index) => {
             return (
               <div

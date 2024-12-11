@@ -36,7 +36,7 @@ const WhyWe = () => {
 
   return (
     <>
-      <div className="max-w-full h-[35rem] bg-accent-100 relative flex justify-center items-center">
+      <div className="max-w-full h-[35rem] bg-accent-100 relative flex justify-center items-center px-4">
         <div className="h-full w-full absolute top-0 left-0 overflow-hidden z-0">
           <img
             src={collegeStudents}
@@ -46,14 +46,14 @@ const WhyWe = () => {
         <div className="h-full w-full bg-voilet/80 bg-opacity-50 absolute z-0"></div>
         <div className="flex flex-col justify-center items-center h-full w-full gap-6 mb-28 z-10">
           <div className="flex flex-col justify-center items-center gap-2">
-            <h2 className="text-3xl font-semibold font-sans text-white">
+            <h2 className="lg:text-3xl font-semibold font-sans text-white text-2xl">
               Why Are We the Top Choice of Students Looking for
             </h2>
-            <h2 className="text-3xl font-extrabold font-sans text-pink">
+            <h2 className="lg:text-3xl font-extrabold font-sans text-pink text-2xl">
               Accommodations Near University?
             </h2>
           </div>
-          <div className="text-base font-sans text-white">
+          <div className="text-base font-sans text-white text-justify">
             Finding{" "}
             <span className="font-semibold underline underline-offset-4 text-yellow-300">
               student housing near you
@@ -62,7 +62,7 @@ const WhyWe = () => {
             comfort, convenience, and a secure living environment!
           </div>
         </div>
-        <div className="w-fit h-auto bg-white absolute -bottom-60 rounded-lg flex flex-row items-center justify-center border border-voilet gap-4">
+        <div className="w-fit h-auto bg-white absolute xl:-bottom-60 md:-bottom-[36rem] xs:-bottom-[78em] rounded-lg grid sm:grid-cols-1 md:grid-cols-2 xl:grid-flow-col lg:grid-cols-3 border border-voilet gap-2">
           {data.map((item, index) => {
             return (
               <div

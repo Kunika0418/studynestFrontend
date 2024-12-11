@@ -48,6 +48,10 @@ module.exports = {
           '"Segoe UI Symbol"',
         ],
       },
+      screens: {
+        xs: '350px',
+        // lg: '1280px' // Example for an extra small breakpoint
+      },
     },
   },
   plugins: [],
