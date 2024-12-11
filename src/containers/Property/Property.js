@@ -5,10 +5,145 @@ import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import FilterBar from "./components/FilterBar";
 
+const initialCountries = [
+  {
+    country: "USA",
+    cities: [
+      "New York",
+      "San Francisco",
+      "Chicago",
+      "Los Angeles",
+      "Houston",
+      "Miami",
+      "Seattle",
+      "Boston",
+      "Atlanta",
+      "Dallas",
+      "San Diego",
+      "Phoenix",
+      "Philadelphia",
+      "Austin",
+      "Denver",
+      "Orlando",
+      "Las Vegas",
+      "Portland",
+      "San Jose",
+      "Nashville",
+    ],
+  },
+  {
+    country: "UK",
+    cities: [
+      "London",
+      "Manchester",
+      "Birmingham",
+      "Liverpool",
+      "Edinburgh",
+      "Glasgow",
+      "Leeds",
+      "Bristol",
+      "Sheffield",
+      "Cardiff",
+      "Nottingham",
+      "Newcastle",
+      "Aberdeen",
+      "Brighton",
+      "Coventry",
+      "Leicester",
+      "Southampton",
+      "Oxford",
+      "Cambridge",
+      "York",
+    ],
+  },
+  {
+    country: "India",
+    cities: [
+      "Mumbai",
+      "Delhi",
+      "Bangalore",
+      "Hyderabad",
+      "Chennai",
+      "Kolkata",
+      "Pune",
+      "Ahmedabad",
+      "Jaipur",
+      "Lucknow",
+      "Kanpur",
+      "Indore",
+      "Nagpur",
+      "Thane",
+      "Bhopal",
+      "Patna",
+      "Ludhiana",
+      "Agra",
+      "Vadodara",
+      "Nashik",
+    ],
+  },
+  {
+    country: "Germany",
+    cities: [
+      "Berlin",
+      "Munich",
+      "Frankfurt",
+      "Hamburg",
+      "Stuttgart",
+      "Cologne",
+      "Düsseldorf",
+      "Dresden",
+      "Leipzig",
+      "Hannover",
+      "Nuremberg",
+      "Bremen",
+      "Essen",
+      "Dortmund",
+      "Aachen",
+      "Mannheim",
+      "Karlsruhe",
+      "Freiburg",
+      "Potsdam",
+      "Kiel",
+    ],
+  },
+  {
+    country: "Canada",
+    cities: [
+      "Toronto",
+      "Vancouver",
+      "Montreal",
+      "Calgary",
+      "Ottawa",
+      "Edmonton",
+      "Winnipeg",
+      "Quebec City",
+      "Hamilton",
+      "Victoria",
+      "Halifax",
+      "Saskatoon",
+      "Regina",
+      "St. John's",
+      "Kelowna",
+      "Waterloo",
+      "Brampton",
+      "Mississauga",
+      "Windsor",
+      "Guelph",
+    ],
+  },
+];
+
+
 const Property = () => {
   // State variables
   const [selectedApartment, setSelectedApartment] = useState(null);
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState([
+    "USA",
+    "UK",
+    "India",
+    "Germany",
+    "Canada",
+  ]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -18,80 +153,163 @@ const Property = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
-  // Fetch data on component mount
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let response;
-        if (localStorage.getItem("item") && localStorage.getItem("name")) {
-          const filterType = localStorage.getItem("name");
-          const filterValue = localStorage.getItem("item");
-          response = await axios.get(
-            `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties/search?${filterType}=${filterValue}`
-          );
-        } else {
-          response = await axios.get(
-            `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties`
-          );
+  // Fetch properties
+  const fetchProperties = async (pageNumber = 1, filters = {}) => {
+    console.log(selectedCity);
+    try {
+      setIsFetchingMore(true);
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties/filter`,
+        {
+          params: {
+            page: pageNumber,
+            limit: 10,
+            ...filters,
+          },
         }
-        localStorage.removeItem("item");
-        localStorage.removeItem("name");
-        const fetchedData = response.data;
-        setData(fetchedData.properties);
-        setFilteredApartments(fetchedData.properties);
-        const uniqueCountries = Array.from(
-          new Set(fetchedData.properties.map((apt) => apt.country))
-        );
-        setCountries(uniqueCountries);
-        setSelectedCountry(uniqueCountries[0]);
-        setLoading(false);
-      } catch (err) {
-        setError("Error fetching data:", err);
-        setLoading(false);
+      );
+
+      const { properties, pagination } = response.data;
+
+      if (pageNumber === 1) {
+        setData(properties);
+        setFilteredApartments(properties);
+
+        //   // Calculate unique countries after setting initial state
+        //   const uniqueCountries = Array.from(
+        //   new Set(properties.map((apt) => apt.country))
+        // );
+        // setCountries(uniqueCountries);
+      } else {
+        setData((prevData) => {
+          const updatedData = [...prevData, ...properties];
+
+          // Calculate unique countries after combining previous and new data
+          // const uniqueCountries = Array.from(
+          //   new Set(updatedData.map((apt) => apt.country))
+          // );
+          // setCountries(uniqueCountries);
+
+          return updatedData;
+        });
+
+        setFilteredApartments((prevApartments) => {
+          const updatedApartments = [...prevApartments, ...properties];
+
+          return updatedApartments;
+        });
+      }
+
+      setTotal(pagination.total);
+      setIsFetchingMore(false);
+      setLoading(false);
+    } catch (err) {
+      setError("Error fetching data");
+      setIsFetchingMore(false);
+      setLoading(false);
+    }
+  };
+
+  // Initial fetch
+  useEffect(() => {
+    fetchProperties(1);
+  }, []);
+
+  // // Update cities when country changes
+  useEffect(() => {
+    if (selectedCountry) {
+      const countryObj = initialCountries.find(
+        (country) => country.country === selectedCountry
+      );
+
+      if (countryObj && countryObj.cities) {
+        setCities(countryObj.cities);
+      }
+    }
+  }, [selectedCountry]);
+
+  // // Update cities when country changes
+  // useEffect(() => {
+  //   if (selectedCountry) {
+  //     const uniqueCities = Array.from(
+  //       new Set(
+  //         data
+  //           .filter((apt) => apt.country === selectedCountry)
+  //           .map((apt) => apt.city)
+  //       )
+  //     );
+  //     setCities(uniqueCities);
+  //     setSelectedCity(""); // Reset city when country changes
+  //   } else {
+  //     setCities([]);
+  //   }
+  // }, [selectedCountry, data]);
+
+  // Apply filters
+  // const applyFilters = () => {
+  //   // Filter the original data based on selected filters
+  //   let filtered = data;
+
+  //   if (selectedCountry) {
+  //     filtered = filtered.filter((apt) => apt.country === selectedCountry);
+  //   }
+
+  //   if (selectedCity) {
+  //     filtered = filtered.filter((apt) => apt.city === selectedCity);
+  //   }
+
+  //   if (minPrice) {
+  //     filtered = filtered.filter((apt) => apt.price >= parseFloat(minPrice));
+  //   }
+
+  //   if (maxPrice) {
+  //     filtered = filtered.filter((apt) => apt.price <= parseFloat(maxPrice));
+  //   }
+
+  //   setFilteredApartments(filtered);
+  //   setPage(1);
+  // };
+
+  // Apply filters
+  const applyFilters = () => {
+    setPage(1);
+    fetchProperties(1, {
+      country: selectedCountry,
+      city: selectedCity,
+      minPrice,
+      maxPrice,
+    });
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [selectedCountry, selectedCity, minPrice, maxPrice]);
+
+  // Infinite scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.offsetHeight - 300 &&
+        !isFetchingMore &&
+        data.length < total
+      ) {
+        setPage((prev) => prev + 1);
       }
     };
 
-    fetchData();
-  }, []);
+    window.addEventListener("scroll", handleScroll);
 
-  // Update cities when country changes
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isFetchingMore, data, total]);
+
   useEffect(() => {
-    if (selectedCountry) {
-      const uniqueCities = Array.from(
-        new Set(
-          data
-            .filter((apt) => apt.country === selectedCountry)
-            .map((apt) => apt.city)
-        )
-      );
-      setCities(uniqueCities);
-      setSelectedCity(""); // Reset city when country changes
-    } else {
-      setCities([]);
-    }
-  }, [selectedCountry, data]);
-
-  // Filter apartments based on country, city, and price range
-  useEffect(() => {
-    if (selectedCountry !== "") {
-      const filtered = data.filter((apt) => {
-        const isCountryMatch =
-          !selectedCountry || apt.country === selectedCountry;
-        const isCityMatch = !selectedCity || apt.city === selectedCity;
-        const isPriceMatch =
-          (!minPrice || apt.price >= parseInt(minPrice)) &&
-          (!maxPrice || apt.price <= parseInt(maxPrice));
-
-        return isCountryMatch && isCityMatch && isPriceMatch;
-      });
-
-      setFilteredApartments(filtered);
-    }
-    else {
-      setFilteredApartments(data);
-    }
-  }, [selectedCountry, selectedCity, minPrice, maxPrice, data]);
+    if (page > 1) fetchProperties(page);
+  }, [page]);
 
   if (loading) {
     return (
@@ -106,25 +324,22 @@ const Property = () => {
             strokeWidthSecondary={4}
             color="#242A56"
             ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
           />
         </div>
         <span className="ml-2">Loading...</span>
       </div>
     );
   }
+
   if (error) {
-    localStorage.removeItem("name");
-    localStorage.removeItem("item");
     return (
       <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
-        <p className="text-2xl font-semibold text-red-500">No apartments are found</p>
+        <p className="text-2xl font-semibold text-red-500">{error}</p>
         <button
           className="text-white ring-2 ring-pink-900 bg-pink-700 hover:bg-pink-800 px-4 py-2 rounded-xl"
           onClick={() => window.location.reload()}
         >
-          All Properties
+          Reload
         </button>
       </div>
     );
@@ -133,47 +348,66 @@ const Property = () => {
   return (
     <div className="bg-gray-50 relative w-full">
       {/* Filters Sidebar */}
-      <FilterBar countries={countries} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} setSelectedCity={setSelectedCity} price={true} minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} />
+      <div className="sticky top-16 z-20">
+        <FilterBar
+          countries={countries}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+          setSelectedCity={setSelectedCity}
+          price={true}
+          minPrice={minPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          setCities={setCities}
+        />
+      </div>
 
       {/* Main Content */}
       <main className="w-full">
         <div className="gap-4 flex sm:flex-row xs:flex-col w-full">
-          <div className="cities sm:w-64 xs:w-full min-h-full bg-gray-50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4 xs:overflow-auto xs:whitespace-nowrap">
-            {cities.map((city, index) => (
-              <button
-                key={index}
-                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
-                                        ${selectedCity === city
-                    ? 'bg-voilet text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-voilet hover:text-white'
-                  }`}
-                onClick={() => setSelectedCity(city)}
-              >
-                {city}
-              </button>
-            ))}
+          <div className="cities flex flex-col sm:w-64 xs:w-full max-h-full h-[30rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 xs:overflow-auto xs:whitespace-nowrap overflow-y-scroll sticky top-32">
+            {cities.map((city, index) => {
+              return (
+                <button
+                  key={index}
+                  className={`my-2 px-4 py-1 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
+                                        ${
+                                          selectedCity === city
+                                            ? "bg-voilet text-white"
+                                            : "bg-gray-100 text-gray-600 hover:bg-voilet hover:text-white"
+                                        }`}
+                  onClick={() => setSelectedCity(city)}
+                >
+                  {city}
+                </button>
+              );
+            })}
           </div>
           <div className="px-4 py-10 flex flex-col justify-center">
             <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
               Available{" "}
-              <span className="text-4xl text-pink font-bold">
-                Properties
-              </span>
+              <span className="text-4xl text-pink font-bold">Properties</span>
             </h1>
 
             {/* Filtered Apartments */}
-            {filteredApartments.length > 0 ? (<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 w-full">
-              {filteredApartments.map((apt) => (
-                <ApartmentCard
-                  key={apt._id}
-                  {...apt}
-                  onClick={() => setSelectedApartment(apt)}
-                />
-              ))}
-            </div>) : (
+            {filteredApartments.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 w-full">
+                {filteredApartments.map((apt) => (
+                  <ApartmentCard
+                    key={apt._id}
+                    {...apt}
+                    onClick={() => setSelectedApartment(apt)}
+                  />
+                ))}
+              </div>
+            ) : (
               <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
-                <p className="text-2xl font-semibold text-red-500">No apartments are found</p>
-              </div>)}
+                <p className="text-2xl font-semibold text-red-500">
+                  No apartments are found
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </main>
@@ -183,6 +417,20 @@ const Property = () => {
           apartment={selectedApartment}
           onClose={() => setSelectedApartment(null)}
         />
+      )}
+
+      {/* Infinite Scroll Loader */}
+      {isFetchingMore && (
+        <div className="text-center py-4">
+          <Oval
+            visible={true}
+            height="20"
+            width="20"
+            color="#242A56"
+            ariaLabel="loading"
+          />
+          <span className="ml-2">Loading more properties...</span>
+        </div>
       )}
     </div>
   );

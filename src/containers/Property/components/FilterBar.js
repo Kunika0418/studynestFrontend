@@ -1,6 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelectedCity, price, minPrice, setMinPrice, maxPrice, setMaxPrice }) {
+
+function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelectedCity, price, minPrice, setMinPrice, maxPrice, setMaxPrice, setCities }) {
+    const location = useLocation();
+    const path = location.pathname.toLowerCase();
     return (
         <div>
             <aside className="bg-gray-50 py-4 px-6 shadow-sm">
@@ -8,6 +12,20 @@ function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelected
                     {/* Country Filter */}
                     {countries && (
                         <div className="flex gap-4 items-center">
+                            {path === '/property' &&  <button
+                                className={`px-6 py-1 rounded-full text-md font-medium transition-colors border border-slate-300
+                                    ${selectedCountry === ""
+                                        ? 'bg-darkpink text-white'
+                                        : 'bg-voilet text-white hover:bg-darkpink'
+                                    }`}
+                                onClick={() => {
+                                    setSelectedCountry("");
+                                    setSelectedCity("");
+                                    setCities([]);
+                                }}
+                            >
+                                All Countries
+                            </button>}
                             {countries.map((country, index) => (
                                 <button
                                     key={index}

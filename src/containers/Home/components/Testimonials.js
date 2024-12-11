@@ -51,7 +51,7 @@ const Testimonials = () => {
         // spaceBetween={30}
         slidesPerView={2}
         centeredSlides={true}
-        // loop={true}
+        loop={true}
         breakpoints={{
           350: { slidesPerView: 1 , spaceBetween:2 },
           640: { slidesPerView: 1.95 , spaceBetween: 10},

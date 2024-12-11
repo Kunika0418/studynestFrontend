@@ -185,7 +185,7 @@ const PropertyDetail = () => {
 
             {/* Grid of smaller images */}
             <div className="w-1/2 grid grid-cols-2 gap-2 grid-rows-2">
-              {apartment.images.slice(1, 4).map((image, index) => (
+              {apartment.images && apartment.images.length >= 5 && apartment.images.slice(1, 4).map((image, index) => (
                 <div
                   onClick={() => openModal(apartment.images[index + 1])}
                   key={index}
@@ -198,7 +198,7 @@ const PropertyDetail = () => {
                   />
                 </div>
               ))}
-              {apartment.images.length > 4 && (
+              {apartment.images && apartment.images.length > 4 && (
                 <div
                   key={4}
                   className="relative overflow-hidden rounded-md opacity-75 w-full h-full cursor-pointer"
