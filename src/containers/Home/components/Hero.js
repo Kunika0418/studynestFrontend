@@ -50,7 +50,7 @@ const Hero = ({
             <div className="relative flex items-center">
               <input
                 type="text"
-                placeholder="Enter city, neighborhood, or title"
+                placeholder="Enter city, country, or name"
                 value={searchTerm}
                 onChange={handleChange}
                 onFocus={handleFocus}  // Open modal when focused

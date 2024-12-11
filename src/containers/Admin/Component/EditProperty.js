@@ -72,7 +72,7 @@ const EditProperty = () => {
         <button
           disabled={isLoading}
           onClick={handleSearch}
-          className="bg-blue-500 text-white w-44 px-4 py-2 rounded-md flex flex-row gap-2 justify-center items-center"
+          className="bg-voilet text-white w-44 px-4 py-2 rounded-md flex flex-row gap-2 justify-center items-center"
         >
           Search
           {isLoading && <div className="ml-4 transition duration-500 ease-in-out">

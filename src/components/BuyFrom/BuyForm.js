@@ -39,7 +39,7 @@ const BuyForm = ({ apartment }) => {
                     <span className="float-right">→</span>
                 </button>
             </div>
-            <div className="form px-4 pb-4">
+            <div className="form px-4 pb-4 h-80">
                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                     <div>
                         <input
@@ -75,7 +75,7 @@ const BuyForm = ({ apartment }) => {
                             required
                         />
                         {formData.email.length === 0 && (
-                            <p className="text-red-500 text-sm mt-1">Email address is required</p>
+                            <p className={`text-red-500 text-sm mt-1`}>Email address is required</p>
                         )}
                     </div>
 
@@ -88,11 +88,11 @@ const BuyForm = ({ apartment }) => {
                         />
                         <label htmlFor="terms" className="ml-2 text-gray-600 text-sm">
                             By continuing, you agree to our{' '}
-                            <a href="#" className="text-primary-100">
+                            <a href="#" className="text-darkpink">
                                 Privacy Policy
                             </a>{' '}
                             and{' '}
-                            <a href="#" className="text-primary-100">
+                            <a href="#" className="text-darkpink">
                                 Terms of Service
                             </a>
                         </label>
@@ -100,7 +100,7 @@ const BuyForm = ({ apartment }) => {
 
                     <button
                         type="submit"
-                        className="w-full py-3 mt-4 bg-primary-100 hover:bg-primary-100/90 hover:scale-95 text-bg-200 font-semibold rounded-lg transition duration-500 ease-in-out"
+                        className="w-full py-3 mt-4 bg-blue hover:bg-blue/90 hover:scale-95 text-lightpink font-semibold rounded-lg transition duration-500 ease-in-out"
                     >
                         Find My Home
                     </button>

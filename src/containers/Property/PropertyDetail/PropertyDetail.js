@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import "swiper/css/bundle";
 import BuyForm from "../../../components/BuyFrom/BuyForm";
 import ImageModal from "../../../components/ImageModal/ImageModal";
-import { IoLocationSharp, IoShieldCheckmark } from "react-icons/io5";
+import { IoLocationSharp, IoShieldCheckmark, IoBusiness  } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
 import axios from "axios";
@@ -32,9 +32,7 @@ const PropertyDetail = () => {
           `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/property/${PropertyId}`
         );
         setapartment(response.data.property);
-        console.log(response.data.property);
         setLoading(false);
-        console.log(response);
       } catch (error) {
         setError(error.message);
         setLoading(false);
@@ -121,7 +119,7 @@ const PropertyDetail = () => {
       </div>
     );
   }
-  if (error) {
+  if (error || !apartment) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <p className="text-lg text-red-500">Something went wrong: {error}</p>
@@ -136,29 +134,34 @@ const PropertyDetail = () => {
   }
 
   return (
-    <div className="min-h-screen py-8 ">
+    <div className="min-h-screen py-8 bg-offwhite/50">
       {apartment ? (<div>
         {/* Image Slider */}
         <div className="mb-6 px-20">
           <div className="info mb-6 flex flex-col gap-2">
-            <h1 className="text-4xl text-accent-100 font-semibold font-sans">
+            <h1 className="text-4xl text-voilet font-semibold font-sans">
               {apartment.title}
             </h1>
             <div className="flex gap-4">
-              <p className="flex gap-2 items-center text-lg text-accent-100 font-sans font-medium">
-                <FaGraduationCap className="text-primary-100" /> Student
+              <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                <FaGraduationCap className="text-darkpink" /> Student
                 Accomodation
               </p>
-              <p className="flex gap-2 items-center text-lg text-accent-100 font-sans font-medium">
-                <IoShieldCheckmark className="text-primary-100" /> On-site
+              <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                <IoShieldCheckmark className="text-darkpink" /> On-site
                 verification
               </p>
             </div>
             <div className="flex justify-between">
-              <p className="flex gap-2 items-center text-lg text-accent-100 font-sans font-medium">
-                <IoLocationSharp className="text-primary-100" /> {apartment.city},{" "}
+              <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                <IoLocationSharp className="text-darkpink" /> {apartment.city},{" "}
                 {apartment.country}
               </p>
+              <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                <IoBusiness  className="text-darkpink" />
+                {apartment.university}
+              </p>
+
               {/* <div className="flex items-center border-2 border-pink-100 bg-pink-50 px-4 py-1 rounded-lg gap-2">
               {renderStars(apartment.rating)}
               <span className="text-gray-600">
@@ -174,7 +177,7 @@ const PropertyDetail = () => {
               className="w-1/2 cursor-pointer"
             >
               <img
-                src={apartment.images[0]}
+                src={apartment.images && apartment.images[0]}
                 alt="Large Image"
                 className="w-full h-full object-cover rounded-md"
               />
@@ -202,7 +205,7 @@ const PropertyDetail = () => {
                   onClick={() => openModal(apartment.images[0])}
                 >
                   <img
-                    src={apartment.images[4]}
+                    src={apartment.images && apartment.images[4] || ""}
                     alt="Others"
                     className="w-full h-full object-cover blur-sm"
                   />
@@ -218,12 +221,12 @@ const PropertyDetail = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex space-x-4 w-full sticky top-[72px] h-16 bg-white z-10">
+        <div className="flex space-x-4 w-full h-16 z-10">
           <div className="flex justify-center border-b gap-10 w-full">
             <button
               className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Overview"
-                ? "border-primary-100 text-primary-100"
-                : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
+                ? "border-darkpink text-voilet"
+                : "text-gray-600 hover:border-darkpink hover:text-voilet"
                 }`}
               onClick={() => {
                 setActiveTab("Overview");
@@ -234,8 +237,8 @@ const PropertyDetail = () => {
             </button>
             <button
               className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Facilities"
-                ? "border-primary-100 text-primary-100"
-                : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
+                ? "border-darkpink text-voilet"
+                : "text-gray-600 hover:border-darkpink hover:text-voilet"
                 }`}
               onClick={() => {
                 setActiveTab("Facilities");
@@ -246,8 +249,8 @@ const PropertyDetail = () => {
             </button>
             <button
               className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Services"
-                ? "border-primary-100 text-primary-100"
-                : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
+                ? "border-darkpink text-voilet"
+                : "text-gray-600 hover:border-darkpink hover:text-voilet"
                 }`}
               onClick={() => {
                 setActiveTab("Services");
@@ -258,8 +261,8 @@ const PropertyDetail = () => {
             </button>
             <button
               className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${activeTab === "Properties"
-                ? "border-primary-100 text-primary-100"
-                : "text-gray-600 hover:border-primary-100 hover:text-primary-100"
+                ? "border-darkpink text-voilet"
+                : "text-gray-600 hover:border-darkpink hover:text-voilet"
                 }`}
               onClick={() => {
                 setActiveTab("Properties");
@@ -318,7 +321,7 @@ const PropertyDetail = () => {
                     {apartment.amenities.map((category, index) => (
                       <div
                         key={index}
-                        className="mb-6 border border-primary-300 bg-gray-50 px-6 py-4 rounded-lg"
+                        className="mb-6 border border-voilet bg-gray-50 px-6 py-4 rounded-lg"
                       >
                         <h3 className="text-lg text-accent-100 font-semibold mb-2">
                           {category.title}
@@ -346,7 +349,7 @@ const PropertyDetail = () => {
                 <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
                   Services
                 </h2>
-                <div className="services border border-primary-300 bg-gray-50 p-4 rounded-lg">
+                <div className="services border border-voilet bg-gray-50 p-4 rounded-lg">
                   <ul className="list-disc list-inside mt-2">
                     {apartment.services.map((service, index) => (
                       <li
