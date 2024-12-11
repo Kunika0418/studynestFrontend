@@ -4,6 +4,7 @@ import ApartmentCard from "../../components/Card/Card";
 import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import FilterBar from "./components/FilterBar";
+import { useSearchParams } from "react-router-dom";
 
 const initialCountries = [
   {
@@ -57,28 +58,28 @@ const initialCountries = [
     ],
   },
   {
-    country: "India",
+    country: "Australia",
     cities: [
-      "Mumbai",
-      "Delhi",
-      "Bangalore",
-      "Hyderabad",
-      "Chennai",
-      "Kolkata",
-      "Pune",
-      "Ahmedabad",
-      "Jaipur",
-      "Lucknow",
-      "Kanpur",
-      "Indore",
-      "Nagpur",
-      "Thane",
-      "Bhopal",
-      "Patna",
-      "Ludhiana",
-      "Agra",
-      "Vadodara",
-      "Nashik",
+      "Sydney",
+      "Melbourne",
+      "Brisbane",
+      "Perth",
+      "Adelaide",
+      "Canberra",
+      "Hobart",
+      "Darwin",
+      "Gold Coast",
+      "Newcastle",
+      "Wollongong",
+      "Geelong",
+      "Cairns",
+      "Townsville",
+      "Toowoomba",
+      "Ballarat",
+      "Bendigo",
+      "Launceston",
+      "Alice Springs",
+      "Mackay",
     ],
   },
   {
@@ -133,20 +134,22 @@ const initialCountries = [
   },
 ];
 
-
 const Property = () => {
+  const [searchParams] = useSearchParams();
+  const city = searchParams.get("city");
+
   // State variables
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [countries, setCountries] = useState([
     "USA",
     "UK",
-    "India",
+    "Australia",
     "Germany",
     "Canada",
   ]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState(city || "");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredApartments, setFilteredApartments] = useState([]);
@@ -159,7 +162,6 @@ const Property = () => {
 
   // Fetch properties
   const fetchProperties = async (pageNumber = 1, filters = {}) => {
-    console.log(selectedCity);
     try {
       setIsFetchingMore(true);
       const response = await axios.get(
@@ -215,9 +217,19 @@ const Property = () => {
   };
 
   // Initial fetch
+  // useEffect(() => {
+  //   fetchProperties(1);
+  // }, []);
+
   useEffect(() => {
-    fetchProperties(1);
-  }, []);
+    if (selectedCity) {
+      fetchProperties(1, {
+        city: selectedCity
+      });
+    } else {
+      fetchProperties(1);
+    }
+  }, [selectedCity, selectedCountry]);
 
   // // Update cities when country changes
   useEffect(() => {
