@@ -9,11 +9,11 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
 
     return (
         <div
-            className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 md:px-0 xs:px-4"
             onClick={onClose}
         >
             <div
-                className="relative w-full max-w-5xl rounded-lg overflow-hidden shadow-lg h-[37rem]"
+                className="relative w-full max-w-5xl md:max-w-2xl sm:max-w-sm rounded-lg overflow-hidden shadow-lg h-[37rem] xs:h-fit"
                 onClick={(e) => e.stopPropagation()} // Prevent click on modal content from closing the modal
             >
                 {/* Main Swiper for showing large images */}
@@ -28,7 +28,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
                 >
                     {images.map((image, index) => (
                         <SwiperSlide key={index} className="flex justify-center">
-                            <img src={image} alt={`Image ${index}`} className="w-full object-cover h-[28rem]" />
+                            <img src={image} alt={`Image ${index}`} className="w-full object-cover md:h-[28rem] xs:h-[20rem]" />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -39,7 +39,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
                     watchSlidesProgress
                     onSwiper={setThumbsSwiper}
                     spaceBetween={6}
-                    slidesPerView={5}
+                    slidesPerView={4}
                     className="mt-4 rounded-lg"
                 >
                     {images.map((image, index) => (
@@ -55,7 +55,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
             </div>
             {/* Close Button */}
             <button
-                className="absolute top-4 right-8 text-white rounded-full text-3xl"
+                className="absolute top-4 right-8 xs:right-2 md:right-4 text-white rounded-full text-3xl"
                 onClick={onClose}
             >
                 &times;

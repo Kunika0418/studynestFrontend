@@ -137,7 +137,7 @@ const PropertyDetail = () => {
       {apartment ? (
         <div>
           {/* Image Slider */}
-          <div className="mb-6 px-20">
+          <div className="mb-6 lg:px-20 md:px-10 xs:px-6">
             <div className="info mb-6 flex flex-col gap-2">
               <h1 className="text-4xl text-voilet font-semibold font-sans">
                 {apartment.title}
@@ -152,7 +152,7 @@ const PropertyDetail = () => {
                   verification
                 </p>
               </div>
-              <div className="flex justify-between">
+              <div className="flex lg:justify-between xs:gap-6">
                 <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
                   <IoLocationSharp className="text-darkpink" /> {apartment.city}
                   , {apartment.country}
@@ -174,7 +174,7 @@ const PropertyDetail = () => {
               {/* Large image */}
               <div
                 onClick={() => openModal(apartment.images[1])}
-                className="w-1/2 cursor-pointer"
+                className="lg:w-1/2 xs:w-full cursor-pointer"
               >
                 <img
                   src={apartment.images && apartment.images[0]}
@@ -184,7 +184,7 @@ const PropertyDetail = () => {
               </div>
 
               {/* Grid of smaller images */}
-              <div className="w-1/2 grid grid-cols-2 gap-2 grid-rows-2">
+              <div className="w-1/2 grid grid-cols-2 gap-2 grid-rows-2 xs:hidden lg:block">
                 {apartment.images &&
                   apartment.images.length >= 5 &&
                   apartment.images.slice(1, 4).map((image, index) => (
@@ -224,7 +224,7 @@ const PropertyDetail = () => {
 
           {/* Tabs */}
           <div className="flex space-x-4 w-full h-16 z-10">
-            <div className="flex justify-center border-b gap-10 w-full">
+            <div className="flex md:justify-center border-b gap-10 w-full overflow-x-auto">
               <button
                 className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
                   activeTab === "Overview"
@@ -283,10 +283,10 @@ const PropertyDetail = () => {
           {/* Section Contents */}
           <div
             id="overview"
-            className="w-full py-6 flex justify-between relative px-20 gap-10 bg-bg-200"
+            className="w-full py-6 flex lg:flex-row flex-col justify-between relative lg:px-20 px-10 lg:gap-10 gap-4 bg-bg-200"
           >
             {/* Left Section */}
-            <div className="mb-6 w-[65%]">
+            <div className="mb-6 lg:w-[65%] w-full ">
               {/* Overview Section */}
               <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
                 Overview
@@ -392,7 +392,7 @@ const PropertyDetail = () => {
           </div>
 
           {/* Similar Apartments */}
-          <div id="properties" className="mt-4 px-20">
+          <div id="properties" className="mt-4 lg:px-20 md:px-10 xs:px-6">
             <h2 className="text-2xl font-sans text-primary-100 font-semibold mb-6">
               Similar Properties
             </h2>

@@ -39,7 +39,7 @@ const BuyForm = ({ apartment }) => {
                     <span className="float-right">→</span>
                 </button>
             </div>
-            <div className="form px-4 pb-4 h-80">
+            <div className="form px-4 mb-4 h-80">
                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                     <div>
                         <input
