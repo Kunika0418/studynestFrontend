@@ -378,7 +378,7 @@ const Property = () => {
       {/* Main Content */}
       <main className="w-full">
         <div className="gap-4 flex sm:flex-row xs:flex-col w-full">
-          <div className="cities flex flex-col sm:w-64 xs:w-full max-h-full h-[30rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 xs:overflow-auto xs:whitespace-nowrap overflow-y-scroll sticky top-32">
+          {selectedCountry!=="" && <div className="cities flex lg:flex-col xs:flex-row lg:w-64 xs:w-full max-h-full lg:h-[30rem] xs:h-[6rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 xs:overflow-x-auto xs:whitespace-nowrap xs:overflow-hidden lg:overflow-y-scroll sticky lg:top-32 xs:top-56 z-20">
             {cities.map((city, index) => {
               return (
                 <button
@@ -395,7 +395,7 @@ const Property = () => {
                 </button>
               );
             })}
-          </div>
+          </div>}
           <div className="px-4 py-10 flex flex-col justify-center">
             <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
               Available{" "}
@@ -404,7 +404,7 @@ const Property = () => {
 
             {/* Filtered Apartments */}
             {filteredApartments.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-6 w-full">
+              <div className={`grid grid-cols-1 md:grid-cols-2 ${selectedCountry===""?'xl:grid-cols-4':`xl:grid-cols-3`} gap-x-6 gap-y-6 w-full`}>
                 {filteredApartments.map((apt) => (
                   <ApartmentCard
                     key={apt._id}
