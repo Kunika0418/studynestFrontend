@@ -4,6 +4,7 @@ import ImageUpload from "./ImageUpload";
 import BasicInfoFields from "./BasicInfo/BasicInfoFields";
 import ServicesList from "./Services/ServicesList";
 import AmenitiesList from "./Amenities/AmenitiesList";
+import RoomTypeGroup from "./RoomType/RoomTypesGroup";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -22,6 +23,7 @@ const UpdateProperty = ({ property, onSuccess }) => {
     area: property.area,
     services: property.services,
     amenities: property.amenities,
+    roomTypes: property.roomTypes,
   });
 
   const api = axios.create({
@@ -67,6 +69,48 @@ const UpdateProperty = ({ property, onSuccess }) => {
   const handleServiceRemove = (index) => {
     const newServices = formData.services.filter((_, i) => i !== index);
     setFormData({ ...formData, services: newServices });
+  };
+
+  const handleRoomTypeGroupAdd = () => {
+    // Adds a new room group with an initial title and one room type
+    setFormData({
+      ...formData,
+      roomTypes: [
+        ...formData.roomTypes,
+        { title: '', roomTypes: [{ title: '', price: '' }] }
+      ]
+    });
+  };
+
+  const handleRoomTypeGroupTitleChange = (groupIndex, title) => {
+    // Updates the title of a specific room group
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes[groupIndex].title = title;
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+  const handleRoomTypeChange = (groupIndex, title, price) => {
+    // Create a copy of the room types array
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes[groupIndex].title = title;
+    updatedRoomTypes[groupIndex].price = price;
+    // Update the formData state with the updated room types
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+
+  const handleRoomTypeAdd = (groupIndex) => {
+    // Adds a new room type to a specific room group
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes[groupIndex].roomTypes.push({ title: '', price: 100 });
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+  const handleRoomTypeRemove = (groupIndex) => {
+    // Removes a specific room group
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes.splice(groupIndex, 1); // Remove the group at the specified index
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
   };
 
   const handleAmenityGroupAdd = () => {
@@ -121,6 +165,12 @@ const UpdateProperty = ({ property, onSuccess }) => {
     if (!hasValidAmenityGroup)
       return "At least one amenity group with one item is required";
 
+    const hasValidRoomType = formData.roomTypes.some(
+      (roomType) => roomType.title.trim() && roomType.price
+    );
+    if (!hasValidRoomType) return "At least one room type is required";
+
+
     return null;
   };
 
@@ -139,7 +189,7 @@ const UpdateProperty = ({ property, onSuccess }) => {
 
       // Append property data
       Object.entries(formData).forEach(([key, value]) => {
-        if (key === "services" || key === "amenities") {
+        if (key === "services" || key === "amenities" || key === "roomTypes") {
           formDataToSend.append(key, JSON.stringify(value));
         } else {
           formDataToSend.append(key, value.toString());
@@ -233,16 +283,23 @@ const UpdateProperty = ({ property, onSuccess }) => {
             onItemAdd={handleAmenityItemAdd}
             onItemRemove={handleAmenityItemRemove}
           />
+
+          <RoomTypeGroup
+            roomTypes={formData.roomTypes}
+            onGroupAdd={handleRoomTypeGroupAdd}
+            onRoomTypeChange={handleRoomTypeChange}
+            onRoomTypeAdd={handleRoomTypeAdd}
+            onRoomTypeRemove={handleRoomTypeRemove}
+          />
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 ${
-            isSubmitting
+          className={`w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 ${isSubmitting
               ? "opacity-50 cursor-not-allowed"
               : "hover:bg-[#a04031]"
-          }`}
+            }`}
         >
           {isSubmitting ? "Updating Property..." : "Update Property"}
         </button>

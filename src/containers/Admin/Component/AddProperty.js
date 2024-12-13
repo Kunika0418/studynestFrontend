@@ -5,6 +5,7 @@ import ServicesList from "./Services/ServicesList";
 import AmenitiesList from "./Amenities/AmenitiesList";
 import { toast } from "react-toastify";
 import axios from "axios";
+import RoomTypeGroup from "./RoomType/RoomTypesGroup";
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URI}/api/propertyauth`,
@@ -19,9 +20,11 @@ const AddProperty = () => {
     city: "",
     country: "",
     description: "",
+    university: "",
     area: "",
     services: [""],
     amenities: [{ title: "", items: [""] }],
+    roomTypes: [{ title: "", price: "" }],
   });
 
   const handleImageChange = (files) => {
@@ -33,6 +36,50 @@ const AddProperty = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Room types handlers
+  const handleRoomTypeGroupAdd = () => {
+    // Adds a new room group with an initial title and one room type
+    setFormData({
+      ...formData,
+      roomTypes: [
+        ...formData.roomTypes,
+        { title: '', roomTypes: [{ title: '', price: '' }] }
+      ]
+    });
+  };
+
+  const handleRoomTypeGroupTitleChange = (groupIndex, title) => {
+    // Updates the title of a specific room group
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes[groupIndex].title = title;
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+  const handleRoomTypeChange = (groupIndex, title, price) => {
+    // Create a copy of the room types array
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes[groupIndex].title = title;
+    updatedRoomTypes[groupIndex].price = price;
+    // Update the formData state with the updated room types
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+
+  const handleRoomTypeAdd = (groupIndex) => {
+    // Adds a new room type to a specific room group
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes[groupIndex].roomTypes.push({ title: '', price: 100 });
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+  const handleRoomTypeRemove = (groupIndex) => {
+    // Removes a specific room group
+    const updatedRoomTypes = [...formData.roomTypes];
+    updatedRoomTypes.splice(groupIndex, 1); // Remove the group at the specified index
+    setFormData({ ...formData, roomTypes: updatedRoomTypes });
+  };
+
+  // Services handlers
   const handleServiceChange = (index, value) => {
     const newServices = [...formData.services];
     newServices[index] = value;
@@ -48,6 +95,7 @@ const AddProperty = () => {
     setFormData({ ...formData, services: newServices });
   };
 
+  // Amenities handlers
   const handleAmenityGroupAdd = () => {
     setFormData({
       ...formData,
@@ -75,9 +123,7 @@ const AddProperty = () => {
 
   const handleAmenityItemRemove = (groupIndex, itemIndex) => {
     const newAmenities = [...formData.amenities];
-    newAmenities[groupIndex].items = formData.amenities[
-      groupIndex
-    ].items.filter((_, i) => i !== itemIndex);
+    newAmenities[groupIndex].items = formData.amenities[groupIndex].items.filter((_, i) => i !== itemIndex);
     setFormData({ ...formData, amenities: newAmenities });
   };
 
@@ -86,10 +132,7 @@ const AddProperty = () => {
       const formData = new FormData();
 
       // Append property data
-      formData.append(
-        "slug",
-        propertyData.title.toLowerCase().replace(/\s+/g, "-")
-      );
+      formData.append("slug", propertyData.title.toLowerCase().replace(/\s+/g, "-"));
       formData.append("title", propertyData.title);
       formData.append("price", propertyData.price);
       formData.append("city", propertyData.city);
@@ -98,22 +141,20 @@ const AddProperty = () => {
       formData.append("description", propertyData.description);
       formData.append("area", propertyData.area);
 
-      // Append services as JSON string
-      formData.append(
-        "services",
-        JSON.stringify(
-          propertyData.services.filter((service) => service.trim())
-        )
-      );
-
-      // Append amenities as JSON string
+      // Append services, amenities, and roomTypes as JSON strings
+      formData.append("services", JSON.stringify(propertyData.services.filter((service) => service.trim())));
       formData.append(
         "amenities",
         JSON.stringify(
           propertyData.amenities.filter(
-            (group) =>
-              group.title.trim() && group.items.some((item) => item.trim())
+            (group) => group.title.trim() && group.items.some((item) => item.trim())
           )
+        )
+      );
+      formData.append(
+        "roomTypes",
+        JSON.stringify(
+          propertyData.roomTypes.filter((roomType) => roomType.title.trim() && roomType.price)
         )
       );
 
@@ -121,7 +162,6 @@ const AddProperty = () => {
       images.forEach((image) => {
         formData.append("images", image);
       });
-
 
       const response = await api.post("/property", formData, {
         headers: {
@@ -144,14 +184,17 @@ const AddProperty = () => {
     if (!formData.university.trim()) return "University is required";
     if (!formData.area.trim()) return "Area is required";
     if (images.length === 0) return "At least one image is required";
-    if (!formData.services.some((service) => service.trim()))
-      return "At least one service is required";
+    if (!formData.services.some((service) => service.trim())) return "At least one service is required";
 
     const hasValidAmenityGroup = formData.amenities.some(
       (group) => group.title.trim() && group.items.some((item) => item.trim())
     );
-    if (!hasValidAmenityGroup)
-      return "At least one amenity group with one item is required";
+    if (!hasValidAmenityGroup) return "At least one amenity group with one item is required";
+
+    const hasValidRoomType = formData.roomTypes.some(
+      (roomType) => roomType.title.trim() && roomType.price
+    );
+    if (!hasValidRoomType) return "At least one room type is required";
 
     return null;
   };
@@ -181,6 +224,7 @@ const AddProperty = () => {
         area: "",
         services: [""],
         amenities: [{ title: "", items: [""] }],
+        roomTypes: [{ title: "", price: "" }],
       });
       setImages([]);
     } catch (error) {
@@ -215,16 +259,22 @@ const AddProperty = () => {
             onItemAdd={handleAmenityItemAdd}
             onItemRemove={handleAmenityItemRemove}
           />
+
+          <RoomTypeGroup
+            roomTypes={formData.roomTypes}
+            onGroupAdd={handleRoomTypeGroupAdd}
+            onRoomTypeChange={handleRoomTypeChange}
+            onRoomTypeAdd={handleRoomTypeAdd}
+            onRoomTypeRemove={handleRoomTypeRemove}
+          />
+
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 ${
-            isSubmitting
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:bg-[#a04031]"
-          }`}
+          className={`w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 ${isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-[#a04031]"
+            }`}
         >
           {isSubmitting ? "Creating Property..." : "Submit Property"}
         </button>
