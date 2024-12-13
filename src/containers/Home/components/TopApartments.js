@@ -111,12 +111,12 @@ const TopApartments = () => {
           setSelectedCity={setSelectedCity}
           price={false}
         />
-        <div className="flex sm:flex-row xs:flex-col w-full">
-          <div className="cities sm:w-64 xs:w-full min-h-full bg-offwhite/50 shadow-lg overflow-y-auto border-r border-gray-200 gap-2 p-4 grid grid-flow-row xs:overflow-auto xs:whitespace-nowrap">
+        <div className="flex lg:flex-row flex-col w-full">
+          <div className="cities flex lg:flex-col flex-row lg:w-64 w-full max-h-full bg-offwhite/50 shadow-lg border-r border-gray-200 gap-2 p-4 overflow-x-auto whitespace-nowrap overflow-hidden lg:overflow-y-scroll">
             {cities.map((city, index) => (
               <button
                 key={index}
-                className={`my-2 px-4 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
+                className={`my-2 px-4 py-1 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
                                     ${
                                       selectedCity === city
                                         ? "bg-voilet text-white"

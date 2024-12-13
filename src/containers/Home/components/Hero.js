@@ -30,7 +30,7 @@ const Hero = ({
             preload="auto"
           />
         </div>
-        <div className="absolute w-full h-full bg-white/30 bg-opacity-30 z-0"></div>
+        {/* <div className="absolute w-full h-full bg-white/30 bg-opacity-30 z-0"></div> */}
         {/* Header Section */}
         <div className="w-full max-w-6xl text-center px-6 z-10">
           <h1 className="font-outline text-4xl md:text-6xl font-sans text-bg-100 animate-fade-in">

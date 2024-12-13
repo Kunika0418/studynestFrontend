@@ -11,6 +11,7 @@ import {
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
 import axios from "axios";
+import { Oval } from "react-loader-spinner";
 
 const PropertyDetail = () => {
   const { PropertyId } = useParams();
@@ -110,14 +111,23 @@ const PropertyDetail = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div
-          className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
-          role="status"
-        ></div>
+        <div className="ml-4 transition duration-500 ease-in-out">
+          <Oval
+            visible={true}
+            height="20"
+            width="20"
+            secondaryColor="#2c2c2c"
+            strokeWidth={4}
+            strokeWidthSecondary={4}
+            color="#242A56"
+            ariaLabel="oval-loading"
+          />
+        </div>
         <span className="ml-2">Loading...</span>
       </div>
     );
   }
+
   if (error || !apartment) {
     return (
       <div className="flex items-center justify-center min-h-screen">

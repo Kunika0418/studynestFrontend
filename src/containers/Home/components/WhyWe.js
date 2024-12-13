@@ -58,7 +58,7 @@ const WhyWe = () => {
             <span className="font-semibold underline underline-offset-4 text-yellow-300">
               student housing near you
             </span>{" "}
-            is effortless with Universal Student Homes. We strive to provide
+            is effortless with StudyNest assistance. We strive to provide
             comfort, convenience, and a secure living environment!
           </div>
         </div>

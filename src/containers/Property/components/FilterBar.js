@@ -8,12 +8,12 @@ function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelected
     return (
         <div className='w-full'>
             <aside className="bg-gray-50 py-4 px-6 shadow-sm w-full">
-                <div className="flex sm:flex-row xs:flex-col items-center justify-between gap-8 w-full">
+                <div className="flex flex-col md:flex-row xs:flex-col items-center justify-between gap-8 w-full">
                     {/* Country Filter */}
                     {countries && (
-                        <div className="flex gap-4 items-center overflow-auto w-full xl:max-w-3xl lg:max-w-2xl md:max-w-xl sm:max-w-lg xs:max-w-full p-2">
+                        <div className="flex gap-4 items-center overflow-auto w-full xl:max-w-3xl lg:max-w-2xl md:max-w-full sm:max-w-full xs:max-w-full max-w-full p-2">
                             {path === '/property' &&  <button
-                                className={`md:px-6 md:py-1 xs:px-4 xs:py-0 rounded-full text-md font-medium transition-colors border border-slate-300
+                                className={`py-1 px-6 text-nowrap rounded-full text-md font-medium transition-colors border border-slate-300
                                     ${selectedCountry === ""
                                         ? 'bg-darkpink text-white'
                                         : 'bg-voilet text-white hover:bg-darkpink'

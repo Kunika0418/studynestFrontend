@@ -45,26 +45,26 @@ const Service = () => {
 
   return (
     <div className="bg-bg-200 w-full">
-      <div className="flex flex-col justify-center items-center w-full px-16 py-16 relative">
+      <div className="flex flex-col justify-center items-center w-full px-16 py-44 relative">
         <div
-          className="h-full w-full absolute top-0 left-0 bg-white/30 opacity-20 z-0"
+          className="h-full w-full absolute top-0 left-0 z-0 before:absolute before:inset-0 before:bg-gradient-to-b before:from-black before:to-white/20 before:opacity-80"
           style={{
-            backgroundImage: `url(${backgroundHotel})`,
+            backgroundImage: `url("https://images.unsplash.com/photo-1533929736458-ca588d08c8be?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
             backgroundSize: "auto",
             backgroundPosition: "center",
           }}
         ></div>
         {/* Heading */}
-        <h1 className="text-3xl font-semibold text-voilet text-center mb-8 z-10">
-          Our{" "}
-          <span className="text-4xl text-pink font-bold">Services</span>
+        <h1 className="text-3xl font-semibold text-indigo-200 text-center mb-8 z-10">
+          Partner{" "}
+          <span className="text-4xl text-pink font-bold">With Us</span>
         </h1>
-        <p className="text-base font-sans font-semibold text-accent-100 text-center mb-12 z-10">
-          We provide everything you need to buy, sell, or rent an apartment.
+        <p className="text-base font-sans tracking-wider font-semibold text-white text-center mb-12 z-10">
+        Join our network and unlock exciting opportunities.
         </p>
 
         {/* Service Cards */}
-        <div className="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 z-10">
+        {/* <div className="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 z-10">
           {services.map((service) => (
             <div
               key={service.id}
@@ -77,12 +77,14 @@ const Service = () => {
               <p className="text-accent-100">{service.description}</p>
             </div>
           ))}
-        </div>
+        </div> */}
+
+        
       </div>
       <div className="bg-offwhite/50 rounded-lg p-6 md:py-10 md:px-20 max-w-full mx-auto border border-gray-200">
-        <h2 className="text-3xl font-bold text-voilet text-center mb-6">
+        {/* <h2 className="text-3xl font-bold text-voilet text-center mb-6">
           Have a Query<span className="text-5xl">?</span>{" "}<span className="text-darkpink">Tell Us</span>
-        </h2>
+        </h2> */}
         <p className="text-gray-600 font-semibold text-center mb-8">
           Fill out the form below and we’ll get back to you promptly.
         </p>

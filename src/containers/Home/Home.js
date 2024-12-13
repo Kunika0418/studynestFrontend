@@ -3,7 +3,7 @@ import CountryModal from "../../components/SearchTab/SearchTab";
 import PropertyDetail from "../Property/PropertyDetail/PropertyDetail";
 
 import Hero from "./components/Hero";
-import Parameters from "./components/Parameters"
+import Parameters from "./components/Parameters";
 import TopCities from "./components/TopCities";
 import WhyWe from "./components/WhyWe";
 import Options from "./components/Options";
@@ -12,10 +12,9 @@ import Testimonials from "./components/Testimonials";
 import { apartmentsData } from "../../components/Data/Data";
 import bannerVideo from "../../assets/video/Banner_video.mp4";
 import TopApartments from "./components/TopApartments";
-
+import Faq from "./components/Faqs.js";
 
 const Home = () => {
-
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
   const [selectedApartment, setSelectedApartment] = useState(null);
@@ -24,7 +23,6 @@ const Home = () => {
     const query = e.target.value.toLowerCase();
     setSearchTerm(query);
   };
-
 
   const handleSearch = () => {
     // Filter logic
@@ -40,14 +38,19 @@ const Home = () => {
 
   return (
     <div className="flex flex-col">
+      <Hero
+        apartmentsData={apartmentsData}
+        handleSearch={handleSearch}
+        searchTerm={searchTerm}
+        handleChange={handleChange}
+        bannerVideo={bannerVideo}
+      />
 
-      <Hero apartmentsData={apartmentsData} handleSearch={handleSearch} searchTerm={searchTerm} handleChange={handleChange} bannerVideo={bannerVideo} />
-      
       <Parameters />
 
       <TopCities />
 
-      <TopApartments/>
+      <TopApartments />
 
       {/* Apartments Section */}
       {/* <div className="Apartment px-4">
@@ -73,6 +76,8 @@ const Home = () => {
       <EasyBook />
 
       <Testimonials />
+
+      <Faq />
 
       {selectedApartment && (
         <PropertyDetail

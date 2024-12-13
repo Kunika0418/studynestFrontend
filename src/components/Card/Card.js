@@ -27,7 +27,7 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
         {/* Apartment Image Slider */}
         <div className='flex justify-center'>
           <div className='bg-white w-[24rem] rounded-lg overflow-hidden border border-gray-100 shadow-lg shadow-slate-400 hover:shadow-lg hover:shadow-voilet hover:border-voilet transition-shadow duration-500 ease-in-out'>
-            <div className="w-[24rem] h-48">
+            <div className="w-[24rem] h-48 relative">
               <Slider {...settings}>
                 {images.length > 0 ? (
                   images.map((image, index) => (

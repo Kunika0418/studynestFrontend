@@ -377,8 +377,8 @@ const Property = () => {
 
       {/* Main Content */}
       <main className="w-full">
-        <div className="gap-4 flex sm:flex-row xs:flex-col w-full">
-          {selectedCountry!=="" && <div className="cities flex lg:flex-col xs:flex-row lg:w-64 xs:w-full max-h-full lg:h-[30rem] xs:h-[6rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 xs:overflow-x-auto xs:whitespace-nowrap xs:overflow-hidden lg:overflow-y-scroll sticky lg:top-32 xs:top-56 xs:z-20 lg:z-0">
+        <div className="gap-4 flex flex-col lg:flex-row w-full">
+          {selectedCountry!=="" && <div className="cities flex flex-row lg:flex-col lg:w-64 w-full h-[6rem] max-h-full lg:h-[30rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 overflow-x-auto whitespace-nowrap overflow-hidden lg:overflow-y-scroll sticky lg:top-32 top-52 z-20 lg:z-0">
             {cities.map((city, index) => {
               return (
                 <button
