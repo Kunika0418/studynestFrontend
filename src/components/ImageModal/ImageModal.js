@@ -13,7 +13,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
             onClick={onClose}
         >
             <div
-                className="relative w-full max-w-5xl md:max-w-2xl sm:max-w-sm rounded-lg overflow-hidden shadow-lg h-[37rem] xs:h-fit"
+                className="relative w-full max-w-5xl md:max-w-2xl sm:max-w-xl xs:max-w-sm rounded-lg overflow-hidden shadow-lg h-[37rem] xs:h-fit"
                 onClick={(e) => e.stopPropagation()} // Prevent click on modal content from closing the modal
             >
                 {/* Main Swiper for showing large images */}

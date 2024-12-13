@@ -184,7 +184,7 @@ const PropertyDetail = () => {
               </div>
 
               {/* Grid of smaller images */}
-              <div className="w-1/2 grid grid-cols-2 gap-2 grid-rows-2 xs:hidden lg:block">
+              <div className="w-1/2 lg:grid lg:grid-cols-2 gap-2 lg:grid-rows-2 xs:hidden">
                 {apartment.images &&
                   apartment.images.length >= 5 &&
                   apartment.images.slice(1, 4).map((image, index) => (
@@ -250,6 +250,19 @@ const PropertyDetail = () => {
                 }}
               >
                 Facilities
+              </button>
+              <button
+                className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
+                  activeTab === "roomTypes"
+                    ? "border-darkpink text-voilet"
+                    : "text-gray-600 hover:border-darkpink hover:text-voilet"
+                }`}
+                onClick={() => {
+                  setActiveTab("roomTypes");
+                  scrollToSection("roomTypes");
+                }}
+              >
+                RoomTypes
               </button>
               <button
                 className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
@@ -331,13 +344,13 @@ const PropertyDetail = () => {
               </div>
 
               {/* Amenities Section */}
-              {apartment.amenities.length > 0 && (
+              {apartment.amenities && (
                 <div id="facilities" className="w-full py-2 mt-4">
                   <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
                     Amenities
                   </h2>
                   <div className="amenities">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {apartment.amenities.map((category, index) => (
                         <div
                           key={index}
@@ -363,17 +376,42 @@ const PropertyDetail = () => {
                 </div>
               )}
 
+              {apartment.roomTypes && (
+                <div id="roomTypes" className="w-full py-2 mt-4">
+                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+                    Room Types
+                  </h2>
+                  <div className="roomTypes">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {apartment.roomTypes.map((category, index) => (
+                        <div
+                          key={index}
+                          className="mb-6 border border-voilet bg-gray-50 px-6 py-4 rounded-lg"
+                        >
+                          <h3 className="text-md text-accent-100 font-medium mb-2">
+                            Room Type : {category.title}
+                          </h3>
+                          <h3 className="text-md text-accent-100 font-medium mb-2">
+                            Price : {category.price}
+                          </h3>
+                        </div>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
               {/* Services Section */}
-              {apartment.services.length > 0 && (
+              {apartment.services && (
                 <div id="services" className="w-full py-2 mb-6">
                   <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
                     Services
                   </h2>
                   <div className="services border border-voilet bg-gray-50 p-4 rounded-lg">
-                    <ul className="list-disc list-inside mt-2">
+                    <ul className="list-disc list-inside">
                       {apartment.services.map((service, index) => (
                         <li
-                          className="text-accent-100 font-medium text-sm"
+                          className="text-accent-100 font-medium text-md mb-2"
                           key={index}
                         >
                           {service}
