@@ -5,7 +5,6 @@ import FilterBar from "../../Property/components/FilterBar";
 import PropertyDetail from "../../Property/PropertyDetail/PropertyDetail";
 import arrow from "../../../assets/images/arrow.png";
 
-
 const TopApartments = () => {
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [properties, setProperties] = useState([]);
@@ -95,14 +94,16 @@ const TopApartments = () => {
     <div className="bg-offwhite/50">
       <div className="w-full h-auto flex flex-col pt-10">
         <div className="flex flex-col justify-center items-center gap-4 mb-10 relative">
-        <div className="h-64 w-44 rotate-45 object-contain absolute -top-10 left-72"> <img src={arrow} /></div>
           <h2 className="text-3xl font-semibold font-sans text-voilet">
             Top <span className="text-4xl font-bold text-pink">Apartments</span>
           </h2>
           <h3 className="text-base font-sans font-medium text-accent-100 z-10 px-4 text-justify">
-          Find your dream home from our Rent added properties.
-        </h3>
-        </div>  
+            Find your dream home from our Rent added properties.
+          </h3>
+          <div className="h-24 lg:h-36 w-auto rotate-45 object-contain sm:absolute flex justify-center items-center sm:mr-[30rem] lg:mr-[35rem] sm:mt-10 lg:mt-12 z-0 rounded-full overflow-hidden">
+            <img className="h-full w-full object-cover" src={arrow} />
+          </div>
+        </div>
         <FilterBar
           countries={countries}
           selectedCountry={selectedCountry}
