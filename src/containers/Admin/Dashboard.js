@@ -3,13 +3,14 @@ import AddProperty from "./Component/AddProperty";
 import EditProperty from "./Component/EditProperty";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import UserDetails from "./Component/UserDetails";
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const [isAddProperty, setIsAddProperty] = useState(false);
-  const [isEditProperty, setIsEditProperty] = useState(false);
-
+  const [menu, setMenu] = useState("");
+  
   const handleLogOut = () => {
     localStorage.removeItem("atoken");
     toast.success("Logged out successfully");
@@ -34,7 +35,7 @@ const Dashboard = () => {
           </button>
           <button
             onClick={() => {
-              setIsAddProperty(!isAddProperty);
+              setMenu("add");
             }}
             className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
           >
@@ -42,15 +43,24 @@ const Dashboard = () => {
           </button>
           <button
             onClick={() => {
-              setIsEditProperty(!isEditProperty);
+              setMenu("edit");
             }}
             className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
           >
             Edit Property
           </button>
+          <button
+            onClick={() => {
+              setMenu("userDetails");
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            User Details
+          </button>
         </div>
-        {isAddProperty && <AddProperty />}
-        {isEditProperty && <EditProperty />}
+        {menu === "add" && <AddProperty />}
+        {menu === "edit" && <EditProperty />}
+        {menu === "userDetails" && <UserDetails />}
       </div>
     </>
   );

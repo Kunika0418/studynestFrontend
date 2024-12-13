@@ -234,7 +234,7 @@ const PropertyDetail = () => {
 
           {/* Tabs */}
           <div className="flex space-x-4 w-full h-16 z-10">
-            <div className="flex md:justify-center border-b gap-10 w-full overflow-x-auto">
+            <div className="flex md:justify-center border-b gap-10 w-full overflow-x-scroll no-scrollbar">
               <button
                 className={`py-2 px-4 text-lg font-semibold transition duration-300 ease-in-out border-b-2 ${
                   activeTab === "Overview"
