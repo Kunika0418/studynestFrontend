@@ -4,6 +4,8 @@ import EditProperty from "./Component/EditProperty";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UserDetails from "./Component/UserDetails";
+import AddTestimonial from "./Component/AddTestimonial";
+import ManageTestimonial from "./Component/ManageTestimonial";
 
 
 const Dashboard = () => {
@@ -26,7 +28,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="min-h-screen">
-        <div className="flex flex-row gap-4 p-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-flow-col gap-4 p-6">
           <button
             onClick={handleLogOut}
             className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
@@ -57,10 +59,28 @@ const Dashboard = () => {
           >
             User Details
           </button>
+          <button
+            onClick={() => {
+              setMenu("Add Testimonial");
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Add Testimonial
+          </button>
+          <button
+            onClick={() => {
+              setMenu("Manage Testimonial");
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Manage Testimonial
+          </button>
         </div>
         {menu === "add" && <AddProperty />}
         {menu === "edit" && <EditProperty />}
         {menu === "userDetails" && <UserDetails />}
+        {menu === "Add Testimonial" && <AddTestimonial />}
+        {menu === "Manage Testimonial" && <ManageTestimonial />}
       </div>
     </>
   );

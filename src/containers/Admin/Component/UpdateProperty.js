@@ -225,7 +225,7 @@ const UpdateProperty = ({ property, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-6 space-y-8">
+    <form onSubmit={handleSubmit} className="max-w-4xl w-full sm:max-w-full mx-auto lg:p-6 space-y-8">
       <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
         <h2 className="text-2xl font-bold text-[#6C0F0A]">Edit Property</h2>
 

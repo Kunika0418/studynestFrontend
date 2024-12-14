@@ -84,38 +84,40 @@ const UserManagement = () => {
 
   return (
     <div className="container mx-auto p-4 bg-offwhite">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden border-voilet">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden hide-scrollbar border-voilet">
         {/* Table Title */}
         <div className="p-4 text-2xl font-bold text-center bg-blue text-offwhite">
           User Information
         </div>
 
-        {/* User Table */}
-        <table className="w-full">
-          <thead>
-            <tr className="bg-pink text-offwhite">
-              <th className="p-2 text-left">Name</th>
-              <th className="p-2 text-left">Email</th>
-              <th className="p-2 text-left">Phone</th>
-              <th className="p-2 text-left">University</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-lightpink" : "bg-offwhite"
-                } border-b`}
-              >
-                <td className="p-2">{user.Name}</td>
-                <td className="p-2">{user.Email}</td>
-                <td className="p-2">{user.Phone}</td>
-                <td className="p-2">{user.University}</td>
+        {/* Scrollable Table Container */}
+        <div className="overflow-y-auto hide-scrollbar max-h-96"> {/* Set max height for scrolling */}
+          <table className="w-full">
+            <thead>
+              <tr className="bg-pink text-offwhite">
+                <th className="p-2 text-left">Name</th>
+                <th className="p-2 text-left">Email</th>
+                <th className="p-2 text-left">Phone</th>
+                <th className="p-2 text-left">University</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-lightpink" : "bg-offwhite"
+                  } border-b`}
+                >
+                  <td className="p-2">{user.Name}</td>
+                  <td className="p-2">{user.Email}</td>
+                  <td className="p-2">{user.Phone}</td>
+                  <td className="p-2">{user.University}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         {/* Download Button */}
         <div className="p-4 text-center">

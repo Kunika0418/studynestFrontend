@@ -22,13 +22,13 @@ const Parameters = () => {
     {
       icon: <PiStudentFill className="text-3xl text-orange-500" />,
       iconColor: "group-hover:text-orange-500",
-      title: "25,000+ Students Assisted Worldwide",
+      title: "5,000+ Students Assisted Worldwide",
       description: "Trusted for quality housing services.",
     },
     {
       icon: <FaBed className="text-3xl text-indigo-500" />,
       iconColor: "group-hover:text-indigo-500",
-      title: "1.2 Million+ Beds Available Globally",
+      title: "122k+ Beds Available Globally",
       description: "Ideal homes near leading universities.",
     },
   ];

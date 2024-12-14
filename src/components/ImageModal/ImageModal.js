@@ -13,7 +13,7 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
             onClick={onClose}
         >
             <div
-                className="relative w-full max-w-5xl md:max-w-2xl sm:max-w-xl xs:max-w-sm rounded-lg overflow-hidden shadow-lg h-[37rem] xs:h-fit"
+                className="relative w-full lg:max-w-5xl md:max-w-2xl sm:max-w-xl xs:max-w-sm rounded-lg overflow-hidden shadow-lg h-[37rem] xs:h-fit"
                 onClick={(e) => e.stopPropagation()} // Prevent click on modal content from closing the modal
             >
                 {/* Main Swiper for showing large images */}
@@ -39,7 +39,15 @@ const ImageModal = ({ images, selectedImage, onClose }) => {
                     watchSlidesProgress
                     onSwiper={setThumbsSwiper}
                     spaceBetween={6}
-                    slidesPerView={4}
+                    slidesPerView={5}
+                    breakpoints={{
+                        350: { slidesPerView: 3, spaceBetween: 2 },
+                        640: { slidesPerView: 4, spaceBetween: 4 },
+                        780: { slidesPerView: 4, spaceBetween: 4 },
+                        900: { slidesPerView: 4, spaceBetween: 4 },
+                        1100: { slidesPerView: 5, spaceBetween: 6 },
+                        1270: { slidesPerView: 5, spaceBetween: 6 },
+                      }}
                     className="mt-4 rounded-lg"
                 >
                     {images.map((image, index) => (
