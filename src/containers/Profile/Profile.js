@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import HelmetConfig from "../../utils/HelmetConfig";
+
 
 const Profile = ({ decodeToken }) => {
   const [userData, setUserData] = useState({
@@ -114,6 +116,11 @@ const Profile = ({ decodeToken }) => {
   };
 
   return (
+    <>
+    <HelmetConfig
+        title="Profile"
+        description="Manage your account details, preferences, and saved properties effortlessly on your profile page."
+      />
     <div className="bg-bg-200 w-full h-auto py-10">
       <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow">
         <div className="flex flex-col gap-2 mb-6">
@@ -368,6 +375,7 @@ const Profile = ({ decodeToken }) => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

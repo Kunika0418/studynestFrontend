@@ -5,6 +5,9 @@ import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import FilterBar from "./components/FilterBar";
 import { useSearchParams } from "react-router-dom";
+import HelmetConfig from "../../utils/HelmetConfig";
+
+
 
 const initialCountries = [
   {
@@ -358,6 +361,11 @@ const Property = () => {
   }
 
   return (
+    <>
+    <HelmetConfig
+        title="Property"
+        description="Explore a curated list of student accommodations worldwide at StudyNest. Find properties tailored to your preferences, offering comfort, convenience, and affordability."
+      />
     <div className="bg-gray-50 relative w-full">
       {/* Filters Sidebar */}
       <div className="sticky top-16 z-10">
@@ -445,6 +453,7 @@ const Property = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

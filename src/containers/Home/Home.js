@@ -14,6 +14,9 @@ import bannerVideo from "../../assets/video/Banner_video.mp4";
 import TopApartments from "./components/TopApartments";
 import Faq from "./components/Faqs.js";
 
+import HelmetConfig from "../../utils/HelmetConfig.js";
+
+
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
@@ -37,6 +40,11 @@ const Home = () => {
   };
 
   return (
+    <>
+    <HelmetConfig
+        title="Home"
+        description="Welcome to StudyNest - Your Cozy Nest for finding student accommodations worldwide."
+      />
     <div className="flex flex-col">
       <Hero
         apartmentsData={apartmentsData}
@@ -86,6 +94,7 @@ const Home = () => {
         />
       )}
     </div>
+    </>
   );
 };
 
