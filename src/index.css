@@ -101,3 +101,15 @@ code {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* Hide horizontal scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For other browsers */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+

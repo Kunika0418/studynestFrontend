@@ -20,7 +20,7 @@ const RoomTypeGroup = ({
                     className="flex items-center text-[#a04031] hover:text-[#6C0F0A]"
                 >
                     <Plus size={20} />
-                    <span className="ml-1">Add RoomTypes Group</span>
+                    <span className="ml-1">Add RoomTypes</span>
                 </button>
             </div>
             {roomTypes.map((room, itemIndex) => (

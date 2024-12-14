@@ -13,12 +13,12 @@ const EasyBook = () => {
     },
     {
       img: notepad,
-      title: "We’ll Handle It",
+      title: "Agent allocation",
       description: "Leave the paperwork to us, stress-free and easy.",
     },
     {
       img: house,
-      title: "Room Reserved!",
+      title: "Get the contract",
       description:
         "Prepare, gather your things, and begin your next adventure!",
     },

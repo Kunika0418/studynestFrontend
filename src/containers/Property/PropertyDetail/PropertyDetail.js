@@ -356,7 +356,7 @@ const PropertyDetail = () => {
               {/* Amenities Section */}
               {apartment.amenities && (
                 <div id="facilities" className="w-full py-2 mt-4">
-                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-4">
                     Amenities
                   </h2>
                   <div className="amenities">
@@ -364,12 +364,12 @@ const PropertyDetail = () => {
                       {apartment.amenities.map((category, index) => (
                         <div
                           key={index}
-                          className="mb-6 border border-voilet bg-gray-50 px-6 py-4 rounded-lg"
+                          className="mb-4 border border-gray-500 bg-gray-50 px-8 py-4 rounded-lg"
                         >
                           <h3 className="text-lg text-accent-100 font-semibold mb-2">
                             {category.title}
                           </h3>
-                          <ul className="list-disc px-4 grid grid-cols-2 gap-x-4 gap-y-2">
+                          <ul className="list-decimal px-4 grid grid-cols-2 gap-x-4 gap-y-2">
                             {category.items.map((item, itemIndex) => (
                               <li
                                 className="text-accent-100 font-medium text-sm"
@@ -387,8 +387,8 @@ const PropertyDetail = () => {
               )}
 
               {apartment.roomTypes && (
-                <div id="roomTypes" className="w-full py-2 mt-4">
-                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+                <div id="roomTypes" className="w-full py-2">
+                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-4">
                     Room Types
                   </h2>
                   <div className="roomTypes">
@@ -396,12 +396,12 @@ const PropertyDetail = () => {
                       {apartment.roomTypes.map((category, index) => (
                         <div
                           key={index}
-                          className="mb-6 border border-voilet bg-gray-50 px-6 py-4 rounded-lg"
+                          className="mb-4 border border-gray-500 bg-gray-50 px-8 py-4 rounded-lg gap-2 flex flex-col"
                         >
-                          <h3 className="text-md text-accent-100 font-medium mb-2">
+                          <h3 className="text-md text-accent-100 font-medium">
                             Room Type : {category.title}
                           </h3>
-                          <h3 className="text-md text-accent-100 font-medium mb-2">
+                          <h3 className="text-md text-accent-100 font-medium">
                             Price : {category.price}
                           </h3>
                         </div>
@@ -413,15 +413,15 @@ const PropertyDetail = () => {
 
               {/* Services Section */}
               {apartment.services && (
-                <div id="services" className="w-full py-2 mb-6">
-                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-6">
+                <div id="services" className="w-1/2 py-2">
+                  <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-4">
                     Services
                   </h2>
-                  <div className="services border border-voilet bg-gray-50 p-4 rounded-lg">
-                    <ul className="list-disc list-inside">
+                  <div className="services border border-gray-500 bg-gray-50 py-4 px-8 rounded-lg">
+                    <ul className="list-decimal list-inside grid grid-cols-2">
                       {apartment.services.map((service, index) => (
                         <li
-                          className="text-accent-100 font-medium text-md mb-2"
+                          className="text-accent-100 font-medium text-md"
                           key={index}
                         >
                           {service}

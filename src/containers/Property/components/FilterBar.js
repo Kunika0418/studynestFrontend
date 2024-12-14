@@ -11,7 +11,7 @@ function FilterBar({ countries, selectedCountry, setSelectedCountry, setSelected
                 <div className="flex flex-col md:flex-row xs:flex-col items-center justify-between gap-8 w-full">
                     {/* Country Filter */}
                     {countries && (
-                        <div className="flex gap-4 items-center overflow-auto w-full xl:max-w-3xl lg:max-w-2xl md:max-w-full sm:max-w-full xs:max-w-full max-w-full p-2">
+                        <div className="flex gap-4 items-center overflow-auto hide-scrollbar w-full xl:max-w-3xl lg:max-w-2xl md:max-w-full sm:max-w-full xs:max-w-full max-w-full p-2">
                             {path === '/property' &&  <button
                                 className={`py-1 px-6 text-nowrap rounded-full text-md font-medium transition-colors border border-slate-300
                                     ${selectedCountry === ""

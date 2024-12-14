@@ -112,7 +112,7 @@ const TopApartments = () => {
           price={false}
         />
         <div className="flex lg:flex-row flex-col w-full">
-          <div className="cities flex lg:flex-col flex-row lg:w-64 w-full max-h-full bg-offwhite/50 shadow-lg border-r border-gray-200 gap-2 p-4 overflow-x-auto whitespace-nowrap overflow-hidden lg:overflow-y-scroll">
+          <div className="cities flex flex-row lg:flex-col lg:w-64 w-full h-[6rem] max-h-full lg:h-[30rem] bg-offwhite/50 shadow-lg border-r border-gray-200 gap-2 p-4 overflow-x-auto whitespace-nowrap overflow-hidden lg:overflow-y-scroll hide-scrollbar">
             {cities.map((city, index) => (
               <button
                 key={index}
