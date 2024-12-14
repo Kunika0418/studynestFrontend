@@ -360,7 +360,7 @@ const Property = () => {
   return (
     <div className="bg-gray-50 relative w-full">
       {/* Filters Sidebar */}
-      <div className="sticky top-16 z-20">
+      <div className="sticky top-16 z-10">
         <FilterBar
           countries={countries}
           selectedCountry={selectedCountry}
@@ -433,7 +433,7 @@ const Property = () => {
 
       {/* Infinite Scroll Loader */}
       {isFetchingMore && (
-        <div className="text-center py-4">
+        <div className="flex flex-row gap-2 items-center justify-center text-center py-16">
           <Oval
             visible={true}
             height="20"

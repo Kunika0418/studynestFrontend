@@ -14,25 +14,25 @@ const Faqs = () => {
     {
       question: "What is our mission?",
       answer:
-        "Our mission is to provide innovative solutions that make a difference in people's lives.",
+        "Our mission is to simplify the search for student accommodations across countries by providing reliable, convenient, and affordable housing solutions tailored to meet the needs of students worldwide.",
       icon: Target,
     },
     {
       question: "How do we work?",
       answer:
-        "We collaborate closely with our clients, using cutting-edge technology and creative thinking to solve complex challenges.",
+        "We partner with trusted property providers worldwide to offer diverse student accommodations. Our platform lets students search, compare, and book their ideal housing easily.",
       icon: Rocket,
     },
     {
       question: "What services do we offer?",
       answer:
-        "We offer a wide range of services including consulting, software development, design, and strategic planning.",
+        "We provide a variety of student accommodations, including shared apartments, studios, and private rooms. Our services also include 24/7 support and assistance in finding options that match your needs and budget.",
       icon: MessageCircleQuestion,
     },
     {
       question: "How can I contact support?",
       answer:
-        "You can reach our support team via email at support@example.com or call our helpline at 1-800-HELP-NOW.",
+        "You can reach our support team through the contact form on our website or via email at Hello@studynests.com . For instant assistance, use our 24/7 live chat or WhatsApp support.",
       icon: PhoneCall,
     },
   ];

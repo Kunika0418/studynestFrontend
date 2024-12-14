@@ -12,6 +12,9 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
 import axios from "axios";
 import { Oval } from "react-loader-spinner";
+import { Image } from 'lucide-react';
+import { FaMoneyBillWave } from "react-icons/fa";
+
 
 const PropertyDetail = () => {
   const { PropertyId } = useParams();
@@ -184,19 +187,19 @@ const PropertyDetail = () => {
               {/* Large image */}
               <div
                 onClick={() => openModal(apartment.images[1])}
-                className="lg:w-1/2 xs:w-full cursor-pointer"
+                className="lg:w-1/2 xs:w-full cursor-pointer relative"
               >
                 <img
                   src={apartment.images && apartment.images[0]}
                   alt="Large Image"
                   className="w-full h-full object-cover rounded-md"
                 />
+                <div className='absolute bottom-2 right-2 flex flex-row gap-2 px-2 py-2 items-center justify-center bg-black/60 rounded-xl text-lg text-white font-sans lg:hidden'><Image size={20} /> {apartment.images.length}</div>
               </div>
 
               {/* Grid of smaller images */}
               <div className="w-1/2 lg:grid lg:grid-cols-2 gap-2 lg:grid-rows-2 xs:hidden">
                 {apartment.images &&
-                  apartment.images.length >= 5 &&
                   apartment.images.slice(1, 4).map((image, index) => (
                     <div
                       onClick={() => openModal(apartment.images[index + 1])}
@@ -369,7 +372,7 @@ const PropertyDetail = () => {
                           <h3 className="text-lg text-accent-100 font-semibold mb-2">
                             {category.title}
                           </h3>
-                          <ul className="list-decimal px-4 grid grid-cols-2 gap-x-4 gap-y-2">
+                          <ul className="list-decimal px-4 grid grid-cols-1 xs:grid-cols-2 gap-x-4 gap-y-2">
                             {category.items.map((item, itemIndex) => (
                               <li
                                 className="text-accent-100 font-medium text-sm"
@@ -396,13 +399,13 @@ const PropertyDetail = () => {
                       {apartment.roomTypes.map((category, index) => (
                         <div
                           key={index}
-                          className="mb-4 border border-gray-500 bg-gray-50 px-8 py-4 rounded-lg gap-2 flex flex-col"
+                          className="mb-4 border border-gray-500 bg-gray-50 px-8 py-4 rounded-lg gap-2 flex flex-row justify-between flex-wrap"
                         >
                           <h3 className="text-md text-accent-100 font-medium">
-                            Room Type : {category.title}
+                            {category.title}
                           </h3>
-                          <h3 className="text-md text-accent-100 font-medium">
-                            Price : {category.price}
+                          <h3 className="flex flex-row gap-2 justify-center items-center text-md text-accent-100 font-medium">
+                          <FaMoneyBillWave /> ${category.price}/month
                           </h3>
                         </div>
                       ))}
@@ -413,12 +416,12 @@ const PropertyDetail = () => {
 
               {/* Services Section */}
               {apartment.services && (
-                <div id="services" className="w-1/2 py-2">
+                <div id="services" className="w-full md:w-1/2 py-2">
                   <h2 className="text-2xl font-sans text-accent-100 font-semibold mb-4">
                     Services
                   </h2>
                   <div className="services border border-gray-500 bg-gray-50 py-4 px-8 rounded-lg">
-                    <ul className="list-decimal list-inside grid grid-cols-2">
+                    <ul className="list-decimal px-4 grid grid-cols-1 xs:grid-cols-2 gap-4">
                       {apartment.services.map((service, index) => (
                         <li
                           className="text-accent-100 font-medium text-md"

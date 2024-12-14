@@ -22,7 +22,7 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
   };
 
   return (
-    <div className="w-full z-10">
+    <div className="w-full z-0">
       <Link to={`/Property/${_id}`}>
         {/* Apartment Image Slider */}
         <div className='flex justify-center'>

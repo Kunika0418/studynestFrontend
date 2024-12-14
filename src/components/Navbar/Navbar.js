@@ -11,6 +11,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { toast } from "react-toastify";
+import { IoMenu, IoClose } from "react-icons/io5";
 
 import "./Navbar.css";
 
@@ -126,18 +127,19 @@ const Navbar = () => {
             className="md:hidden text-2xl text-gray-700"
             aria-label="Toggle Menu"
           >
-            {isMenuOpen ? "X" : "☰"}
+            {isMenuOpen ? <IoClose /> : <IoMenu />}
           </button>
         </nav>
 
         {/* Mobile Nav Links */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white p-4 shadow-lg">
+          <div className="md:hidden bg-white p-4 shadow-lg absolute w-full z-10">
             <ul>
               <li className="py-2">
                 <Link
                   to={"/Property"}
-                  className="block text-gray-700 hover:text-primary-100 transition duration-300"
+                  onClick={toggleMenu}
+                  className="block text-voilet hover:text-pink transition duration-300"
                 >
                   Property
                 </Link>
@@ -145,19 +147,59 @@ const Navbar = () => {
               <li className="py-2">
                 <Link
                   to={"/Services"}
-                  className="block text-gray-700 hover:text-primary-100 transition duration-300"
+                  onClick={toggleMenu}
+                  className="block text-voilet hover:text-pink transition duration-300"
                 >
                   Services
                 </Link>
               </li>
               <li className="py-2">
                 {/* Login/Logout Button for Mobile */}
-                <button
-                  onClick={handleLoginLogout}
-                  className="text-gray-700 hover:text-amber-800"
-                >
-                  {isLoggedIn ? "Logout" : "Login"}
-                </button>
+
+                {localStorage.getItem("token") && (
+                  <Popover className="relative">
+                    <PopoverButton className="text-gray-700 hover:text-voilet text-2xl transition duration-300 mt-2 outline-none">
+                      <IoMdPerson />
+                    </PopoverButton>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-200"
+                      enterFrom="opacity-0 translate-y-1"
+                      enterTo="opacity-100 translate-y-0"
+                      leave="transition ease-in duration-150"
+                      leaveFrom="opacity-100 translate-y-0"
+                      leaveTo="opacity-0 translate-y-1"
+                    >
+                      <PopoverPanel
+                        anchor="bottom"
+                        className="flex flex-col justify-center items-center gap-1 bg-offwhite/80 border border-voilet rounded-xl p-2 w-32 z-20 mt-4 -ml-4"
+                      >
+                        <Link
+                          onClick={toggleMenu}
+                          className="hover:bg-voilet hover:text-white transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
+                          to={"/Profile"}
+                        >
+                          Profile
+                        </Link>
+                        <div
+                          className="hover:bg-voilet hover:text-white transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
+                          onClick={() => {handleLogOut(); toggleMenu()}}
+                        >
+                          Log Out
+                        </div>
+                      </PopoverPanel>
+                    </Transition>
+                  </Popover>
+                )}
+
+                {!localStorage.getItem("token") && (
+                  <button
+                    onClick={() => {handleLoginLogout(); toggleMenu();}}
+                    className="text-voilet hover:text-pink"
+                  >
+                    Login / SignUp
+                  </button>
+                )}
               </li>
             </ul>
           </div>

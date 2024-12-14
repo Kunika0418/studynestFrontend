@@ -314,7 +314,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             <button
               type="submit"
               disabled={disabled}
-              className="flex flex-row items-center justify-center w-full py-2 px-4 bg-blue hover:bg-blue/90 hover:scale-95 text-lightpink font-semibold rounded-lg transition duration-500 ease-in-out"
+              className={`flex flex-row items-center justify-center w-full py-2 px-4 ${disabled ? "bg-blue/80" : "bg-blue"} hover:bg-blue/90 hover:scale-95 text-lightpink font-semibold rounded-lg transition duration-500 ease-in-out`}
             >
               {isSignUp ? "Create Account" : "Login"}
               {isLoading && (
