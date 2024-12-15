@@ -20,6 +20,7 @@ import { jwtDecode } from "jwt-decode";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./containers/NotFound/NotFound.js";
 
 function App() {
   const [user, setUser] = useState({});
@@ -51,6 +52,7 @@ function App() {
       <Navbar />
       <WhastappIcon />
       <Routes>
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="/Property" element={<Property />} />
         <Route path="/Services" element={<Service />} />

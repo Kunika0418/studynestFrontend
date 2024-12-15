@@ -1,7 +1,6 @@
 # Search Engine Indexing Instructions
 User-agent: *
-Disallow: /admin/
 Disallow: /private/
 Allow: /
 
-Sitemap: https://www.yourwebsite.com/sitemap.xml
+Sitemap: https://www.studynests.com/sitemap.xml
