@@ -139,8 +139,9 @@ const initialCountries = [
 
 const Property = () => {
   const [searchParams] = useSearchParams();
-  const city = searchParams.get("city");
-
+  const type = searchParams.get("type");
+  const name = searchParams.get("name");
+  const country = searchParams.get("country");
   // State variables
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [countries, setCountries] = useState([
@@ -151,8 +152,8 @@ const Property = () => {
     "Canada",
   ]);
   const [cities, setCities] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedCity, setSelectedCity] = useState(city || "");
+  const [selectedCountry, setSelectedCountry] = useState(country || "");
+  const [selectedCity, setSelectedCity] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredApartments, setFilteredApartments] = useState([]);
@@ -162,6 +163,10 @@ const Property = () => {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+  console.log(selectedCountry)
+  // if(type==="city"){
+  //   setSelectedCity(name);
+  // }
 
   // Fetch properties
   const fetchProperties = async (pageNumber = 1, filters = {}) => {
@@ -225,6 +230,10 @@ const Property = () => {
   // }, []);
 
   useEffect(() => {
+    if(type==="city"){
+      setSelectedCity(name);
+    }
+    console.log(selectedCity)
     if (selectedCity) {
       fetchProperties(1, {
         city: selectedCity
@@ -352,6 +361,7 @@ const Property = () => {
         <p className="text-xl font-semibold text-red-500">{error}</p>
         <button
           className="text-white bg-voilet hover:bg-pink px-4 py-2 rounded-xl"
+
           onClick={() => window.location.reload()}
         >
           Reload
@@ -404,7 +414,7 @@ const Property = () => {
               );
             })}
           </div>}
-          <div className="px-4 py-10 flex flex-col justify-center">
+          <div className="px-4 py-10 flex flex-col justify-start">
             <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
               Available{" "}
               <span className="text-4xl text-pink font-bold">Properties</span>
@@ -422,7 +432,7 @@ const Property = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
+              <div className="flex flex-col gap-4 items-center justify-center h-full">
                 <p className="text-2xl font-semibold text-red-500">
                   No apartments are found
                 </p>
