@@ -3,8 +3,6 @@ import { CountryTabs } from "../../../components/SearchTab/SearchTab";
 import "../Home.css";
 
 const Hero = ({
-  apartmentsData,
-  handleSearch,
   searchTerm,
   handleChange,
   bannerVideo,
@@ -45,7 +43,7 @@ const Hero = ({
         <div className="w-full h-auto flex justify-center items-center mb-20 px-4">
           <div className="mt-10 w-full max-w-2xl relative">
             {isModalOpen && (
-              <CountryTabs setIsModalOpen={setIsModalOpen} searchTerm={searchTerm} />
+              <CountryTabs setIsModalOpen={setIsModalOpen} searchTerm={searchTerm} isModalOpen={isModalOpen} />
             )}
             <div className="relative flex items-center">
               <input
