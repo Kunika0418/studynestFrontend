@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
+import { getCurrencySymbolByCountry } from "../../utils/Currency";
 
 const BuyForm = ({ apartment }) => {
   const location = useLocation();
@@ -98,7 +99,8 @@ const BuyForm = ({ apartment }) => {
     <div className={`max-w-sm mx-auto border-2 border-green-500 rounded-xl`}>
       <div className="border-b border-bg-300 bg-gradient-to-b from-green-300 to-bg-green-200 p-4 rounded-t-xl">
         <h2 className="text-2xl text-accent-100 font-semibold text-center">
-          ${apartment.price}/week
+          {getCurrencySymbolByCountry(apartment.country)}
+          {apartment.price}/week
         </h2>
 
         <button className="bg-pink-100 text-primary-100 px-4 py-2 rounded mt-4 w-full text-left">
@@ -171,27 +173,29 @@ const BuyForm = ({ apartment }) => {
             />
           </div>
 
-          <div className="flex items-start">
-            <input
-              type="checkbox"
-              name="terms"
-              id="terms"
-              onChange={handleTermsChange}
-              className="h-4 w-4 text-primary-100 mt-[0.15rem]"
-            />
-            <label htmlFor="terms" className="ml-2 text-gray-600 text-sm">
-              By continuing, you agree to our{" "}
-              <a href="/" className="text-darkpink">
-                Privacy Policy
-              </a>{" "}
-              and{" "}
-              <a href="/" className="text-darkpink">
-                Terms of Service
-              </a>
-            </label>
+          <div className="flex flex-col">
+            <div className="flex items-start">
+              <input
+                type="checkbox"
+                name="terms"
+                id="terms"
+                onChange={handleTermsChange}
+                className="h-4 w-4 text-primary-100 mt-[0.15rem]"
+              />
+              <label htmlFor="terms" className="ml-2 text-gray-600 text-sm">
+                By continuing, you agree to our{" "}
+                <a href="/" className="text-darkpink">
+                  Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a href="/" className="text-darkpink">
+                  Terms of Service
+                </a>
+              </label>
+            </div>
             {errors.terms && (
               <p className={`text-red-500 text-sm mt-1`}>
-                Email address is required
+                Please accept Terms & Conditionss
               </p>
             )}
           </div>

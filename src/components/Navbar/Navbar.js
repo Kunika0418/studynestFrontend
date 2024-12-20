@@ -108,7 +108,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="https://wa.me/1234567890"  // Replace with your WhatsApp number
+                href="https://api.whatsapp.com/send?phone=918882487126"  // Replace with your WhatsApp number
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-voilet hover:text-voilet/80 transition duration-300 relative"
@@ -233,7 +233,7 @@ const Navbar = () => {
             <ul>
               <li className="py-2">
                 <a
-                  href="https://wa.me/1234567890"  // Replace with your WhatsApp number
+                  href="https://api.whatsapp.com/send?phone=918882487126"  // Replace with your WhatsApp number
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-voilet hover:text-voilet/80 transition duration-300"

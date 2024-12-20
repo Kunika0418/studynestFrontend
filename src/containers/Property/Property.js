@@ -7,8 +7,6 @@ import FilterBar from "./components/FilterBar";
 import { useSearchParams } from "react-router-dom";
 import HelmetConfig from "../../utils/HelmetConfig";
 
-
-
 const initialCountries = [
   {
     country: "USA",
@@ -142,6 +140,7 @@ const Property = () => {
   const type = searchParams.get("type");
   const name = searchParams.get("name");
   const country = searchParams.get("country");
+  const city = searchParams.get("city");
   // State variables
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [countries, setCountries] = useState([
@@ -153,7 +152,7 @@ const Property = () => {
   ]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(country || "");
-  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCity, setSelectedCity] = useState(city || "");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [filteredApartments, setFilteredApartments] = useState([]);
@@ -163,7 +162,6 @@ const Property = () => {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
-  console.log(selectedCountry)
   // if(type==="city"){
   //   setSelectedCity(name);
   // }
@@ -230,13 +228,13 @@ const Property = () => {
   // }, []);
 
   useEffect(() => {
-    if(type==="city"){
+    if (type === "city") {
       setSelectedCity(name);
     }
-    console.log(selectedCity)
+    console.log(selectedCity);
     if (selectedCity) {
       fetchProperties(1, {
-        city: selectedCity
+        city: selectedCity,
       });
     } else {
       fetchProperties(1);
@@ -361,7 +359,6 @@ const Property = () => {
         <p className="text-xl font-semibold text-red-500">{error}</p>
         <button
           className="text-white bg-voilet hover:bg-pink px-4 py-2 rounded-xl"
-
           onClick={() => window.location.reload()}
         >
           Reload
@@ -372,97 +369,103 @@ const Property = () => {
 
   return (
     <>
-    <HelmetConfig
+      <HelmetConfig
         title="Property"
         description="Explore a curated list of student accommodations worldwide at StudyNest. Find properties tailored to your preferences, offering comfort, convenience, and affordability."
       />
-    <div className="bg-gray-50 relative w-full">
-      {/* Filters Sidebar */}
-      <div className="sticky top-16 z-10">
-        <FilterBar
-          countries={countries}
-          selectedCountry={selectedCountry}
-          setSelectedCountry={setSelectedCountry}
-          setSelectedCity={setSelectedCity}
-          price={true}
-          minPrice={minPrice}
-          setMinPrice={setMinPrice}
-          maxPrice={maxPrice}
-          setMaxPrice={setMaxPrice}
-          setCities={setCities}
-        />
-      </div>
+      <div className="bg-gray-50 relative w-full">
+        {/* Filters Sidebar */}
+        <div className="sticky top-16 z-10">
+          <FilterBar
+            countries={countries}
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
+            setSelectedCity={setSelectedCity}
+            price={true}
+            minPrice={minPrice}
+            setMinPrice={setMinPrice}
+            maxPrice={maxPrice}
+            setMaxPrice={setMaxPrice}
+            setCities={setCities}
+          />
+        </div>
 
-      {/* Main Content */}
-      <main className="w-full">
-        <div className="gap-4 flex flex-col lg:flex-row w-full">
-          {selectedCountry!=="" && <div className="cities flex flex-row lg:flex-col lg:w-64 w-full h-[6rem] max-h-full lg:h-[30rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 overflow-x-auto whitespace-nowrap overflow-hidden lg:overflow-y-scroll sticky lg:top-32 top-52 z-20 lg:z-0 hide-scrollbar">
-            {cities.map((city, index) => {
-              return (
-                <button
-                  key={index}
-                  className={`my-2 px-4 py-1 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
+        {/* Main Content */}
+        <main className="w-full">
+          <div className="gap-4 flex flex-col lg:flex-row w-full">
+            {selectedCountry !== "" && (
+              <div className="cities flex flex-row lg:flex-col lg:w-64 w-full h-[6rem] max-h-full lg:h-[30rem] bg-gray-50 shadow-lg border-r border-gray-200 gap-2 p-4 overflow-x-auto whitespace-nowrap overflow-hidden lg:overflow-y-scroll sticky lg:top-32 top-52 z-20 lg:z-0 hide-scrollbar">
+                {cities.map((city, index) => {
+                  return (
+                    <button
+                      key={index}
+                      className={`my-2 px-4 py-1 text-md font-medium transition-colors w-full h-12 rounded-lg border border-slate-300
                                         ${
                                           selectedCity === city
                                             ? "bg-voilet text-white"
                                             : "bg-gray-100 text-gray-600 hover:bg-voilet hover:text-white"
                                         }`}
-                  onClick={() => setSelectedCity(city)}
-                >
-                  {city}
-                </button>
-              );
-            })}
-          </div>}
-          <div className="px-4 py-10 flex flex-col justify-start">
-            <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
-              Available{" "}
-              <span className="text-4xl text-pink font-bold">Properties</span>
-            </h1>
-
-            {/* Filtered Apartments */}
-            {filteredApartments.length > 0 ? (
-              <div className={`grid grid-cols-1 md:grid-cols-2 ${selectedCountry===""?'xl:grid-cols-4':`xl:grid-cols-3`} gap-x-6 gap-y-6 w-full`}>
-                {filteredApartments.map((apt) => (
-                  <ApartmentCard
-                    key={apt._id}
-                    {...apt}
-                    onClick={() => setSelectedApartment(apt)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col gap-4 items-center justify-center h-full">
-                <p className="text-2xl font-semibold text-red-500">
-                  No apartments are found
-                </p>
+                      onClick={() => setSelectedCity(city)}
+                    >
+                      {city}
+                    </button>
+                  );
+                })}
               </div>
             )}
+            <div className="px-4 py-10 flex flex-col justify-center w-full h-auto">
+              <h1 className="text-2xl font-semibold font-sans text-voilet mb-8">
+                Available{" "}
+                <span className="text-4xl text-pink font-bold">Properties</span>
+              </h1>
+
+              {/* Filtered Apartments */}
+              {filteredApartments.length > 0 ? (
+                <div
+                  className={`grid grid-cols-1 md:grid-cols-2 ${
+                    selectedCountry === "" ? "xl:grid-cols-4" : `xl:grid-cols-3`
+                  } gap-x-6 gap-y-6 w-full`}
+                >
+                  {filteredApartments.map((apt) => (
+                    <ApartmentCard
+                      key={apt._id}
+                      {...apt}
+                      onClick={() => setSelectedApartment(apt)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4 items-center justify-center h-80">
+                  <p className="text-2xl font-semibold text-red-500">
+                    No apartments are found
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      {selectedApartment && (
-        <PropertyDetail
-          apartment={selectedApartment}
-          onClose={() => setSelectedApartment(null)}
-        />
-      )}
-
-      {/* Infinite Scroll Loader */}
-      {isFetchingMore && (
-        <div className="flex flex-row gap-2 items-center justify-center text-center py-16">
-          <Oval
-            visible={true}
-            height="20"
-            width="20"
-            color="#242A56"
-            ariaLabel="loading"
+        {selectedApartment && (
+          <PropertyDetail
+            apartment={selectedApartment}
+            onClose={() => setSelectedApartment(null)}
           />
-          <span className="ml-2">Loading more properties...</span>
-        </div>
-      )}
-    </div>
+        )}
+
+        {/* Infinite Scroll Loader */}
+        {isFetchingMore && (
+          <div className="flex flex-row gap-2 items-center justify-center text-center py-16">
+            <Oval
+              visible={true}
+              height="20"
+              width="20"
+              color="#242A56"
+              ariaLabel="loading"
+            />
+            <span className="ml-2">Loading more properties...</span>
+          </div>
+        )}
+      </div>
     </>
   );
 };

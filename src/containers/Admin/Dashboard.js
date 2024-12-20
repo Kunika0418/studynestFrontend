@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import UserDetails from "./Component/UserDetails";
 import AddTestimonial from "./Component/AddTestimonial";
 import ManageTestimonial from "./Component/ManageTestimonial";
+import PropertyUpload from "./Component/PropertyUpload";
 
 
 const Dashboard = () => {
@@ -45,6 +46,14 @@ const Dashboard = () => {
           </button>
           <button
             onClick={() => {
+              setMenu("upload");
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Upload Properties
+          </button>
+          <button
+            onClick={() => {
               setMenu("edit");
             }}
             className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
@@ -77,6 +86,7 @@ const Dashboard = () => {
           </button>
         </div>
         {menu === "add" && <AddProperty />}
+        {menu === "upload" && <PropertyUpload />}
         {menu === "edit" && <EditProperty />}
         {menu === "userDetails" && <UserDetails />}
         {menu === "Add Testimonial" && <AddTestimonial />}
