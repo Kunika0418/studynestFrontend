@@ -6,8 +6,9 @@ import {
   FaYoutube, 
   FaEnvelope, 
   FaPhoneAlt, 
-  FaMapMarkerAlt 
+  FaMapMarkerAlt
 } from "react-icons/fa";
+import { SiTrustpilot } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -37,6 +38,11 @@ const Footer = () => {
       icon: FaYoutube, 
       href: "https://www.youtube.com/@studynest.global", 
       ariaLabel: "YouTube" 
+    },
+    { 
+      icon: SiTrustpilot, 
+      href: "https://www.trustpilot.com/review/www.studynests.com", 
+      ariaLabel: "TrustPilot" 
     }
   ];
 

@@ -47,8 +47,6 @@ const Home = () => {
       />
     <div className="flex flex-col">
       <Hero
-        apartmentsData={apartmentsData}
-        handleSearch={handleSearch}
         searchTerm={searchTerm}
         handleChange={handleChange}
         bannerVideo={bannerVideo}
