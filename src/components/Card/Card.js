@@ -26,7 +26,7 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
       <Link to={`/Property/${_id}`}>
         {/* Apartment Image Slider */}
         <div className='flex justify-center'>
-          <div className='bg-white w-[24rem] rounded-lg overflow-hidden border border-gray-100 shadow-lg shadow-slate-400 hover:shadow-lg hover:shadow-voilet hover:border-voilet transition-shadow duration-500 ease-in-out'>
+          <div className='bg-white w-[24rem] h-96 rounded-lg overflow-hidden border border-gray-100 shadow-lg shadow-slate-400 hover:shadow-lg hover:shadow-voilet hover:border-voilet transition-shadow duration-500 ease-in-out'>
             <div className="w-[24rem] h-48 relative">
               <Slider {...settings}>
                 {images.length > 0 ? (
@@ -54,7 +54,7 @@ const ApartmentCard = ({ _id, images, title, price, city, country, area, service
               <p className="text-sm mb-1">{city}, {country}</p>
               <p className="text-sm mb-1 text-indigo-900">Area: {area}</p>
               <p className="text-sm font-semibold mb-1 text-indigo-900">
-                Price: ${price}/month
+                Price: ${price}/week
               </p>
               <ul className="text-xs text-gray-600 mt-2 grid grid-cols-3">
                 {services.slice(0, 2).map((service, index) => (

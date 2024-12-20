@@ -12,9 +12,8 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FaGraduationCap } from "react-icons/fa6";
 import axios from "axios";
 import { Oval } from "react-loader-spinner";
-import { Image } from 'lucide-react';
+import { Image } from "lucide-react";
 import { FaMoneyBillWave } from "react-icons/fa";
-
 
 const PropertyDetail = () => {
   const { PropertyId } = useParams();
@@ -30,15 +29,16 @@ const PropertyDetail = () => {
   const [apartment, setapartment] = useState({});
 
   useEffect(() => {
+    
     const fetchPropertyById = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/property/${PropertyId}`
         );
         setapartment(response.data.property);
-        setLoading(false);
       } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
       }
     };
@@ -49,10 +49,9 @@ const PropertyDetail = () => {
           `${process.env.REACT_APP_SERVER_URI}/api/propertyauth/properties`
         );
         setApartmentsData(response.data.properties);
-        setLoading(false);
-        console.log(response);
       } catch (error) {
         setError(error.message);
+      } finally {
         setLoading(false);
       }
     };
@@ -194,7 +193,9 @@ const PropertyDetail = () => {
                   alt="Large Image"
                   className="w-full h-full object-cover rounded-md"
                 />
-                <div className='absolute bottom-2 right-2 flex flex-row gap-2 px-2 py-2 items-center justify-center bg-black/60 rounded-xl text-lg text-white font-sans lg:hidden'><Image size={20} /> {apartment.images.length}</div>
+                <div className="absolute bottom-2 right-2 flex flex-row gap-2 px-2 py-2 items-center justify-center bg-black/60 rounded-xl text-lg text-white font-sans lg:hidden">
+                  <Image size={20} /> {apartment.images && apartment.images.length}
+                </div>
               </div>
 
               {/* Grid of smaller images */}
@@ -405,7 +406,7 @@ const PropertyDetail = () => {
                             {category.title}
                           </h3>
                           <h3 className="flex flex-row gap-2 justify-center items-center text-md text-accent-100 font-medium">
-                          <FaMoneyBillWave /> ${category.price}/month
+                            <FaMoneyBillWave /> ${category.price}/month
                           </h3>
                         </div>
                       ))}
@@ -480,7 +481,7 @@ const PropertyDetail = () => {
         </div>
       ) : (
         <div className="flex items-center justify-center min-h-screen">
-          <p className="text-lg text-gray-500">Property not found.</p>
+          <p className="text-lg text-voilet">Property not found.</p>
         </div>
       )}
     </div>

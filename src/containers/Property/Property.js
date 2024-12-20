@@ -349,9 +349,9 @@ const Property = () => {
   if (error) {
     return (
       <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
-        <p className="text-2xl font-semibold text-red-500">{error}</p>
+        <p className="text-xl font-semibold text-red-500">{error}</p>
         <button
-          className="text-white ring-2 ring-pink-900 bg-pink-700 hover:bg-pink-800 px-4 py-2 rounded-xl"
+          className="text-white bg-voilet hover:bg-pink px-4 py-2 rounded-xl"
           onClick={() => window.location.reload()}
         >
           Reload
