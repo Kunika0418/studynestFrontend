@@ -9,10 +9,10 @@ const HelmetConfig = ({ title, description }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://www.studynest.com" />
+      <meta property="og:url" content="https://www.studynests.com" />
       <meta
         property="og:image"
-        content="https://www.studynest.com/assets/og-preview.jpg"
+        content="https://www.studynests.com/assets/og-preview.jpg"
       />
       <meta name="twitter:card" content="summary_large_image" />
       <script
@@ -22,11 +22,11 @@ const HelmetConfig = ({ title, description }) => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "StudyNest",
-            "url": "https://www.studynest.com",
+            "url": "https://www.studynests.com",
             "description": description,
             "potentialAction": {
               "@type": "SearchAction",
-              "target": "https://www.studynest.com/search?q={search_term_string}",
+              "target": "https://www.studynests.com/search?q={search_term_string}",
               "query-input": "required name=search_term_string"
             }
           })

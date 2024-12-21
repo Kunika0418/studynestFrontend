@@ -19,24 +19,11 @@ import HelmetConfig from "../../utils/HelmetConfig.js";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredApartments, setFilteredApartments] = useState(apartmentsData);
   const [selectedApartment, setSelectedApartment] = useState(null);
 
   const handleChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchTerm(query);
-  };
-
-  const handleSearch = () => {
-    // Filter logic
-    const query = searchTerm;
-    const filtered = apartmentsData.filter(
-      (apartment) =>
-        apartment.title.toLowerCase().includes(query) ||
-        apartment.city.toLowerCase().includes(query) ||
-        apartment.country.toLowerCase().includes(query)
-    );
-    setFilteredApartments(filtered);
   };
 
   return (
@@ -49,6 +36,7 @@ const Home = () => {
       <Hero
         searchTerm={searchTerm}
         handleChange={handleChange}
+        setSearchTerm={setSearchTerm}
         bannerVideo={bannerVideo}
       />
 

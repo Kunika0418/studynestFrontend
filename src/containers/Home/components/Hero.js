@@ -1,18 +1,30 @@
-import React, { useState } from "react";
-import { CountryTabs } from "../../../components/SearchTab/SearchTab";
+import React, { useEffect, useRef, useState } from "react";
+import EnhancedSearch from "../../../components/EnhancedSearch/EnhancedSearch";
 import "../Home.css";
 
-const Hero = ({
-  searchTerm,
-  handleChange,
-  bannerVideo,
-}) => {
+const Hero = ({ searchTerm, handleChange, bannerVideo, setSearchTerm }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const inputRef = useRef(null);
 
   // Handler to open modal when the search input is focused
   const handleFocus = () => {
     setIsModalOpen(true);
   };
+
+  // Close modal when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setIsModalOpen(false);
+        setSearchTerm("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -41,17 +53,25 @@ const Hero = ({
         </div>
         {/* Search Bar Section */}
         <div className="w-full h-auto flex justify-center items-center mb-20 px-4">
-          <div className="mt-10 w-full max-w-2xl relative">
+          <div ref={inputRef} className="mt-10 w-full max-w-2xl relative">
             {isModalOpen && (
-              <CountryTabs setIsModalOpen={setIsModalOpen} searchTerm={searchTerm} isModalOpen={isModalOpen} />
+              <EnhancedSearch
+                searchTerm={searchTerm}
+                isOpen={isModalOpen}
+                onClose={() => {
+                  setIsModalOpen(false);
+                  setSearchTerm("");
+                }}
+              />
             )}
             <div className="relative flex items-center">
               <input
+                ref={inputRef}
                 type="text"
                 placeholder="Enter city, country, or name"
                 value={searchTerm}
                 onChange={handleChange}
-                onFocus={handleFocus}  // Open modal when focused
+                onFocus={handleFocus} // Open modal when focused
                 className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300"
               />
             </div>

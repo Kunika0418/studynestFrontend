@@ -1,11 +1,10 @@
 // components/Navbar.jsx
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa"; // WhatsApp Icon
 import logo from "../../assets/logo/logo.jpg";
 import AuthModal from "../Login/Modal";
-import { CountryTabs } from "../SearchTab/SearchTab";
 import {
   Popover,
   PopoverButton,
@@ -14,6 +13,7 @@ import {
 } from "@headlessui/react";
 import { toast } from "react-toastify";
 import { IoMenu, IoClose } from "react-icons/io5";
+import EnhancedSearch from "../EnhancedSearch/EnhancedSearch";
 
 import "./Navbar.css";
 
@@ -25,6 +25,10 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+  const searchContainerRef = useRef(null);
+  const searchMobileContainerRef = useRef(null);
+  const searchMobileInputRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -51,11 +55,32 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // Handle click outside search
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target) &&
+        searchMobileContainerRef.current &&
+        !searchMobileContainerRef.current.contains(event.target)
+      ) {
+        setIsSearchOpen(false);
+        setSearchTerm("");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <>
       <div className="bg-offwhite/50 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md border-b-2 border-pink">
         <nav className="navbar flex justify-between items-center xs:px-4 md:px-6 py-3 shadow-md">
-          <Link to={"/"} className="flex justify-center items-center space-x-3 px-1">
+          <Link
+            to={"/"}
+            className="flex justify-center items-center space-x-3 px-1"
+          >
             <div className="w-12 h-12 overflow-hidden rounded-full">
               <img
                 src={logo}
@@ -63,7 +88,7 @@ const Navbar = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="xs:hidden sm:block text-3xl font-semibold font-sans text-voilet">
+            <div className="hidden sm:block text-3xl font-semibold font-sans text-voilet">
               StudyNests
             </div>
           </Link>
@@ -71,17 +96,23 @@ const Navbar = () => {
           {/* Desktop Nav Links */}
           <ul className="hidden lg:flex justify-center items-center xl:gap-10 lg:gap-6 w-full max-w-5xl">
             <li className="relative w-full">
-              <div className="w-full h-auto flex justify-center items-center">
-                <div className="w-full max-w-2xl relative">
-                  <div className={`relative flex items-center ${isSearchOpen ? 'justify-center' : 'justify-end'}`}>
+              <div className="w-full h-auto flex justify-center items-center relative">
+                <div className="w-full max-w-2xl">
+                  <div
+                    className={`flex items-center ${
+                      isSearchOpen ? "justify-center" : "justify-end"
+                    }`}
+                  >
                     <input
+                      ref={searchInputRef}
                       type="text"
                       placeholder="Enter city, country, or name"
                       value={searchTerm}
                       onChange={handleChange}
-                      onFocus={handleFocus}  // Open modal when focused
-                      className={`transition-all duration-300 w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet ${isSearchOpen ? 'w-full xl:w-96 lg:w-[21rem]' : 'lg:w-72'
-                        }`}
+                      onFocus={handleFocus} // Open modal when focused
+                      className={`transition-all duration-300 w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet ${
+                        isSearchOpen ? "w-full xl:w-96 lg:w-[21rem]" : "lg:w-72"
+                      }`}
                     />
                   </div>
                 </div>
@@ -90,16 +121,22 @@ const Navbar = () => {
                   <div className="absolute inset-0 flex justify-center z-50 w-full max-w-4xl">
                     {/* Background Overlay */}
                     <div
-                      className="absolute inset-0 min-h-screen w-full"  // Semi-transparent black background
+                      className="absolute inset-0 min-h-screen w-full" // Semi-transparent black background
                       onClick={() => setIsSearchOpen(false)} // Close the modal if clicked outside
                     ></div>
 
                     {/* Modal Content */}
-                    <div className="relative z-10 w-full max-w-2xl mt-2">
-                      <CountryTabs
-                        setIsModalOpen={setIsSearchOpen}
+                    <div
+                      ref={searchContainerRef}
+                      className="absolute top-10 z-10 w-full max-w-2xl mt-2"
+                    >
+                      <EnhancedSearch
                         searchTerm={searchTerm}
-                        isModalOpen={isSearchOpen}
+                        isOpen={isSearchOpen}
+                        onClose={() => {
+                          setIsSearchOpen(false);
+                          setSearchTerm("");
+                        }}
                       />
                     </div>
                   </div>
@@ -108,7 +145,7 @@ const Navbar = () => {
             </li>
             <li>
               <a
-                href="https://api.whatsapp.com/send?phone=918882487126"  // Replace with your WhatsApp number
+                href="https://api.whatsapp.com/send?phone=918882487126" // Replace with your WhatsApp number
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-voilet hover:text-voilet/80 transition duration-300 relative"
@@ -181,7 +218,6 @@ const Navbar = () => {
             </li>
           </ul>
 
-
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex gap-2">
             <div className="w-full h-auto flex justify-center items-center">
@@ -192,7 +228,7 @@ const Navbar = () => {
                     placeholder="Search"
                     value={searchTerm}
                     onChange={handleChange}
-                    onFocus={handleFocus}  // Open modal when focused
+                    onFocus={handleFocus} // Open modal when focused
                     className="xs:w-[8rem] md:w-full py-2 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300"
                   />
                 </div>
@@ -202,16 +238,22 @@ const Navbar = () => {
                 <div className="absolute inset-0 flex justify-center items-start z-50">
                   {/* Background Overlay */}
                   <div
-                    className="absolute inset-0 bg-black opacity-30 min-h-screen"  // Semi-transparent black background
+                    className="absolute inset-0 bg-black opacity-30 min-h-screen" // Semi-transparent black background
                     onClick={() => setIsSearchOpen(false)} // Close the modal if clicked outside
                   ></div>
 
                   {/* Modal Content */}
-                  <div className="relative z-10 w-full max-w-md mt-2">
-                    <CountryTabs
-                      setIsModalOpen={setIsSearchOpen}
+                  <div
+                    ref={searchMobileContainerRef}
+                    className="relative z-10 w-full max-w-md mt-2"
+                  >
+                    <EnhancedSearch
                       searchTerm={searchTerm}
-                      isModalOpen={isSearchOpen}
+                      isOpen={isSearchOpen}
+                      onClose={() => {
+                        setIsSearchOpen(false);
+                        setSearchTerm("");
+                      }}
                     />
                   </div>
                 </div>
@@ -233,7 +275,7 @@ const Navbar = () => {
             <ul>
               <li className="py-2">
                 <a
-                  href="https://api.whatsapp.com/send?phone=918882487126"  // Replace with your WhatsApp number
+                  href="https://api.whatsapp.com/send?phone=918882487126" // Replace with your WhatsApp number
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-voilet hover:text-voilet/80 transition duration-300"
@@ -289,7 +331,10 @@ const Navbar = () => {
                         </Link>
                         <div
                           className="hover:bg-voilet hover:text-white transition duration-300 ease-in-out cursor-pointer w-full px-4 py-2 rounded-xl text-center font-sans font-medium"
-                          onClick={() => { handleLogOut(); toggleMenu() }}
+                          onClick={() => {
+                            handleLogOut();
+                            toggleMenu();
+                          }}
                         >
                           Log Out
                         </div>
@@ -300,7 +345,10 @@ const Navbar = () => {
 
                 {!localStorage.getItem("token") && (
                   <button
-                    onClick={() => { handleLoginLogout(); toggleMenu(); }}
+                    onClick={() => {
+                      handleLoginLogout();
+                      toggleMenu();
+                    }}
                     className="text-voilet hover:text-pink"
                   >
                     Login / SignUp
