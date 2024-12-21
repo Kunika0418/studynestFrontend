@@ -148,7 +148,7 @@ const PropertyDetail = () => {
   return (
     <>
       <HelmetConfig
-        title={apartment.title}
+        title={`${apartment.title}`}
         description="Explore a curated list of student accommodations worldwide at StudyNest. Find properties tailored to your preferences, offering comfort, convenience, and affordability."
       />
 

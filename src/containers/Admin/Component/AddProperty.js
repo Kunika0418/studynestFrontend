@@ -132,7 +132,7 @@ const AddProperty = () => {
       const formData = new FormData();
 
       // Append property data
-      formData.append("slug", propertyData.title.toLowerCase().replace(/\s+/g, "-"));
+      formData.append("slug", propertyData.title.toLowerCase().replace(/\s+/g, "-") + "-" + Date.now());
       formData.append("title", propertyData.title);
       formData.append("price", propertyData.price);
       formData.append("city", propertyData.city);

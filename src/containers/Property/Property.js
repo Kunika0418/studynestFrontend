@@ -231,7 +231,6 @@ const Property = () => {
     if (type === "city") {
       setSelectedCity(name);
     }
-    console.log(selectedCity);
     if (selectedCity) {
       fetchProperties(1, {
         city: selectedCity,

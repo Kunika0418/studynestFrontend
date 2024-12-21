@@ -63,7 +63,7 @@ const ApartmentCard = ({
             </div>
 
             <div className="p-4 flex flex-col gap-[2px]">
-              <h2 className="text-xl text-voilet font-bold">{title}</h2>
+              <h2 className="text-xl text-voilet font-bold truncate">{title}</h2>
               <p className="text-sm mb-1">
                 {city}, {country}
               </p>
