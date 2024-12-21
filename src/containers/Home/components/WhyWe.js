@@ -41,6 +41,7 @@ const WhyWe = () => {
           <img
             src={collegeStudents}
             className="h-full w-full object-cover absolute"
+            loading="lazy"
           />
         </div>
         <div className="h-full w-full bg-voilet/80 bg-opacity-50 absolute z-0"></div>
@@ -58,7 +59,7 @@ const WhyWe = () => {
             <span className="font-semibold underline underline-offset-4 text-yellow-300">
               student housing near you
             </span>{" "}
-            is effortless with StudyNest assistance. We strive to provide
+            is effortless with StudyNests assistance. We strive to provide
             comfort, convenience, and a secure living environment!
           </div>
         </div>
@@ -66,13 +67,20 @@ const WhyWe = () => {
           {data.map((item, index) => {
             return (
               <div
-                key={index+1}
+                key={index + 1}
                 className="h-full w-72 flex flex-col justify-center items-center gap-2 p-8  border-none cursor-pointer relative group hover:-translate-y-2 transition-transform duration-500 ease-in-out"
               >
                 <div className="h-44 w-56 bg-slate-300 overflow-hidden rounded-lg">
-                  <img src={item.img} className="h-full w-full object-cover" alt="error occured"/>
+                  <img
+                    src={item.img}
+                    className="h-full w-full object-cover"
+                    alt="image"
+                    loading="lazy"
+                  />
                 </div>
-                <h3 className="font-sans font-semibold text-pink">{item.title}</h3>
+                <h3 className="font-sans font-semibold text-pink">
+                  {item.title}
+                </h3>
                 <span className="text-justify text-sm text-voilet">
                   {item.description}
                 </span>

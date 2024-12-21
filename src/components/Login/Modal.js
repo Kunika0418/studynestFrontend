@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import axios from "axios";
+import logo from "../../assets/logo/logo.jpg";
+
 
 const AuthModal = ({ isOpen, onClose }) => {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between Login and SignUp
@@ -37,9 +39,9 @@ const AuthModal = ({ isOpen, onClose }) => {
     setDisabled(true);
     setIsLoading(true);
     setError(null);
-  
+
     const formData = new FormData(e.target);
-  
+
     // Prepare data to send to the API
     const payload = {
       name: formData.get("fullname"),
@@ -52,31 +54,39 @@ const AuthModal = ({ isOpen, onClose }) => {
         gender: formData.get("gender"),
       }),
     };
-  
+
     const url = isSignUp ? `/api/auth/signup` : `/api/auth/login`;
-  
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URI}${url}`, payload, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URI}${url}`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       // Handle success
-      toast.success(isSignUp ? "Account created successfully!" : "Login successful!");
+      toast.success(
+        isSignUp ? "Account created successfully!" : "Login successful!"
+      );
       localStorage.setItem("token", response.data.token);
       navigate(isSignUp ? "/Profile" : "/Property");
       onClose();
     } catch (err) {
       // Handle error
-      setError(err.response?.data?.message || "An error occurred during authentication.");
+      setError(
+        err.response?.data?.message ||
+          "An error occurred during authentication."
+      );
       toast.error(err.response?.data?.message || "An error occurred.");
     } finally {
       setDisabled(false);
       setIsLoading(false);
     }
   };
-  
 
   const handleSwitchForm = () => setIsSignUp(!isSignUp);
 
@@ -105,7 +115,15 @@ const AuthModal = ({ isOpen, onClose }) => {
         </button>
 
         {/* Title */}
-        <h2 className="text-2xl font-semibold text-accent-100 mb-4">
+        <h2 className="flex flex-row gap-2 justify-start items-center text-2xl font-semibold text-accent-100 mb-4">
+          <div className="w-10 h-10 overflow-hidden rounded-full">
+            <img
+              src={logo}
+              alt="StudyNest Logo"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
           {isSignUp ? "Sign Up" : "Login"}
         </h2>
 
@@ -314,7 +332,9 @@ const AuthModal = ({ isOpen, onClose }) => {
             <button
               type="submit"
               disabled={disabled}
-              className={`flex flex-row items-center justify-center w-full py-2 px-4 ${disabled ? "bg-blue/80" : "bg-blue"} hover:bg-blue/90 hover:scale-95 text-lightpink font-semibold rounded-lg transition duration-500 ease-in-out`}
+              className={`flex flex-row items-center justify-center w-full py-2 px-4 ${
+                disabled ? "bg-blue/80" : "bg-blue"
+              } hover:bg-blue/90 hover:scale-95 text-lightpink font-semibold rounded-lg transition duration-500 ease-in-out`}
             >
               {isSignUp ? "Create Account" : "Login"}
               {isLoading && (

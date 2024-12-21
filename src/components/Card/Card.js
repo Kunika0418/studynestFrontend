@@ -45,6 +45,7 @@ const ApartmentCard = ({
                       src={image || "/default-image.jpg"}
                       alt={title || "Apartment"}
                       className="w-[21rem] h-48 object-cover"
+                      loading="lazy"
                     />
                   ))
                 ) : (
@@ -52,6 +53,7 @@ const ApartmentCard = ({
                     src="/default-image.jpg"
                     alt="Default Apartment"
                     className="w-48 h-48 object-cover"
+                    loading="lazy"
                   />
                 )}
               </Slider>

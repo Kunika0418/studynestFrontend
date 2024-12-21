@@ -68,6 +68,7 @@ const Testimonials = () => {
                   src={'https://w7.pngwing.com/pngs/184/113/png-transparent-user-profile-computer-icons-profile-heroes-black-silhouette-thumbnail.png'}
                   alt={testimonial.name}
                   className="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-voilet"
+                  loading="lazy"
                 />
                 <p className="text-text-200 text-center italic mb-4">
                   "{testimonial.feedback}"

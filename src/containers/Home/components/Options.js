@@ -6,7 +6,6 @@ import room3 from "../../../assets/images/room3.jpg";
 import room4 from "../../../assets/images/room4.jpg";
 import backgroundHotel from "../../../assets/images/backgroundHotel.jpg";
 
-
 const Options = () => {
   const data = [
     {
@@ -45,8 +44,7 @@ const Options = () => {
             backgroundSize: "auto", // Adjust size if needed
             backgroundPosition: "center",
           }}
-        >
-        </div>
+        ></div>
         <h2 className="text-3xl font-semibold font-sans text-voilet capitalize z-10">
           Discover the Options: Explore the Range of{" "}
           <span className="text-pink capitalize z-10">
@@ -66,7 +64,8 @@ const Options = () => {
                 <img
                   src={item.image}
                   className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  alt="error occured"
+                  alt="image"
+                  loading="lazy"
                 />
                 <div className="left-0 bottom-0 absolute z-0 p-4 group-hover:-translate-y-10 transition-transform duration-500">
                   <h3 className="text-xl font-sans text-white font-semibold">

@@ -5,49 +5,7 @@ import axios from "axios";
 import { Oval } from "react-loader-spinner";
 import HelmetConfig from "../../utils/HelmetConfig";
 
-
 const Service = () => {
-  const services = [
-    {
-      id: 1,
-      title: "Property Listings",
-      description: "Explore a wide range of apartments available for sale.",
-      icon: "🏠",
-    },
-    {
-      id: 2,
-      title: "Virtual Tours",
-      description:
-        "Take a virtual walkthrough of properties from the comfort of your home.",
-      icon: "🖥️",
-    },
-    {
-      id: 3,
-      title: "Real Estate Consultancy",
-      description: "Get expert advice to find the right property for you.",
-      icon: "🤝",
-    },
-    {
-      id: 4,
-      title: "Legal Assistance",
-      description: "We help with property documentation and legal formalities.",
-      icon: "📜",
-    },
-    {
-      id: 5,
-      title: "Home Loans",
-      description: "Get assistance in securing the best home loan deals.",
-      icon: "💰",
-    },
-    {
-      id: 6,
-      title: "Post-Sale Services",
-      description:
-        "We offer after-sale support for a seamless transition into your new home.",
-      icon: "🔑",
-    },
-  ];
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -107,29 +65,10 @@ const Service = () => {
           <p className="text-base font-sans tracking-wider font-semibold text-white text-center mb-12 z-10">
             Join our network and unlock exciting opportunities.
           </p>
-
-          {/* Service Cards */}
-          {/* <div className="grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 z-10">
-          {services.map((service) => (
-            <div
-              key={service.id}
-              className="rounded-lg border border-voilet overflow-hidden shadow-2xl shadow-slate-400 hover:shadow-3xl hover:shadow-voilet transition duration-500 ease-in-out hover:scale-105 p-6 text-center text-accent-100 cursor-pointer bg-lightpink"
-            >
-              <div className="text-5xl mb-4">{service.icon}</div>
-              <h2 className="text-xl font-semibold text-darkpink mb-2">
-                {service.title}
-              </h2>
-              <p className="text-accent-100">{service.description}</p>
-            </div>
-          ))}
-        </div> */}
         </div>
         <div className="bg-offwhite/50 rounded-lg p-6 md:py-10 md:px-20 max-w-full mx-auto border border-gray-200">
-          {/* <h2 className="text-3xl font-bold text-voilet text-center mb-6">
-          Have a Query<span className="text-5xl">?</span>{" "}<span className="text-darkpink">Tell Us</span>
-        </h2> */}
           <p className="text-gray-600 font-semibold text-center mb-8">
-            Fill out the form below and we’ll get back to you promptly.
+            Fill out the form below and we'll get back to you promptly.
           </p>
           <form onSubmit={handleSubmit}>
             <div className="mb-4 flex gap-8">

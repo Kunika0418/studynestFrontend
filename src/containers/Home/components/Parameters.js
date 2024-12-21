@@ -1,7 +1,6 @@
 import React from "react";
-import { FaGlobe, FaUsers, FaHome, FaCity, FaBed  } from "react-icons/fa";
+import { FaGlobe, FaUsers, FaHome, FaCity, FaBed } from "react-icons/fa";
 import { PiStudentFill } from "react-icons/pi";
-
 
 const Parameters = () => {
   const data = [
@@ -9,15 +8,13 @@ const Parameters = () => {
       icon: <FaGlobe className="text-3xl text-blue-500" />,
       iconColor: "group-hover:text-blue-500",
       title: "10+ Countries Worldwide",
-      description:
-        "Premium living spaces for students.",
+      description: "Premium living spaces for students.",
     },
     {
       icon: <FaCity className="text-3xl text-green-500" />,
       iconColor: "group-hover:text-green-500",
       title: "450+ Cities Across the Globe",
-      description:
-        "Presence in top cities worldwide.",
+      description: "Presence in top cities worldwide.",
     },
     {
       icon: <PiStudentFill className="text-3xl text-orange-500" />,
@@ -44,7 +41,9 @@ const Parameters = () => {
               {item.icon}
             </div>
             <div>
-              <h3 className={`text-lg font-semibold text-gray-800 ${item.iconColor} transition ease-in-out duration-300`}>
+              <h3
+                className={`text-lg font-semibold text-gray-800 ${item.iconColor} transition ease-in-out duration-300`}
+              >
                 {item.title}
               </h3>
               <p className="text-gray-600 text-justify">{item.description}</p>

@@ -4,6 +4,7 @@ import ApartmentCard from "../../../components/Card/Card";
 import FilterBar from "../../Property/components/FilterBar";
 import PropertyDetail from "../../Property/PropertyDetail/PropertyDetail";
 import arrow from "../../../assets/images/arrow.png";
+import { Oval } from "react-loader-spinner";
 
 const TopApartments = () => {
   const [selectedApartment, setSelectedApartment] = useState(null);
@@ -83,11 +84,26 @@ const TopApartments = () => {
   }, [selectedCountry, selectedCity, properties]);
 
   if (loading) {
-    return <div className="text-center text-blue-500">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center">
+        <div className="ml-4 transition duration-500 ease-in-out">
+          <Oval
+            visible={true}
+            height="20"
+            width="20"
+            secondaryColor="#2c2c2c"
+            strokeWidth={4}
+            strokeWidthSecondary={4}
+            color="#242A56"
+            ariaLabel="oval-loading"
+          />
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-center text-red-500">{error}</div>;
+    return <div className="text-center">{" "}</div>;
   }
 
   return (

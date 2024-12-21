@@ -46,6 +46,7 @@ const EasyBook = () => {
                     src={item.img}
                     className="h-full w-full object-cover rounded-full"
                     alt="error occured"
+                    loading="lazy"
                   />
                   <div className="h-14 w-14 rounded-full bg-darkpink absolute -right-6 border-8 border-white flex justify-center items-center text-white">
                     0{index + 1}

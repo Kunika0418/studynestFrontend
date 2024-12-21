@@ -199,6 +199,7 @@ const PropertyDetail = () => {
                     src={apartment.images && apartment.images[0]}
                     alt="Large Image"
                     className="w-full h-full object-cover rounded-md"
+                    loading="lazy"
                   />
                   <div className="absolute bottom-2 right-2 flex flex-row gap-2 px-2 py-2 items-center justify-center bg-black/60 rounded-xl text-lg text-white font-sans lg:hidden">
                     <Image size={20} />{" "}
@@ -219,6 +220,7 @@ const PropertyDetail = () => {
                           src={image}
                           alt={`Image ${index + 2}`}
                           className="w-full h-full object-cover"
+                          loading="lazy"
                         />
                       </div>
                     ))}
@@ -232,6 +234,7 @@ const PropertyDetail = () => {
                         src={(apartment.images && apartment.images[4]) || ""}
                         alt="Others"
                         className="w-full h-full object-cover blur-sm"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <p className="text-white text-2xl font-medium">
@@ -460,24 +463,25 @@ const PropertyDetail = () => {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
                 {recommendedApartments.map((apt) => (
-                  <Link
+                  <a
                     key={apt._id}
-                    to={`/Property/${apt._id}`}
+                    href={`/Property/${apt._id}`}
                     className="block bg-white border rounded-lg shadow-md hover:shadow-lg transition overflow-hidden"
                   >
                     <img
                       src={apt.images[0]}
                       alt={apt.title}
                       className="w-full h-48 object-cover"
+                      loading="lazy"
                     />
                     <div className="p-4">
                       <h3 className="text-lg font-semibold">{apt.title}</h3>
                       <p className="text-gray-500">{apt.city}</p>
-                      <p className="text-pink-800 font-bold">
+                      <p className="text-pink font-bold">
                         ${apt.price}/month
                       </p>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>

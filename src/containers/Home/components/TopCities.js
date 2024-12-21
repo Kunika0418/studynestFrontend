@@ -96,6 +96,7 @@ const TopCities = () => {
             <img
               src={city.image}
               alt={city.name}
+              loading="lazy"
               className="h-full w-full object-cover group-hover:scale-125 transition-transform duration-500 ease-in-out"
             />
           </Link>

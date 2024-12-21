@@ -55,16 +55,16 @@ const Navbar = () => {
     <>
       <div className="bg-offwhite/50 bg-opacity-30 backdrop-blur-lg sticky top-0 z-20 shadow-md border-b-2 border-pink">
         <nav className="navbar flex justify-between items-center xs:px-4 md:px-6 py-3 shadow-md">
-          <Link to={"/"} className="flex justify-center items-center space-x-3">
-            <div className="w-12 h-12">
+          <Link to={"/"} className="flex justify-center items-center space-x-3 px-1">
+            <div className="w-12 h-12 overflow-hidden rounded-full">
               <img
                 src={logo}
                 alt="StudyNest Logo"
-                className="w-full h-full object-contain rounded-full"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="xs:hidden sm:block text-3xl font-semibold font-sans text-voilet">
-              StudyNest
+              StudyNests
             </div>
           </Link>
 
