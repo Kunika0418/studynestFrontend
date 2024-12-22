@@ -419,7 +419,7 @@ const PropertyDetail = () => {
                             <h3 className="flex flex-row gap-2 justify-center items-center text-md text-accent-100 font-medium">
                               <FaMoneyBillWave />{" "}
                               {getCurrencySymbolByCountry(apartment.country)}
-                              {category.price}/month
+                              {category.price}/week
                             </h3>
                           </div>
                         ))}
@@ -478,7 +478,8 @@ const PropertyDetail = () => {
                       <h3 className="text-lg font-semibold">{apt.title}</h3>
                       <p className="text-gray-500">{apt.city}</p>
                       <p className="text-pink font-bold">
-                        ${apt.price}/month
+                        {getCurrencySymbolByCountry(apt.country)}
+                        {apt.price}/week
                       </p>
                     </div>
                   </a>
