@@ -88,7 +88,7 @@ const Navbar = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="hidden sm:block text-3xl font-semibold font-sans text-voilet">
+            <div className="text-lg sm:text-3xl font-semibold font-sans text-voilet">
               StudyNests
             </div>
           </Link>

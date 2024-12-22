@@ -1,16 +1,26 @@
 {
-  "short_name": "StudyNest",
-  "name": "Your Cozy Nest Away From Home",
+  "short_name": "StudyNests",
+  "name": "StudyNests - Your Cozy Nest Away From Home",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#242A56",
   "background_color": "#FFFFFF",
-  "description": "StudyNest connects students with comfortable, secure accommodations worldwide — your cozy nest away from home for academic success and comfort.",
+  "description": "StudyNests connects students with comfortable, secure accommodations worldwide — your cozy nest away from home for academic success and comfort.",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "\/favicon.ico",
       "sizes": "16x16",
-      "type": "image/png"
+      "type": "image\/x-icon"
+    },
+    {
+      "src": "\/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image\/png"
+    },
+    {
+      "src": "\/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image\/png"
     }
   ],
   "scope": "/",
