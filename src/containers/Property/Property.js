@@ -137,9 +137,6 @@ const initialCountries = [
 
 const Property = () => {
   const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
-  const name = searchParams.get("name");
-  const country = searchParams.get("country");
   const city = searchParams.get("city");
   // State variables
   const [selectedApartment, setSelectedApartment] = useState(null);
@@ -151,7 +148,7 @@ const Property = () => {
     "Canada",
   ]);
   const [cities, setCities] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(country || "");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState(city || "");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
@@ -228,12 +225,10 @@ const Property = () => {
   // }, []);
 
   useEffect(() => {
-    if (type === "city") {
-      setSelectedCity(name);
-    }
-    if (selectedCity) {
+    if (selectedCity || selectedCountry) {
       fetchProperties(1, {
         city: selectedCity,
+        country: selectedCountry,
       });
     } else {
       fetchProperties(1);
