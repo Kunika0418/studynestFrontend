@@ -130,7 +130,9 @@ export const CountryTabs = ({ setIsModalOpen, searchTerm }) => {
         </div>
 
         {/* Tab Content */}
-        <div className="max-h-96 overflow-y-auto hide-scrollbar"> {/* Scrollable container */}
+        <div className="max-h-96 overflow-y-auto hide-scrollbar">
+          {" "}
+          {/* Scrollable container */}
           {!searchTerm ? (
             <>
               {filteredCities.length > 0 && (
@@ -201,7 +203,9 @@ export const CountryTabs = ({ setIsModalOpen, searchTerm }) => {
                     </span>
                     <div>
                       <h3 className="text-sm font-medium text-start">{name}</h3>
-                      <p className="text-xs text-gray-500 text-start">{country}</p>
+                      <p className="text-xs text-gray-500 text-start">
+                        {country}
+                      </p>
                     </div>
                   </button>
                 ))
@@ -215,4 +219,3 @@ export const CountryTabs = ({ setIsModalOpen, searchTerm }) => {
     </div>
   );
 };
-
