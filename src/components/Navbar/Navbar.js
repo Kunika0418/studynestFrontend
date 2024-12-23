@@ -261,7 +261,7 @@ const Navbar = () => {
             </div>
             <button
               onClick={toggleMenu}
-              className=" text-2xl text-gray-700"
+              className="text-2xl text-gray-700"
               aria-label="Toggle Menu"
             >
               {isMenuOpen ? <IoClose /> : <IoMenu />}
@@ -271,7 +271,7 @@ const Navbar = () => {
 
         {/* Mobile Nav Links */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white p-4 shadow-lg absolute w-full z-10">
+          <div className="lg:hidden bg-white p-4 shadow-lg absolute w-full z-10">
             <ul>
               <li className="py-2">
                 <a
