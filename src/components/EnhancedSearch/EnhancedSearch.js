@@ -4,10 +4,11 @@ import { MapPin, X, Loader2 } from "lucide-react";
 import PropertyCard from "../Card/PropertyCard";
 
 const countries = [
-  { id: "USA", name: "USA", flag: "🇺🇸" },
+  // { id: "USA", name: "USA", flag: "🇺🇸" },
   { id: "UK", name: "UK", flag: "🇬🇧" },
-  { id: "CAN", name: "Canada", flag: "🇨🇦" },
-  { id: "DEU", name: "Germany", flag: "🇩🇪" },
+  // { id: "CAN", name: "Canada", flag: "🇨🇦" },
+  // { id: "DEU", name: "Germany", flag: "🇩🇪" },
+  { id: "AUS", name: "Australia", flag: "🇦🇺" },
 ];
 
 const EnhancedSearch = ({ searchTerm, onClose, isOpen }) => {
@@ -196,11 +197,12 @@ const EnhancedSearch = ({ searchTerm, onClose, isOpen }) => {
 
 const getCitiesForCountry = (countryId) => {
   const cities = {
-    USA: ["New York", "Los Angeles", "Chicago", "Houston", "Miami"],
+    // USA: ["New York", "Los Angeles", "Chicago", "Houston", "Miami"],
     UK: ["London", "Leicester", "Sheffield", "Manchester", "Birmingham"],
-    CAN: ["Toronto", "Vancouver", "Montreal", "Ottawa", "Calgary"],
-    DEU: ["Berlin", "Munich", "Frankfurt", "Hamburg", "Cologne"],
-  };
+    // CAN: ["Toronto", "Vancouver", "Montreal", "Ottawa", "Calgary"],
+    // DEU: ["Berlin", "Munich", "Frankfurt", "Hamburg", "Cologne"],
+    AUS: ["Canberra", "Darwin", "Brisbane", "Perth", "Adelaide"],
+  };  
   return cities[countryId] || [];
 };
 
