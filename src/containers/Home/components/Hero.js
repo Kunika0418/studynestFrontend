@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import EnhancedSearch from "../../../components/EnhancedSearch/EnhancedSearch";
+import { FaSearch } from "react-icons/fa";
 import "../Home.css";
+
 
 const Hero = ({ searchTerm, handleChange, bannerVideo, setSearchTerm }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,7 +66,7 @@ const Hero = ({ searchTerm, handleChange, bannerVideo, setSearchTerm }) => {
                 }}
               />
             )}
-            <div className="relative flex items-center">
+            <div className="relative flex items-center bg-white py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300">
               <input
                 ref={inputRef}
                 type="text"
@@ -72,8 +74,9 @@ const Hero = ({ searchTerm, handleChange, bannerVideo, setSearchTerm }) => {
                 value={searchTerm}
                 onChange={handleChange}
                 onFocus={handleFocus} // Open modal when focused
-                className="w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300"
+                className="w-full outline-none"
               />
+              <FaSearch className="text-voilet" />
             </div>
           </div>
         </div>

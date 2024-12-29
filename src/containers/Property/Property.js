@@ -208,6 +208,7 @@ const Property = () => {
           return updatedApartments;
         });
       }
+      console.log(response.data);
 
       setTotal(pagination.total);
       setIsFetchingMore(false);

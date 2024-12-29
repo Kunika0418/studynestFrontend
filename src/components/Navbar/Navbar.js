@@ -2,7 +2,7 @@
 import React, { useState, Fragment, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
-import { FaWhatsapp } from "react-icons/fa"; // WhatsApp Icon
+import { FaWhatsapp, FaSearch } from "react-icons/fa"; // WhatsApp Icon
 import logo from "../../assets/logo/logo.jpg";
 import AuthModal from "../Login/Modal";
 import {
@@ -97,10 +97,16 @@ const Navbar = () => {
           <ul className="hidden lg:flex justify-center items-center xl:gap-10 lg:gap-6 w-full max-w-5xl">
             <li className="relative w-full">
               <div className="w-full h-auto flex justify-center items-center relative">
-                <div className="w-full max-w-2xl">
+                <div className={`flex items-center w-full max-w-2xl ${
+                      isSearchOpen
+                        ? "justify-center"
+                        : "justify-end"
+                    }`}>
                   <div
-                    className={`flex items-center ${
-                      isSearchOpen ? "justify-center" : "justify-end"
+                    className={`flex items-center transition-all duration-300 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet py-3 px-4 bg-white ${
+                      isSearchOpen
+                        ? "w-full xl:w-96 lg:w-[21rem]"
+                        : "lg:w-72"
                     }`}
                   >
                     <input
@@ -110,10 +116,9 @@ const Navbar = () => {
                       value={searchTerm}
                       onChange={handleChange}
                       onFocus={handleFocus} // Open modal when focused
-                      className={`transition-all duration-300 w-full py-3 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet ${
-                        isSearchOpen ? "w-full xl:w-96 lg:w-[21rem]" : "lg:w-72"
-                      }`}
+                      className={`w-full outline-none`}
                     />
+                    <FaSearch className="text-voilet"/>
                   </div>
                 </div>
                 {/* Mobile Centered Search Modal */}
@@ -221,16 +226,17 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex gap-2">
             <div className="w-full h-auto flex justify-center items-center">
-              <div className="w-full max-w-lg relative">
-                <div className="relative flex items-center">
+              <div className="w-full max-w-lg relative flex items-center">
+                <div className="relative flex items-center bg-white xs:w-[8rem] md:w-full py-2 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300">
                   <input
                     type="text"
                     placeholder="Search"
                     value={searchTerm}
                     onChange={handleChange}
                     onFocus={handleFocus} // Open modal when focused
-                    className="xs:w-[8rem] md:w-full py-2 px-4 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-voilet transition-all duration-300"
+                    className="w-full focus:outline-none outilne-none"
                   />
+                  <FaSearch className="text-voilet"/>
                 </div>
               </div>
               {/* Mobile Search Modal */}

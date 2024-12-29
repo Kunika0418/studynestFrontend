@@ -44,7 +44,6 @@ const ApartmentCard = ({
                     src={images[0] || "/default-image.jpg"}
                     alt={title || "Apartment"}
                     className="w-full h-48 object-cover"
-                    loading="lazy"
                   />
                 ) : (
                   // Use Slider for multiple images
@@ -55,7 +54,6 @@ const ApartmentCard = ({
                         src={image || "/default-image.jpg"}
                         alt={title || "Apartment"}
                         className="w-full h-48 object-cover"
-                        loading="lazy"
                       />
                     ))}
                   </Slider>
@@ -66,7 +64,6 @@ const ApartmentCard = ({
                   src="/default-image.jpg"
                   alt="Default Apartment"
                   className="w-full h-48 object-cover"
-                  loading="lazy"
                 />
               )}
               {path === "/" && (

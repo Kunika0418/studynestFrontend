@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "swiper/css/bundle";
 import BuyForm from "../../../components/BuyFrom/BuyForm";
 import HelmetConfig from "../../../utils/HelmetConfig";
@@ -148,8 +148,8 @@ const PropertyDetail = () => {
   return (
     <>
       <HelmetConfig
-        title={`${apartment.title}`}
-        description="Explore a curated list of student accommodations worldwide at StudyNest. Find properties tailored to your preferences, offering comfort, convenience, and affordability."
+        title={`${apartment.title}, ${apartment.city}`}
+        description={`Discover ${apartment.title}, located in ${apartment.city}. Book your ideal student accommodation with StudyNest today.`}
       />
 
       <div className="min-h-screen py-8 bg-offwhite/50">
@@ -158,25 +158,25 @@ const PropertyDetail = () => {
             {/* Image Slider */}
             <div className="mb-6 lg:px-20 md:px-10 xs:px-6">
               <div className="info mb-6 flex flex-col gap-2">
-                <h1 className="text-4xl text-voilet font-semibold font-sans">
+                <h1 className="text-3xl sm:text-4xl text-voilet font-semibold font-sans">
                   {apartment.title}
                 </h1>
-                <div className="flex gap-4">
-                  <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                <div className="flex flex-wrap gap-2">
+                  <p className="flex gap-2 items-center text-nowrap text-sm sm:text-lg text-voilet font-sans font-medium">
                     <FaGraduationCap className="text-darkpink" /> Student
                     Accomodation
                   </p>
-                  <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                  <p className="flex gap-2 items-center text-nowrap text-sm sm:text-lg text-voilet font-sans font-medium">
                     <IoShieldCheckmark className="text-darkpink" /> On-site
                     verification
                   </p>
                 </div>
-                <div className="flex lg:justify-between xs:gap-6">
-                  <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                <div className="flex flex-col-reverse lg:flex-row lg:justify-between gap-2 lg:gap-6">
+                  <p className="flex gap-2 items-center text-sm sm:text-lg text-voilet font-sans font-medium">
                     <IoLocationSharp className="text-darkpink" />{" "}
                     {apartment.city}, {apartment.country}
                   </p>
-                  <p className="flex gap-2 items-center text-lg text-voilet font-sans font-medium">
+                  <p className="flex gap-2 items-center text-sm sm:text-lg text-voilet font-sans font-medium">
                     <IoBusiness className="text-darkpink" />
                     {apartment.university}
                   </p>
