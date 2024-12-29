@@ -169,9 +169,9 @@ const Navbar = () => {
             <li>
               <Link
                 to={"/Services"}
-                className="link_nav relative text-voilet text-base font-medium hover:text-voilet/80 transition duration-300"
+                className="link_nav relative text-nowrap text-voilet text-base font-medium hover:text-voilet/80 transition duration-300"
               >
-                Services
+                Become a Partner
               </Link>
             </li>
             {/* WhatsApp Icon */}
@@ -304,7 +304,7 @@ const Navbar = () => {
                   onClick={toggleMenu}
                   className="block text-voilet hover:text-pink transition duration-300"
                 >
-                  Services
+                  Become a Partner
                 </Link>
               </li>
               <li className="py-2">
