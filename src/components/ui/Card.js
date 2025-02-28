@@ -1,30 +1,3 @@
-
-
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-
-// const Card = ({ id, image, title, description }) => {
-//   const navigate = useNavigate();
-
-//   const handleClick = () => {
-//     navigate(`/blog/${id}`);
-//   };
-
-//   return (
-//     <div
-//       className="rounded-2xl shadow-lg bg-white p-4 cursor-pointer hover:shadow-xl transition"
-//       onClick={handleClick}
-//     >
-//       <img src={image} alt={title} className="w-full h-40 object-cover rounded-lg mb-4" />
-//       <h3 className="text-xl font-semibold mb-2">{title}</h3>
-//       <p className="text-gray-600">{description}</p>
-//     </div>
-//   );
-// };
-
-// export default Card;
-
-// src/components/ui/Card.js
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -39,8 +12,3 @@ const Card = ({ id, image, title, description }) => {
     </Link>
   );
 };
-
-export default Card;
-
-
-

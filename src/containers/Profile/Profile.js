@@ -33,7 +33,9 @@ const Profile = ({ decodeToken }) => {
 
     const decoded = decodeToken(token);
     setUserDetails(decoded);
-    const userId = decoded.userId;
+   // const userId = decoded.userId;
+   const userId = decoded?.userId || "Guest"; // ✅ Prevents error if decoded is undefined
+
 
     const fetchUserDetails = async () => {
       try {
