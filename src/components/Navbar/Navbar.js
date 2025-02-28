@@ -94,6 +94,8 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav Links */}
+          
+
           <ul className="hidden lg:flex justify-center items-center xl:gap-10 lg:gap-6 w-full max-w-5xl">
             <li className="relative w-full">
               <div className="w-full h-auto flex justify-center items-center relative">
@@ -116,7 +118,7 @@ const Navbar = () => {
                       value={searchTerm}
                       onChange={handleChange}
                       onFocus={handleFocus} // Open modal when focused
-                      className={`w-full outline-none`}
+                      className={'w-full outline-none'}
                     />
                     <FaSearch className="text-voilet"/>
                   </div>
