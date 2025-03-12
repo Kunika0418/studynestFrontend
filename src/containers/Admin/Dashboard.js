@@ -7,6 +7,7 @@ import UserDetails from "./Component/UserDetails";
 import AddTestimonial from "./Component/AddTestimonial";
 import ManageTestimonial from "./Component/ManageTestimonial";
 import PropertyUpload from "./Component/PropertyUpload";
+import AddBlog from "./Component/AddBlog";
 
 
 const Dashboard = () => {
@@ -84,6 +85,14 @@ const Dashboard = () => {
           >
             Manage Testimonial
           </button>
+          <button
+            onClick={() => {
+              setMenu("Add Blog");
+            }}
+            className="py-2 px-4 bg-primary-100 rounded-lg text-white font-semibold text-lg"
+          >
+            Add Blog
+          </button>
         </div>
         {menu === "add" && <AddProperty />}
         {menu === "upload" && <PropertyUpload />}
@@ -91,6 +100,7 @@ const Dashboard = () => {
         {menu === "userDetails" && <UserDetails />}
         {menu === "Add Testimonial" && <AddTestimonial />}
         {menu === "Manage Testimonial" && <ManageTestimonial />}
+        {menu === "Add Blog" && <AddBlog />}
       </div>
     </>
   );

@@ -16,6 +16,7 @@ import Profile from "./containers/Profile/Profile.js";
 import Property from "./containers/Property/Property.js";
 import PropertyDetail from "./containers/Property/PropertyDetail/PropertyDetail.js";
 import Service from "./containers/Service/Service.js";
+import AddBlog from "./containers/Admin/Component/AddBlog.js";
 
 import { jwtDecode } from "jwt-decode";
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="/Admin/Login" element={<Login />} />
         <Route path="/Admin/Signup" element={<Signup />} />
         <Route path="/Admin/dashboard" element={<Dashboard />} />
+        <Route path="/Admin/add-blog" element={<AddBlog />} />
         <Route path="/blog/:id" element={<BlogDetail />} />  {/* New Route */}
         <Route path="/blog" element={<BlogPage />} />
       </Routes>

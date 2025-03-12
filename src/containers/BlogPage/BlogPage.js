@@ -1,10 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import Button from "../../components/ui/Button";
 import Card from "../../components/ui/Card";
 import Input from "../../components/ui/Input";
+import axios from "axios";
 
-export const blogData = [
+export const BlogData = [
   {
     id: 1,
     category: "Study Abroad Guide",
@@ -335,14 +336,35 @@ The best accommodations often get booked quickly, especially in popular student 
 export const categories = ["All", "Study Abroad Guide", "Visa Information", "Accommodation Tips"];
 
 const BlogPage = () => {
+  const [blogs, setBlogs] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredBlogs = blogData.filter((blog) => 
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URI}/api/blogs`);
+        setBlogs(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const filteredBlogs = blogs.filter((blog) => 
     (selectedCategory === "All" || blog.category === selectedCategory) &&
     (blog.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
     blog.description.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+
+  if (isLoading) {
+    return <div className="p-8 text-center">Loading blogs...</div>;
+  }
 
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
@@ -353,7 +375,6 @@ const BlogPage = () => {
       />
 
       <div className="bg-yellow-100 p-6 rounded-lg mb-6">
-        {/* <h2 className="text-2xl font-semibold mb-2">Inspirational Thought</h2> */}
         <p className="text-gray-700">
           <b>"The journey of a thousand miles begins with a single step." - Lao Tzu</b>
         </p>
@@ -374,17 +395,21 @@ const BlogPage = () => {
       </div>
 
       <h3 className="text-2xl font-semibold mb-4">{selectedCategory}</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredBlogs.map((blog, index) => (
-          <Card
-            key={index}
-            id={blog.id}
-            image={blog.image}
-            title={blog.title}
-            description={blog.description}
-          />
-        ))}
-      </div>
+      {filteredBlogs.length === 0 ? (
+        <p className="text-center text-gray-500">No blogs found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredBlogs.map((blog) => (
+            <Card
+              key={blog._id}
+              id={blog._id}
+              image={blog.image}
+              title={blog.title}
+              description={blog.description}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
