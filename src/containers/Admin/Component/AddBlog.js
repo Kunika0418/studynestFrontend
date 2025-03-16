@@ -16,6 +16,8 @@ const AddBlog = () => {
     staticImages: []
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setBlogData(prev => ({
@@ -35,16 +37,22 @@ const AddBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    // Comprehensive validation
+    // Debug information
+    console.log("REACT_APP_SERVER_URI:", process.env.REACT_APP_SERVER_URI);
+    console.log("Current environment:", process.env.NODE_ENV);
+
+    // Validation
     if (!blogData.title || !blogData.description || !blogData.content) {
       toast.error("Please fill all required fields");
+      setIsSubmitting(false);
       return;
     }
 
-    // Additional image validation
     if (!images.mainImage) {
       toast.error("Please upload a main image");
+      setIsSubmitting(false);
       return;
     }
 
@@ -55,79 +63,78 @@ const AddBlog = () => {
       formData.append(key, blogData[key]);
     });
 
-    // Append images
-    // if (images.mainImage) {
-    //   formData.append('mainImage', images.mainImage);
-    // }
-
-    if (images.mainImage) {
-      formData.append('images', images.mainImage);
-    }
-    images.staticImages.forEach((img, index) => {
-      formData.append(`staticImages`, img);
+    // Append images - make sure this matches your backend expectations
+    formData.append('images', images.mainImage);
+    
+    // Append additional images if any
+    images.staticImages.forEach(img => {
+      formData.append('images', img);
     });
 
     try {
-      // Detailed logging for debugging
-      console.log('Submitting FormData:');
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: `, value);
-      }
-
+      // Use a fallback URL if environment variable is not available
+      const apiBaseUrl = process.env.REACT_APP_SERVER_URI || 
+                         (process.env.NODE_ENV === 'development' 
+                           ? 'http://localhost:5000' 
+                           : 'https://studynest-backend.vercel.app');
+      
+      console.log("Using API URL:", `${apiBaseUrl}/api/blogs`);
+      
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URI}/api/blogs`, 
+        `${apiBaseUrl}/api/blogs`, 
         formData, 
         {
           headers: { 
-            'Content-Type': 'multipart/form-data',
-            // Optionally add authorization token if required
-            // 'Authorization': `Bearer ${yourToken}`
-          }
+            'Content-Type': 'multipart/form-data'
+          },
+          withCredentials: true // If you're using cookies for authentication
         }
       );
 
-      // Check response status
-      if (response.status === 200 || response.status === 201) {
-        toast.success("Blog added successfully!");
-        
-        // Reset form
-        setBlogData({
-          title: "",
-          category: "Study Abroad Guide",
-          description: "",
-          content: ""
-        });
-        setImages({
-          mainImage: null,
-          staticImages: []
-        });
-
-        // Optional: Clear file inputs
-        const fileInputs = document.querySelectorAll('input[type="file"]');
-        fileInputs.forEach(input => input.value = '');
-      } else {
-        throw new Error('Unexpected response status');
-      }
-    } catch (error) {
-      // Comprehensive error handling
-      console.error('Full error:', error);
+      toast.success("Blog added successfully!");
       
+      // Reset form
+      setBlogData({
+        title: "",
+        category: "Study Abroad Guide",
+        description: "",
+        content: ""
+      });
+      setImages({
+        mainImage: null,
+        staticImages: []
+      });
+
+      // Clear file inputs
+      document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
+      
+    } catch (error) {
+      console.error('Error adding blog:', error);
+      
+      // More detailed error handling
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        toast.error(`Error: ${error.response.data.message || 'Failed to add blog'}`);
-        console.error('Error response data:', error.response.data);
-        console.error('Error response status:', error.response.status);
-        console.error('Error response headers:', error.response.headers);
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+        
+        if (error.response.status === 404) {
+          toast.error("API endpoint not found. Please check server configuration.");
+        } else {
+          toast.error(`Server error: ${error.response.data.message || error.response.statusText || 'Unknown error'}`);
+        }
       } else if (error.request) {
         // The request was made but no response was received
-        toast.error('No response received from server');
-        console.error('Error request:', error.request);
+        console.error("Error request:", error.request);
+        toast.error('No response from server. Please check your internet connection or server status.');
       } else {
         // Something happened in setting up the request that triggered an Error
-        toast.error('Error setting up the request');
-        console.error('Error message:', error.message);
+        console.error("Error message:", error.message);
+        toast.error(`Request error: ${error.message}`);
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -217,9 +224,10 @@ const AddBlog = () => {
 
         <button
           type="submit"
-          className="w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 hover:bg-[#a04031]"
+          disabled={isSubmitting}
+          className="w-full bg-[#6C0F0A] text-white py-3 px-6 rounded-lg transition-colors duration-200 hover:bg-[#a04031] disabled:bg-gray-400"
         >
-          Add Blog
+          {isSubmitting ? 'Adding Blog...' : 'Add Blog'}
         </button>
       </div>
     </form>
